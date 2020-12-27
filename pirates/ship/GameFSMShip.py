@@ -327,7 +327,7 @@ class GameFSMShip(FSM.FSM):
         self.ignore('entergrappleTargetSphere')
 
     def handleTargetHit(self, collEntry):
-        print '**********HANDLE TARGET HIT*****************'
+        print('**********HANDLE TARGET HIT*****************')
 
     def enterGrappleLerping(self):
         self.notify.debug('enterGrappleLerping')

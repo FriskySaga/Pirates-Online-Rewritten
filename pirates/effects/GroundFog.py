@@ -6,7 +6,7 @@ from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
 from pirates.piratesbase import PiratesGlobals
-from EffectController import EffectController
+from .EffectController import EffectController
 from pirates.piratesgui.GameOptions import Options
 import random
 

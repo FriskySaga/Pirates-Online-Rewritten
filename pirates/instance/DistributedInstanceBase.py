@@ -236,12 +236,12 @@ class DistributedInstanceBase(NodePath, DistributedObject, StagedObject):
         self.worldGrid.turnOn(av)
 
     def _turnOffIslands(self, cacheIslands=[]):
-        for island in self.islands.values():
+        for island in list(self.islands.values()):
             cache = island in cacheIslands
             island.turnOff()
 
     def _turnOnIslands(self):
-        for island in self.islands.values():
+        for island in list(self.islands.values()):
             island.turnOn()
 
     def isOn(self):
@@ -251,7 +251,7 @@ class DistributedInstanceBase(NodePath, DistributedObject, StagedObject):
     def handleOffStage(self, cacheAreas=[]):
         if hasattr(self, 'islands'):
             self.stash()
-            for area in self.islands.values():
+            for area in list(self.islands.values()):
                 area.goOffStage(area in cacheAreas)
 
         StagedObject.handleOffStage(self)
@@ -264,7 +264,7 @@ class DistributedInstanceBase(NodePath, DistributedObject, StagedObject):
         if self.worldGrid:
             self.worldGrid.goOnStage()
 
-        for island in self.islands.values():
+        for island in list(self.islands.values()):
             if island:
                 island.goOnStage()
 
@@ -315,7 +315,7 @@ class DistributedInstanceBase(NodePath, DistributedObject, StagedObject):
             areaParent = base.cr.doId2do[parentDoId]
             locationInfo = areaParent.builder.getLocationInfo(uniqueId)
             if locationInfo:
-                print 'left area %s' % locationInfo[2]
+                print('left area %s' % locationInfo[2])
                 localAvatar.sendUpdate('leaveAreaSphere', [uniqueId, parentUid])
         return
 

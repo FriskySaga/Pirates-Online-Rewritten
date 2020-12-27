@@ -98,14 +98,14 @@ class InventorySellConfirm(BorderFrame):
                 self.stackSeller.setPos(0.08, 0, 0.08)
 
     def setStackAmount(self, cell, amount):
-        for sellCell in self.inventoryPanelSell.gridDict.values():
+        for sellCell in list(self.inventoryPanelSell.gridDict.values()):
             if sellCell.inventoryItem and sellCell.inventoryItem.inventoryCell == cell:
                 sellCell.inventoryItem.amount = amount
                 sellCell.inventoryItem.updateAmountText()
 
     def cancelItem(self):
         cell = self.stackSeller.fromCell
-        for sellCell in self.inventoryPanelSell.gridDict.values():
+        for sellCell in list(self.inventoryPanelSell.gridDict.values()):
             if sellCell.inventoryItem and sellCell.inventoryItem.inventoryCell == cell:
                 sellCell.inventoryItem.inventoryCell['state'] = DGG.NORMAL
                 sellCell.inventoryItem.inventoryCell.clearColorScale()
@@ -132,7 +132,7 @@ class InventorySellConfirm(BorderFrame):
             self.confirmDialog.destroy()
             self.confirmDialog = None
         if doSale:
-            for cell in self.inventoryPanelSell.gridDict.values():
+            for cell in list(self.inventoryPanelSell.gridDict.values()):
                 if cell.inventoryItem:
                     self.manager.markSlotPending(cell.inventoryItem.inventoryCell.slotId)
                     itemToSell = localAvatar.getInventory().getLocatables().get(cell.inventoryItem.inventoryCell.slotId)

@@ -58,7 +58,7 @@ class AvatarChooser(DirectObject, StateData):
         self.subFrames = {}
         self.subAvButtons = {}
         self.handleDialogOnScreen = 0
-        self.subIds = base.cr.avList.keys()
+        self.subIds = list(base.cr.avList.keys())
         if base.cr.isPaid() == OTPGlobals.AccessVelvetRope:
             for subId in base.cr.avList:
                 avSet = base.cr.avList[subId]
@@ -317,23 +317,23 @@ class AvatarChooser(DirectObject, StateData):
 
     def __createAvatarButtons(self):
         subCard = loader.loadModel('models/gui/toplevel_gui')
-        for subFrame in self.subFrames.values():
+        for subFrame in list(self.subFrames.values()):
             subFrame.destroy()
 
-        for buttonList in self.subAvButtons.values():
+        for buttonList in list(self.subAvButtons.values()):
             for button in buttonList:
                 button.destroy()
 
         self.subFrames = {}
         self.subAvButtons = {}
         i = 0
-        for subId, avData in base.cr.avList.items():
+        for subId, avData in list(base.cr.avList.items()):
             subFrame = DirectFrame(parent=self.avatarListFrame, relief=None, pos=(0, 0, -0.3))
             self.subFrames[subId] = subFrame
             avatarButtons = []
             self.subAvButtons[subId] = avatarButtons
             spacing = -0.1
-            for av, slot in zip(avData, range(len(avData))):
+            for av, slot in zip(avData, list(range(len(avData)))):
                 x = 0.0
                 imageColor = Vec4(1, 1, 1, 1)
                 textScale = 0.045
@@ -417,10 +417,10 @@ class AvatarChooser(DirectObject, StateData):
         self.todManager.delete()
         del self.todManager
         cleanupDialog('globalDialog')
-        for subFrame in self.subFrames.values():
+        for subFrame in list(self.subFrames.values()):
             subFrame.destroy()
 
-        for buttonList in self.subAvButtons.values():
+        for buttonList in list(self.subAvButtons.values()):
             for button in buttonList:
                 button.destroy()
 
@@ -747,7 +747,7 @@ class AvatarChooser(DirectObject, StateData):
         if not self.queueComplete:
             return
 
-        for currSubId, currSubVal in base.cr.avList.items():
+        for currSubId, currSubVal in list(base.cr.avList.items()):
             for currIdx in range(len(currSubVal)):
                 if currSubVal[currIdx] == OTPGlobals.AvatarSlotAvailable:
                     button = self.subAvButtons[currSubId][currIdx]
@@ -760,7 +760,7 @@ class AvatarChooser(DirectObject, StateData):
         self.playButton['text_fg'] = (0.7, 0.7, 0.7, 0.7)
 
     def __deactivateCreateButtons(self):
-        for currSubId, currSubVal in base.cr.avList.items():
+        for currSubId, currSubVal in list(base.cr.avList.items()):
             for currIdx in range(len(currSubVal)):
                 if currSubVal[currIdx] == OTPGlobals.AvatarSlotAvailable:
                     button = self.subAvButtons[currSubId][currIdx]
@@ -784,7 +784,7 @@ class AvatarChooser(DirectObject, StateData):
             return
 
         self.httpClient = HTTPClient()
-        import urllib2
+        import urllib.request, urllib.error, urllib.parse
         proxies = urllib2.getproxies()
         if proxies and proxies.get('http'):
             self.notify.info('queuing proxy found')
@@ -1030,7 +1030,7 @@ class AvatarChooser(DirectObject, StateData):
     def updateAvatarList(self):
         self.__hideHighlightedAvatar()
         self.__createAvatarButtons()
-        self.subIds = base.cr.avList.keys()
+        self.subIds = list(base.cr.avList.keys())
         self.subIds.sort()
         if self.currentSubId not in self.subIds:
             self.notify.warning('subId %s is no longer in family: %s' % (self.currentSubIndex, self.subIds))
@@ -1081,7 +1081,7 @@ class AvatarChooser(DirectObject, StateData):
 
     def blockInput(self):
         color = Vec4(0.7, 0.7, 0.7, 0.7)
-        for subButtons in self.subAvButtons.values():
+        for subButtons in list(self.subAvButtons.values()):
             for button in subButtons:
                 button['state'] = DGG.DISABLED
                 button.setColorScale(color)
@@ -1108,7 +1108,7 @@ class AvatarChooser(DirectObject, StateData):
             self.prevSubButton.setColorScale(color)
 
     def allowInput(self):
-        for subButtons in self.subAvButtons.values():
+        for subButtons in list(self.subAvButtons.values()):
             for button in subButtons:
                 if button['text']:
                     button['state'] = DGG.NORMAL
@@ -1289,12 +1289,12 @@ class AvatarChooser(DirectObject, StateData):
         self.currentSubId = self.subIds[self.currentSubIndex]
         subLabelText = '\x01white\x01%s\x02' % base.cr.launcher.getPlayToken()
         self.subLabel['text'] = subLabelText
-        for frame in self.subFrames.values():
+        for frame in list(self.subFrames.values()):
             frame.hide()
 
         self.subFrames[self.currentSubId].show()
         anyAvatars = False
-        for avList in base.cr.avList.values():
+        for avList in list(base.cr.avList.values()):
             for av in avList:
                 if av not in (OTPGlobals.AvatarSlotUnavailable, OTPGlobals.AvatarSlotAvailable, OTPGlobals.AvatarPendingCreate):
                     anyAvatars = True

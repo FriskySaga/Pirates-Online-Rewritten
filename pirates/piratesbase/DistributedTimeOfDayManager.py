@@ -1,6 +1,6 @@
 from direct.distributed.DistributedObject import DistributedObject
 from direct.distributed.ClockDelta import globalClockDelta
-from TimeOfDayManager import TimeOfDayManager
+from .TimeOfDayManager import TimeOfDayManager
 from pirates.piratesbase import TODGlobals
 import time
 

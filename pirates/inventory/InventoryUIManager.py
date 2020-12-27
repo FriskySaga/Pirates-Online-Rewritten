@@ -93,7 +93,7 @@ class InventoryUIManager(DirectFrame):
         else:
             self.trashInvalidItems = 0
         self.slotToCellMap = {}
-        for index in xrange(Locations.TOTAL_NUM_LOCATIONS - 1):
+        for index in range(Locations.TOTAL_NUM_LOCATIONS - 1):
             self.slotToCellMap[index] = None
 
         self.slotPendingActionList = []
@@ -341,7 +341,7 @@ class InventoryUIManager(DirectFrame):
         itemsToTrash = []
         base.localAvatar.lockRegen()
         for itemKey in locatableItems:
-            if self.slotToCellMap.has_key(itemKey) and self.slotToCellMap[itemKey]:
+            if itemKey in self.slotToCellMap and self.slotToCellMap[itemKey]:
                 itemTuple = locatableItems[itemKey]
                 itemId = itemTuple[1]
                 itemCategory = itemTuple[0]
@@ -357,7 +357,7 @@ class InventoryUIManager(DirectFrame):
                 misplacedSlots.append(itemKey)
 
         if len(itemsToTrash) > 0:
-            print 'trashing invalid items %s' % itemsToTrash
+            print('trashing invalid items %s' % itemsToTrash)
             import pdb
             pdb.set_trace()
             localAvatar.getInventory().trashItems(itemsToTrash)
@@ -383,7 +383,7 @@ class InventoryUIManager(DirectFrame):
             for rangeIndex in range(len(slotRange) - 1, -1, -1):
                 atomicRange = slotRange[rangeIndex]
                 for slotIndex in range(atomicRange[0], atomicRange[1]):
-                    if self.slotToCellMap.has_key(slotIndex) and self.slotToCellMap[slotIndex] != None and self.slotToCellMap[slotIndex].inventoryItem == None and slotIndex not in runningList:
+                    if slotIndex in self.slotToCellMap and self.slotToCellMap[slotIndex] != None and self.slotToCellMap[slotIndex].inventoryItem == None and slotIndex not in runningList:
                         runningList.append(slotIndex)
                         return slotIndex
 
@@ -475,7 +475,7 @@ class InventoryUIManager(DirectFrame):
                 return (
                  canUse, reason)
             reqs = localAvatar.getInventory().getItemRequirements(itemId)
-            if reqs == None or filter(lambda x: reqs[x][1] == False, reqs):
+            if reqs == None or [x for x in reqs if reqs[x][1] == False]:
                 canUse = 0
                 reason = ItemConstants.REASON_LEVEL
                 return (
@@ -592,7 +592,7 @@ class InventoryUIManager(DirectFrame):
             self.slotToCellMap[slot] = cell
             cell.container.assignSlot(cell, slot)
         else:
-            print 'SLOT COLLISION ERROR! FIX ME!'
+            print('SLOT COLLISION ERROR! FIX ME!')
             import pdb
             pdb.set_trace()
         return
@@ -609,11 +609,11 @@ class InventoryUIManager(DirectFrame):
         if slot in self.slotPendingActionList:
             self.slotPendingActionList.remove(slot)
         cell = None
-        if self.slotToCellMap.has_key(slot):
+        if slot in self.slotToCellMap:
             cell = self.slotToCellMap[slot]
         if cell and cell.container:
             cell.container.unmarkCell(cell, MASK_PENDING)
-        if self.associatedSlotDict.has_key(slot):
+        if slot in self.associatedSlotDict:
             assocSlot = self.associatedSlotDict[slot]
             self.unmarkSlotPending(assocSlot)
             del self.associatedSlotDict[slot]
@@ -643,7 +643,7 @@ class InventoryUIManager(DirectFrame):
             slotCell = self.slotToCellMap[slot]
             if localChange:
                 if self.isSlotPending(slot):
-                    raise "you need to test that this slot isn't buffering a local change"
+                    raise Exception("you need to test that this slot isn't buffering a local change")
                 elif slotCell == self.heldFromCell:
                     pass
                 if not self.isSlotPending(slot):
@@ -663,7 +663,7 @@ class InventoryUIManager(DirectFrame):
         return None
 
     def deleteFromCellSlot(self, slot):
-        if self.slotToCellMap.has_key(slot):
+        if slot in self.slotToCellMap:
             slotCell = self.slotToCellMap[slot]
             if slotCell == self.heldFromCell:
                 self.releaseHeld()
@@ -672,7 +672,7 @@ class InventoryUIManager(DirectFrame):
                 self.deleteItem(item)
 
     def swapCellSlot(self, fromSlot, toSlot):
-        if self.slotToCellMap.has_key(fromSlot) and self.slotToCellMap.has_key(toSlot):
+        if fromSlot in self.slotToCellMap and toSlot in self.slotToCellMap:
             fromCell = self.slotToCellMap[fromSlot]
             toCell = self.slotToCellMap[toSlot]
             if fromCell == self.heldFromCell or toCell == self.heldFromCell:
@@ -686,7 +686,7 @@ class InventoryUIManager(DirectFrame):
         return
 
     def handleSlotUpdate(self, slot):
-        if self.slotToCellMap.has_key(slot):
+        if slot in self.slotToCellMap:
             slotCell = self.slotToCellMap[slot]
             locatableItems = localAvatar.getInventory().getLocatables()
             item = locatableItems.get(slot)

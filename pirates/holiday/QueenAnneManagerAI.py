@@ -35,7 +35,7 @@ class QueenAnneManagerAI(FSM):
     def __placeShip(self, task):
         self.notify.debug('Placing Queen Anne')
 
-        placeLocation = random.choice(self.Locations.keys())
+        placeLocation = random.choice(list(self.Locations.keys()))
         self.air.newsManager.d_displayMessage(self.Locations[placeLocation])
 
         #TODO place ship

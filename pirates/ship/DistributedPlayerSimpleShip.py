@@ -77,7 +77,7 @@ class DistributedPlayerSimpleShip(DistributedSimpleShip):
             self.checkAnchor.remove()
             self.checkAnchor = None
         self._repairSpotMgr.destroy()
-        for ival in self._repairSpotIvals.itervalues():
+        for ival in self._repairSpotIvals.values():
             ival.pause()
 
         self._repairSpotIvals = None
@@ -375,7 +375,7 @@ class DistributedPlayerSimpleShip(DistributedSimpleShip):
             self._repairSpotWoodPiles[locName].setPosHpr(locator.getPos(), locator.getHpr())
 
     def _removeRepairSpotModels(self):
-        for woodPile in self._repairSpotWoodPiles.itervalues():
+        for woodPile in self._repairSpotWoodPiles.values():
             woodPile.detachNode()
 
         self._repairSpotWoodPiles = {}
@@ -574,7 +574,7 @@ class DistributedPlayerSimpleShip(DistributedSimpleShip):
 
     def d_setLocation(self, parentId, zoneId):
         theStack = StackTrace(start=1)
-        if self.prevLocStack and len(theStack.trace) == len(self.prevLocStack.trace) and map(lambda x: x[1], theStack.trace) == map(lambda x: x[1], self.prevLocStack.trace):
+        if self.prevLocStack and len(theStack.trace) == len(self.prevLocStack.trace) and [x[1] for x in theStack.trace] == [x[1] for x in self.prevLocStack.trace]:
             base.cr.centralLogger.writeClientEvent('bad ship team: %s setLoc' % self.doId)
         else:
             base.cr.centralLogger.writeClientEvent('bad ship team: %s' % self.doId + theStack.compact()[1:len(theStack.compact())])

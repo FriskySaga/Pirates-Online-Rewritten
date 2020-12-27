@@ -214,7 +214,7 @@ class DistributedEnemySpawnerAI(DistributedObjectAI):
         enemy.setMaxMojo(enemyMp)
         enemy.setMojo(enemyMp)
 
-        weapons = EnemyGlobals.getEnemyWeapons(avatarType, enemy.getLevel()).keys()
+        weapons = list(EnemyGlobals.getEnemyWeapons(avatarType, enemy.getLevel()).keys())
         enemy.setCurrentWeapon(weapons[0], False)
 
         enemy.setIsGhost(int(objectData.get('GhostFX', 0)))
@@ -320,7 +320,7 @@ class DistributedEnemySpawnerAI(DistributedObjectAI):
         skeleton.setMaxMojo(enemyMp)
         skeleton.setMojo(enemyMp)
 
-        weapons = EnemyGlobals.getEnemyWeapons(avatarType, skeleton.getLevel()).keys()
+        weapons = list(EnemyGlobals.getEnemyWeapons(avatarType, skeleton.getLevel()).keys())
         skeleton.setCurrentWeapon(weapons[0], False)
 
         skeleton.setIsGhost(int(objectData.get('GhostFX', 0)))
@@ -383,7 +383,7 @@ class DistributedEnemySpawnerAI(DistributedObjectAI):
         navy.setMaxMojo(enemyMp)
         navy.setMojo(enemyMp)
 
-        weapons = EnemyGlobals.getEnemyWeapons(avatarType, navy.getLevel()).keys()
+        weapons = list(EnemyGlobals.getEnemyWeapons(avatarType, navy.getLevel()).keys())
         navy.setCurrentWeapon(weapons[0], False)
 
         navy.setIsGhost(int(objectData.get('GhostFX', 0)))
@@ -450,7 +450,7 @@ class DistributedEnemySpawnerAI(DistributedObjectAI):
         ghost.setMaxMojo(enemyMp)
         ghost.setMojo(enemyMp)
 
-        weapons = EnemyGlobals.getEnemyWeapons(avatarType, ghost.getLevel()).keys()
+        weapons = list(EnemyGlobals.getEnemyWeapons(avatarType, ghost.getLevel()).keys())
         ghost.setCurrentWeapon(weapons[0], False)
 
         ghost.setIsGhost(2)
@@ -512,7 +512,7 @@ class DistributedEnemySpawnerAI(DistributedObjectAI):
         creature.setMaxMojo(enemyMp)
         creature.setMojo(enemyMp)
 
-        weapons = EnemyGlobals.getEnemyWeapons(avatarType, creature.getLevel()).keys()
+        weapons = list(EnemyGlobals.getEnemyWeapons(avatarType, creature.getLevel()).keys())
         creature.setCurrentWeapon(weapons[0], False)
 
         if 'Start State' in objectData:

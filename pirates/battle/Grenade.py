@@ -4,8 +4,8 @@ from pirates.battle.WeaponGlobals import *
 from pirates.inventory import ItemGlobals
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesbase import PiratesGlobals
-import Weapon
-import WeaponGlobals
+from . import Weapon
+from . import WeaponGlobals
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 

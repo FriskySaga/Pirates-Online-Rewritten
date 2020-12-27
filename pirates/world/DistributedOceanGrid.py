@@ -6,7 +6,7 @@ from pirates.seapatch.Reflection import Reflection
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pandac.PandaModules import *
-from OceanGridBase import OceanGridBase
+from .OceanGridBase import OceanGridBase
 from pirates.map.Minimap import OceanMap
 from pirates.map.Mappable import MappableGrid
 
@@ -94,7 +94,7 @@ class DistributedOceanGrid(DistributedCartesianGrid, OceanGridBase, MappableGrid
 
     def addOceanAreasToMap(self):
         mapPage = base.localAvatar.guiMgr.mapPage
-        areaNames = self.oceanAreas.keys()
+        areaNames = list(self.oceanAreas.keys())
         for name in areaNames:
             mapPage.addOceanArea(name, self.oceanAreas[name][2], self.oceanAreas[name][0], self.oceanAreas[name][1])
 

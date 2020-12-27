@@ -58,55 +58,55 @@ def getTownfolkIds(holiday):
 START_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 1,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 1}
 
 def getStartMessageRange(holiday):
-    return range(0, START_MESSAGE_RANGE[holiday])
+    return list(range(0, START_MESSAGE_RANGE[holiday]))
 
 
 SECOND_WAVE_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 1,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 1}
 
 def getSecondWaveMessageRange(holiday):
-    return range(0, SECOND_WAVE_MESSAGE_RANGE[holiday])
+    return list(range(0, SECOND_WAVE_MESSAGE_RANGE[holiday]))
 
 
 LAST_WAVE_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 1,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 1}
 
 def getLastWaveMessageRange(holiday):
-    return range(0, LAST_WAVE_MESSAGE_RANGE[holiday])
+    return list(range(0, LAST_WAVE_MESSAGE_RANGE[holiday]))
 
 
 PHASE_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 25,INVASION_TORTUGA: 24,INVASION_DEL_FUEGO: 23}
 
 def getPhaseMessageRange(holiday):
-    return range(0, PHASE_MESSAGE_RANGE[holiday])
+    return list(range(0, PHASE_MESSAGE_RANGE[holiday]))
 
 
 GOOD_BOSS_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 4,INVASION_TORTUGA: 4,INVASION_DEL_FUEGO: 4}
 
 def getGoodBossMessageRange(holiday):
-    return range(0, GOOD_BOSS_MESSAGE_RANGE[holiday])
+    return list(range(0, GOOD_BOSS_MESSAGE_RANGE[holiday]))
 
 
 BAD_BOSS_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 1,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 1}
 
 def getBadBossMessageRange(holiday):
-    return range(0, BAD_BOSS_MESSAGE_RANGE[holiday])
+    return list(range(0, BAD_BOSS_MESSAGE_RANGE[holiday]))
 
 
 LOW_HEALTH_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 2,INVASION_TORTUGA: 2,INVASION_DEL_FUEGO: 2}
 
 def getLowHealthMessageRange(holiday):
-    return range(0, LOW_HEALTH_MESSAGE_RANGE[holiday])
+    return list(range(0, LOW_HEALTH_MESSAGE_RANGE[holiday]))
 
 
 WIN_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 1,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 1}
 
 def getWinMessageRange(holiday):
-    return range(0, WIN_MESSAGE_RANGE[holiday])
+    return list(range(0, WIN_MESSAGE_RANGE[holiday]))
 
 
 LOSE_MESSAGE_RANGE = {INVASION_PORT_ROYAL: 3,INVASION_TORTUGA: 1,INVASION_DEL_FUEGO: 3}
 
 def getLoseMessageRange(holiday):
-    return range(0, LOSE_MESSAGE_RANGE[holiday])
+    return list(range(0, LOSE_MESSAGE_RANGE[holiday]))
 
 
 TOTAL_SPAWN_ZONE_LIST = {INVASION_PORT_ROYAL: 8,INVASION_TORTUGA: 7,INVASION_DEL_FUEGO: 8}

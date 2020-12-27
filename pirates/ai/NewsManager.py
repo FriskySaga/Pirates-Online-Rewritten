@@ -195,11 +195,11 @@ class NewsManager(DistributedObject.DistributedObject):
         def isStarting(id):
             return id not in self.holidayIdList
 
-        toEnd = filter(isEnding, self.holidayIdList)
+        toEnd = list(filter(isEnding, self.holidayIdList))
         for endingHolidayId in toEnd:
             self.endHoliday(endingHolidayId)
 
-        toStart = filter(isStarting, holidayIdList)
+        toStart = list(filter(isStarting, holidayIdList))
         for startingHolidayId in toStart:
             self.startHoliday(startingHolidayId)
 
@@ -271,49 +271,49 @@ class NewsManager(DistributedObject.DistributedObject):
                 localAvatar.guiMgr.mapPage.addPath(pathInfo)
 
     def divideTattooPrices(self, divisor):
-        for k, v in TattooGlobals.tattoos.iteritems():
+        for k, v in TattooGlobals.tattoos.items():
             currentPrice = v[4]
             newPrice = int(currentPrice / divisor)
             TattooGlobals.tattoos[k][4] = newPrice
 
     def divideClothingPrices(self, divisor):
-        for k, v in ClothingGlobals.UNIQUE_ID.iteritems():
+        for k, v in ClothingGlobals.UNIQUE_ID.items():
             currentPrice = v[5]
             newPrice = int(currentPrice / divisor)
             ClothingGlobals.UNIQUE_ID[k][5] = newPrice
 
     def divideJewelryPrices(self, divisor):
-        for k, v in JewelryGlobals.jewelry_id.iteritems():
+        for k, v in JewelryGlobals.jewelry_id.items():
             currentPrice = v[3]
             newPrice = int(currentPrice / divisor)
             JewelryGlobals.jewelry_id[k][3] = newPrice
 
     def divideBarberPrices(self, divisor):
-        for k, v in BarberGlobals.barber_id.iteritems():
+        for k, v in BarberGlobals.barber_id.items():
             currentPrice = v[4]
             newPrice = int(currentPrice / divisor)
             BarberGlobals.barber_id[k][4] = newPrice
 
     def multiplyTattooPrices(self, factor):
-        for k, v in TattooGlobals.tattoos.iteritems():
+        for k, v in TattooGlobals.tattoos.items():
             currentPrice = v[4]
             newPrice = int(currentPrice * factor)
             TattooGlobals.tattoos[k][4] = newPrice
 
     def multiplyClothingPrices(self, factor):
-        for k, v in ClothingGlobals.UNIQUE_ID.iteritems():
+        for k, v in ClothingGlobals.UNIQUE_ID.items():
             currentPrice = v[5]
             newPrice = int(currentPrice * factor)
             ClothingGlobals.UNIQUE_ID[k][5] = newPrice
 
     def multiplyJewelryPrices(self, factor):
-        for k, v in JewelryGlobals.jewelry_id.iteritems():
+        for k, v in JewelryGlobals.jewelry_id.items():
             currentPrice = v[3]
             newPrice = int(currentPrice * factor)
             JewelryGlobals.jewelry_id[k][3] = newPrice
 
     def multiplyBarberPrices(self, factor):
-        for k, v in BarberGlobals.barber_id.iteritems():
+        for k, v in BarberGlobals.barber_id.items():
             currentPrice = v[4]
             newPrice = int(currentPrice * factor)
             BarberGlobals.barber_id[k][4] = newPrice

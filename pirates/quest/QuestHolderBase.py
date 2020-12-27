@@ -6,7 +6,7 @@ class QuestHolderBase():
         self._rewardCollectors = {}
 
     def getQuests(self):
-        raise 'derived must implement'
+        raise Exception('derived must implement')
 
     def _addQuestRewardCollector(self, collector):
         cId = collector._serialNum
@@ -17,5 +17,5 @@ class QuestHolderBase():
         del self._rewardCollectors[cId]
 
     def _trackRewards(self, trade):
-        for collector in self._rewardCollectors.itervalues():
+        for collector in self._rewardCollectors.values():
             collector.collect(trade)

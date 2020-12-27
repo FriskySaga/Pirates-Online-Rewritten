@@ -201,7 +201,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
 
     def removeFrame(self, frame):
         removed = False
-        for frameList in self.shipFrames.itervalues():
+        for frameList in self.shipFrames.values():
             if frame in frameList:
                 frameList.remove(frame)
                 removed = True
@@ -215,7 +215,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
         return bool(self.getFrame(shipDoId))
 
     def getFrame(self, shipDoId):
-        for frameList in self.shipFrames.itervalues():
+        for frameList in self.shipFrames.values():
             for frame in frameList:
                 if frame['shipId'] == shipDoId:
                     return frame
@@ -223,7 +223,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
         return None
 
     def getFrameIndex(self, frame):
-        for frameList in self.shipFrames.itervalues():
+        for frameList in self.shipFrames.values():
             for num, currFrame in enumerate(frameList):
                 if currFrame is frame:
                     return num
@@ -249,7 +249,7 @@ class ShipSelectionPanel(GuiPanel.GuiPanel):
                                                                                                   0))
 
     def refreshTabStates(self):
-        for id, frames in self.shipFrames.iteritems():
+        for id, frames in self.shipFrames.items():
             if frames:
                 self.shipBar.getTab(self.NameMap[id]).setTextBright(True)
             else:

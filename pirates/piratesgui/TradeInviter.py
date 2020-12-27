@@ -246,7 +246,7 @@ class TradeInviter(SocialPage.SocialPage):
     def enterTradeNoMore(self):
         self.message['text'] = PLocalizer.TradeInviterTradeNoMore % self.avName
         self.bOk.show()
-        if not base.cr.doId2do.has_key(self.avId):
+        if self.avId not in base.cr.doId2do:
             messenger.send(self.avDisableName)
 
     def exitTradeNoMore(self):

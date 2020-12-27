@@ -9,7 +9,7 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.piratesgui.GuiPanel import *
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.effects.LureGlow import LureGlow
-import FishingGlobals
+from . import FishingGlobals
 _glowColors = {InventoryType.FishingRodStall: (1.0, 1.0, 0.6, 0.7),InventoryType.FishingRodPull: (0.7, 0.7, 1.0, 0.7),InventoryType.FishingRodHeal: (0.6, 1.0, 0.6, 0.7),InventoryType.FishingRodTug: (1.0, 0.6, 0.6, 0.7),InventoryType.FishingRodSink: (1.0, 0.6, 1.0, 0.7),InventoryType.FishingRodOceanEye: (1.0, 1.0, 1.0, 0.7)}
 
 class FishLure(NodePath):

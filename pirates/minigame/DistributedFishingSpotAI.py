@@ -4,7 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.ai import HolidayGlobals
 from pirates.reputation import ReputationGlobals
-import FishingGlobals
+from . import FishingGlobals
 
 class DistributedFishingSpotAI(DistributedInteractiveAI, LootableAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFishingSpotAI')

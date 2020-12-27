@@ -118,7 +118,7 @@ class MinimapShop(MinimapObject):
                 coin.setP(-90)
                 coin.flattenStrong()
 
-            for pattern, signName in MinimapShop.SIGN_DICT.iteritems():
+            for pattern, signName in MinimapShop.SIGN_DICT.items():
                 MinimapShop.SIGNS[pattern] = coins.find(signName)
 
     @classmethod

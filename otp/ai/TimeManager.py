@@ -193,7 +193,7 @@ class TimeManager(DistributedObject.DistributedObject):
         numCpuCores = di.getNumCpuCores()
         numLogicalCpus = di.getNumLogicalCpus()
         info = '%s|%s|%d|%d|%s|%s cpus' % (di.getCpuVendorString(), di.getCpuBrandString(), di.getCpuVersionInformation(), di.getCpuBrandIndex(), '%0.03f,%0.03f' % cpuSpeed, '%d,%d' % (numCpuCores, numLogicalCpus))
-        print 'cpu info: %s' % info
+        print('cpu info: %s' % info)
         self.sendUpdate('setCpuInfo', [info, cacheStatus])
 
     def setFrameRateInterval(self, frameRateInterval):
@@ -245,7 +245,7 @@ class TimeManager(DistributedObject.DistributedObject):
     def d_setFrameRate(self, fps, deviation, numAvs, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName):
         info = '%0.1f fps|%0.3fd|%s avs|%s|%d|%d|%s|0x%04x|0x%04x|%0.1fMB|%0.1fMB|%0.1fMB|%d|%s|%s|%s cpus|%s' % (fps, deviation, numAvs, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, '%s.%d.%d.%d' % osInfo, '%0.03f,%0.03f' % cpuSpeed, '%d,%d' % (numCpuCores, numLogicalCpus), apiName)
         if base.config.GetBool('want-frame-rate-string', 1):
-            print 'frame rate: %s' % info
+            print('frame rate: %s' % info)
         self.sendUpdate('setFrameRate', [fps, deviation, numAvs, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName])
 
     if __dev__:
@@ -291,7 +291,7 @@ class TimeManager(DistributedObject.DistributedObject):
                 bugfix = int(parts[2])
                 result = (
                  sys.platform, bugfix, major, minor)
-            except Exception, e:
+            except Exception as e:
                 self.notify.debug('getMacOsInfo %s' % str(e))
 
         self.notify.debug('getMacOsInfo returning %s' % str(result))

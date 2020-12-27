@@ -4,8 +4,8 @@ from direct.fsm import FSM
 from direct.interval.IntervalGlobal import Sequence, Wait, Func
 from direct.interval.LerpInterval import LerpPosInterval
 from direct.task import Task
-from FishFSM import FishFSM
-import FishingGlobals
+from .FishFSM import FishFSM
+from . import FishingGlobals
 
 class LegendaryFishFSM(FishFSM):
 

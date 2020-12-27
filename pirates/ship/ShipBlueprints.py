@@ -398,7 +398,7 @@ def generateMastCache(mastClass):
     geom.findAllMatches('**/breaks').detach()
     geom.findAllMatches('**/def_mast_base').detach()
     height = MastData[mastClass]['maxHeight']
-    matchSet = range(height)
+    matchSet = list(range(height))
     for i in range(height):
         matchSet = [ x for x in matchSet if x > i ]
         reducedSet = []
@@ -515,11 +515,11 @@ def setupShipTextures():
             shipTextures[i] = textures[0]
 
     model = loader.loadModel('models/textureCards/sailColors.bam')
-    for style, name in ColorDict.iteritems():
+    for style, name in ColorDict.items():
         sailColors[style] = model.find('**/%s' % name).findAllTextures('*')[0]
 
     model = loader.loadModel('models/textureCards/sailLogo.bam')
-    for num, name in LogoDict.iteritems():
+    for num, name in LogoDict.items():
         logoTextures[num] = model.find('**/%s' % name).findAllTextures('*')[0]
 
 

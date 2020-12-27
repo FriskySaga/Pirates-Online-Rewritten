@@ -1,7 +1,7 @@
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 from direct.directnotify import DirectNotifyGlobal
-from DistributedRepairGameBase import *
-import RepairGlobals
+from .DistributedRepairGameBase import *
+from . import RepairGlobals
 import random
 
 class DistributedRepairGameAI(DistributedRepairGameBase, DistributedObjectAI):
@@ -13,7 +13,7 @@ class DistributedRepairGameAI(DistributedRepairGameBase, DistributedObjectAI):
 
         self.avatar2game = {}
         self.avatar2timeout = {}
-        self.game2progress = {gameIndex: GAME_OPEN for gameIndex in xrange(self.getGameCount())}
+        self.game2progress = {gameIndex: GAME_OPEN for gameIndex in range(self.getGameCount())}
 
     def setDifficulty(self, difficulty):
         self.difficulty = difficulty
@@ -42,7 +42,7 @@ class DistributedRepairGameAI(DistributedRepairGameBase, DistributedObjectAI):
         return self.location
 
     def isComplete(self):
-        for gameIndex, gameProgress in self.game2progress.items():
+        for gameIndex, gameProgress in list(self.game2progress.items()):
             if gameProgress < GAME_COMPLETE:
                 return False
 
@@ -63,8 +63,8 @@ class DistributedRepairGameAI(DistributedRepairGameBase, DistributedObjectAI):
         for gameIndex in self.game2progress:
             self.d_setMincroGameProgress(avatar.doId, gameIndex, self.game2progress[gameIndex])
 
-        self.sendUpdateToAvatarId(avatar.doId, 'setAvIds2CurrentGameList', [self.avatar2game.values(),
-            self.avatar2game.keys()])
+        self.sendUpdateToAvatarId(avatar.doId, 'setAvIds2CurrentGameList', [list(self.avatar2game.values()),
+            list(self.avatar2game.keys())])
 
         self.addTimeout(avatar)
         return True

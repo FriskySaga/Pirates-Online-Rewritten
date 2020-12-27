@@ -31,14 +31,14 @@ class QuestTitleNode():
     def getChildren(self):
         if isinstance(self.questDNA, QuestLadderDNA.QuestBranchDNA):
             firstQuestId = self.questDNA.getFirstQuestId()
-            children = self.children.values()
+            children = list(self.children.values())
             firstChild = self.children.get(firstQuestId)
             if not firstChild:
-                return self.children.values()
+                return list(self.children.values())
             elif firstChild in children:
                 children.remove(firstChild)
             return [firstChild] + children
-        return self.children.values()
+        return list(self.children.values())
 
     def hasChild(self, questId):
         return questId in self.children
@@ -164,7 +164,7 @@ class QuestTitleList(DirectScrolledFrame):
         qTier6 = []
         qTier7 = []
         qTier8 = []
-        for tree in self.trees.keys():
+        for tree in list(self.trees.keys()):
             treeObject = self.trees[tree]
             if QuestTitleTiers.firstTier.count(tree):
                 qTier1.append(treeObject)
@@ -255,7 +255,7 @@ class QuestTitleList(DirectScrolledFrame):
                 return text
             if container.isComplete(showComplete=True):
                 quest = localAvatar.getQuestById(container.getQuestId())
-                if quest and quest.getTasks() and not filter(lambda x: isinstance(quest.getTasks()[0], x), [VisitTaskDNA, DeliverItemTaskDNA]):
+                if quest and quest.getTasks() and not [x for x in [VisitTaskDNA, DeliverItemTaskDNA] if isinstance(quest.getTasks()[0], x)]:
                     text += '   \x01questComplete\x01' + PLocalizer.QuestTitleComplete + '\x02'
             if not container.viewedInGUI:
                 text += '   \x01questNew\x01' + PLocalizer.QuestTitleNew + '\x02'

@@ -6,7 +6,7 @@ from direct.interval.LerpInterval import LerpFunc
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import RepairGlobals
+from . import RepairGlobals
 from pirates.piratesbase import PiratesGlobals
 import random
 

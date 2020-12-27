@@ -66,9 +66,9 @@ from pirates.map.MinimapObject import GridMinimapObject
 from pirates.pirate import TitleGlobals
 from pirates.uberdog.UberDogGlobals import InventoryCategory, InventoryType
 from pirates.uberdog.DistributedInventoryBase import DistributedInventoryBase
-import Pirate
-import LocalPirateGameFSM
-from DistributedPlayerPirate import DistributedPlayerPirate
+from . import Pirate
+from . import LocalPirateGameFSM
+from .DistributedPlayerPirate import DistributedPlayerPirate
 from pirates.pirate import PlayerStateGlobals
 from pirates.pirate import AvatarTypes
 from pirates.makeapirate import ClothingGlobals
@@ -1128,7 +1128,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
                 model = parent.modelPath
                 model = model.split('/')[-1]
         strPos = '\nMaya Pos: \n%.1f, %.1f, %.1f' % (pos[0], pos[2], -pos[1]) + '\nPanda Pos: \n%.1f, %.1f, %.1f' % (pos[0], pos[1], pos[2]) + '\nH: %.1f' % hpr[0] + '\nModel: %s' % model + '\nTexture: %s, Terrain: %s, Avatar: %s' % (base.options.getTextureScaleString(), base.options.getGameOptionString(base.options.getTerrainDetailSetting()), base.options.getGameOptionString(base.options.getCharacterDetailSetting())) + '\nLoc: (%s, %s)' % (str(parentId), str(zoneId)) + ',\nVer: %s, ' % serverVersion + '\nDistrict: %s' % districtName
-        print 'Current position=', strPos.replace('\n', ', ')
+        print('Current position=', strPos.replace('\n', ', '))
         self.setChatAbsolute(strPos, CFThought | CFTimeout)
         return
 
@@ -1187,7 +1187,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
             speedMult += self.aimMod
         self.notify.debug('speedMult = %s' % speedMult)
         oldSpeeds = PiratesGlobals.PirateSpeeds[self.speedIndex]
-        newSpeeds = map(lambda x: speedMult * x, oldSpeeds)
+        newSpeeds = [speedMult * x for x in oldSpeeds]
         self.controlManager.setSpeeds(*newSpeeds)
 
     def setWalkForWeapon(self):
@@ -1233,16 +1233,16 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         if enable:
 
             def doPrint(task, self=self):
-                print 'AnimBlends:'
+                print('AnimBlends:')
                 self.printAnimBlends()
-                print ''
+                print('')
                 return task.cont
 
             taskMgr.add(doPrint, 'printAnimBlends')
-            print 'togglePrintAnimBlends ON'
+            print('togglePrintAnimBlends ON')
         else:
             taskMgr.remove('printAnimBlends')
-            print 'togglePrintAnimBlends OFF'
+            print('togglePrintAnimBlends OFF')
         return
 
     def toggleOsdAnimBlends(self, enable=None):
@@ -1258,10 +1258,10 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
                 return task.cont
 
             taskMgr.add(doOsd, 'osdAnimBlends')
-            print 'toggleOsdAnimBlends ON'
+            print('toggleOsdAnimBlends ON')
         else:
             taskMgr.remove('osdAnimBlends')
-            print 'toggleOsdAnimBlends OFF'
+            print('toggleOsdAnimBlends OFF')
         return
 
     def toggleAvVis(self):
@@ -1354,7 +1354,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         if amt > 0 and maxCarry > 0:
             speedMult = 1.0 - 0.5 * self.lootCarried / maxCarry
             regularSpeeds = PiratesGlobals.PirateSpeeds[self.speedIndex]
-            scaledSpeeds = map(lambda x: speedMult * x, regularSpeeds)
+            scaledSpeeds = [speedMult * x for x in regularSpeeds]
             self.controlManager.setSpeeds(*scaledSpeeds)
             self.av.updatePlayerSpeed()
 
@@ -1399,7 +1399,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         return getupTrack
 
     def hasEffect(self, effectId):
-        for key in self.skillEffects.keys():
+        for key in list(self.skillEffects.keys()):
             if effectId == self.skillEffects[key][0]:
                 return 1
 
@@ -1767,7 +1767,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
     def findLegalTargets(self, task):
         TICK_DELAY = 0.5
         if task.time - self.lastTick > TICK_DELAY:
-            for do in self.cr.doId2do.values():
+            for do in list(self.cr.doId2do.values()):
                 if hasattr(do, 'isNpc') and do.doId != self.doId:
                     self.checkViewingArc(do)
 
@@ -2273,33 +2273,33 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
 
         def b_setGameState(self, *args, **kw):
             DistributedPlayerPirate.b_setGameState(self, *args, **kw)
-            print 'b_setGameState', args, kw
+            print('b_setGameState', args, kw)
 
         def printTS(self):
-            print 'TeleportState\n-----------------------------'
-            print 'location:', localAvatar.getLocation()
-            print 'pos:', localAvatar.getPos(localAvatar.getParentObj())
+            print('TeleportState\n-----------------------------')
+            print('location:', localAvatar.getLocation())
+            print('pos:', localAvatar.getPos(localAvatar.getParentObj()))
             try:
-                print 'lastZoneLevel:', localAvatar.getParentObj().lastZoneLevel
+                print('lastZoneLevel:', localAvatar.getParentObj().lastZoneLevel)
             except AttributeError:
                 pass
 
-            print '\nzoneSpheres:'
+            print('\nzoneSpheres:')
             for x in localAvatar.getParentObj().zoneSphere:
                 x.ls()
 
-            print '\naccepting:'
+            print('\naccepting:')
             for x in localAvatar.getParentObj().getAllAccepting():
-                print x
+                print(x)
 
-            print '\ncTrav:'
-            print base.cTrav
+            print('\ncTrav:')
+            print(base.cTrav)
 
     def printIZL(self, reset=False):
-        for x in self.cr.activeWorld.islands.itervalues():
+        for x in self.cr.activeWorld.islands.values():
             if reset:
                 x.setZoneLevel(min(3, x.lastZoneLevel))
-            print '%d %d %20s %s' % (x.lastZoneLevel, x.doId, x.getUniqueId(), x.getName())
+            print('%d %d %20s %s' % (x.lastZoneLevel, x.doId, x.getUniqueId(), x.getName()))
 
     def addStatusEffect(self, effectId, attackerId, duration, timeLeft, timestamp, buffData):
         DistributedPlayerPirate.addStatusEffect(self, effectId, attackerId, duration, timeLeft, timestamp, buffData)
@@ -2441,7 +2441,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
             taskMgr.doMethodLater(self.AFKDelay, self.goAFK, 'autoAFK')
 
     def gotSpecialReward(self, rewardType):
-        if EmoteGlobals.RewardReceivedToEmoteCmds.has_key(rewardType):
+        if rewardType in EmoteGlobals.RewardReceivedToEmoteCmds:
             self.playRewardAnimation = EmoteGlobals.RewardReceivedToEmoteCmds[rewardType]
         if rewardType in [ItemGlobals.BITTER_END, ItemGlobals.SPINECREST_SWORD, ItemGlobals.NAUTILUS_BLADE]:
             self.guiMgr.handleContextTutorial(InventoryType.CursedBlades, 0, 0, 0)
@@ -2678,7 +2678,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
                 messenger.send('Local_Efficiency_Set', [self.efficiency])
 
     def setBoardedShip(self, boardedShip):
-        print 'LA - setBoardedShip'
+        print('LA - setBoardedShip')
         if boardedShip != self.boardedShip:
             self.boardedShip = boardedShip
             if self.boardedShip:
@@ -2735,7 +2735,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         effect = None
         if skillId == EnemySkills.MISC_HEX_WARD:
             if base.options.getSpecialEffectsSetting() >= base.options.SpecialEffectsHigh:
-                if not self.defenceEffects.has_key(skillId):
+                if skillId not in self.defenceEffects:
                     effect = ProtectionSpiral.getEffect(True)
                 if effect:
                     effect.reparentTo(self)
@@ -2752,7 +2752,7 @@ class LocalPirate(DistributedPlayerPirate, LocalAvatar):
         if self.skillSfxIval:
             self.skillSfxIval.finish()
             self.skillSfxIval = None
-        for effect in self.defenceEffects.keys():
+        for effect in list(self.defenceEffects.keys()):
             self.defenceEffects[effect].stopLoop()
             del self.defenceEffects[effect]
 

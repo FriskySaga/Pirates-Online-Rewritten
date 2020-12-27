@@ -1,5 +1,5 @@
 from pandac.PandaModules import *
-import DistributedPostInvasionObject
+from . import DistributedPostInvasionObject
 from pirates.effects.Fire import Fire
 from pirates.effects.MansionSmoke import MansionSmoke
 

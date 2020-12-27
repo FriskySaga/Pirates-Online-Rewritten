@@ -10,12 +10,12 @@ class PiratesAmbientManager(AmbientManagerBase.AmbientManagerBase):
         self.volumeModifierDict = {SoundGlobals.AMBIENT_JUNGLE: 0.6,SoundGlobals.AMBIENT_SWAMP: 0.75,SoundGlobals.AMBIENT_JAIL: 1.25}
 
     def requestFadeIn(self, name, duration=5, finalVolume=1.0, priority=0):
-        if name and not self.ambientDict.has_key(name):
+        if name and name not in self.ambientDict:
             self.load(name, 'audio/' + name)
         AmbientManagerBase.AmbientManagerBase.requestFadeIn(self, name, duration, finalVolume, priority)
 
     def requestChangeVolume(self, name, duration, finalVolume, priority=0):
         newFinalVolume = finalVolume
-        if name in self.volumeModifierDict.keys():
+        if name in list(self.volumeModifierDict.keys()):
             newFinalVolume = finalVolume * self.volumeModifierDict[name]
         AmbientManagerBase.AmbientManagerBase.requestChangeVolume(self, name, duration, newFinalVolume, priority)

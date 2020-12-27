@@ -5,7 +5,7 @@ from pirates.piratesgui.GuiButton import GuiButton
 from direct.gui.DirectGui import *
 from direct.gui.OnscreenImage import OnscreenImage
 from pandac.PandaModules import TransparencyAttrib
-import FishingGlobals
+from . import FishingGlobals
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.world.LocationConstants import LocationIds

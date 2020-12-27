@@ -40,7 +40,7 @@ class PChatInputEmote(DirectObject.DirectObject):
             emote_music_structure = None
             emote_expressions_structure = None
             avatar_gender = base.emoteGender
-            idList = EmoteGlobals.emotes.keys()
+            idList = list(EmoteGlobals.emotes.keys())
             idList.sort()
             for id in idList:
                 emote = EmoteGlobals.emotes.get(id)
@@ -97,7 +97,7 @@ class PChatInputEmote(DirectObject.DirectObject):
         return
 
     def updateEmoteList(self):
-        idList = EmoteGlobals.emotes.keys()
+        idList = list(EmoteGlobals.emotes.keys())
         idList.sort()
         for emoteId in idList:
             if EmoteGlobals.getEmotePrereqs(emoteId):

@@ -209,6 +209,6 @@ class InventoryUIStoreContainer(InventoryUIContainer.InventoryUIContainer):
         self.putIntoCell(item, gridCell)
 
     def disableUnusedCells(self):
-        for cell in self.gridDict.values():
+        for cell in list(self.gridDict.values()):
             if not cell.inventoryItem:
                 cell['state'] = DGG.DISABLED

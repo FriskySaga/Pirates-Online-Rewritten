@@ -73,7 +73,7 @@ class DistributedCapturePoint(DistributedHolidayObject.DistributedHolidayObject,
             return self.__hp
 
         def set_hp(self, hp):
-            if type(hp) in [types.IntType, types.FloatType]:
+            if type(hp) in [int, float]:
                 self.__hp = hp
             else:
                 self.__hp = 0
@@ -84,7 +84,7 @@ class DistributedCapturePoint(DistributedHolidayObject.DistributedHolidayObject,
             return self.__maxHp
 
         def set_maxHp(self, maxHp):
-            if type(maxHp) in [types.IntType, types.FloatType]:
+            if type(maxHp) in [int, float]:
                 self.__maxHp = maxHp
             else:
                 self.__maxHp = 1

@@ -1,6 +1,6 @@
 import copy
 import math
-import cPickle
+import pickle
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase.PythonUtil import *
@@ -15,24 +15,24 @@ from pirates.inventory import ItemGlobals
 import random
 import os
 import copy
-import Pistol
-import Sword
-import Doll
-import Melee
-import Dagger
-import Grenade
-import Wand
-import Bayonet
-import MonsterMelee
-import Consumable
-import Weapon
-import DualCutlass
-import Foil
-import FishingRod
-import Gun
-import Torch
-import PowderKeg
-from WeaponConstants import *
+from . import Pistol
+from . import Sword
+from . import Doll
+from . import Melee
+from . import Dagger
+from . import Grenade
+from . import Wand
+from . import Bayonet
+from . import MonsterMelee
+from . import Consumable
+from . import Weapon
+from . import DualCutlass
+from . import Foil
+from . import FishingRod
+from . import Gun
+from . import Torch
+from . import PowderKeg
+from .WeaponConstants import *
 __defensiveBuffs = [
  C_TAKECOVER, C_OPENFIRE, C_ATTUNE, C_HASTEN, C_REGEN, C_CANNON_DAMAGE_LVL1, C_CANNON_DAMAGE_LVL2, C_CANNON_DAMAGE_LVL3, C_PISTOL_DAMAGE_LVL1, C_PISTOL_DAMAGE_LVL2, C_PISTOL_DAMAGE_LVL3, C_CUTLASS_DAMAGE_LVL1, C_CUTLASS_DAMAGE_LVL2, C_CUTLASS_DAMAGE_LVL3, C_DOLL_DAMAGE_LVL1, C_DOLL_DAMAGE_LVL2, C_DOLL_DAMAGE_LVL3, C_REP_BONUS_LVL1, C_REP_BONUS_LVL2, C_REP_BONUS_LVL3, C_GOLD_BONUS_LVL1, C_GOLD_BONUS_LVL2, C_BURP, C_FART, C_FART_LVL2, C_VOMIT, C_HASTEN_LVL1, C_HASTEN_LVL2, C_HASTEN_LVL3, C_ACCURACY_BONUS_LVL1, C_ACCURACY_BONUS_LVL2, C_ACCURACY_BONUS_LVL3, C_REGEN_LVL1, C_REGEN_LVL2, C_REGEN_LVL3, C_REGEN_LVL4, C_HEAD_FIRE, C_INVISIBILITY_LVL1, C_INVISIBILITY_LVL2, C_WRECKHULL, C_WRECKMASTS, C_SINKHER, C_INCOMING, C_SPIRIT, C_QUICKLOAD, C_DARK_CURSE, C_MASTERS_RIPOSTE, C_MONKEY_PANIC, C_VOODOO_REFLECT, C_RED_FURY, C_GHOST_FORM, C_HEAD_GROW, C_CRAZY_SKIN_COLOR, C_SIZE_REDUCE, C_SIZE_INCREASE, C_SCORPION_TRANSFORM, C_ALLIGATOR_TRANSFORM, C_CRAB_TRANSFORM, C_SUMMON_CHICKEN, C_REP_BONUS_LVLCOMP, C_SUMMON_MONKEY, C_SUMMON_WASP, C_SUMMON_DOG]
 _compEffects = [
@@ -69,13 +69,13 @@ else:
 found = vfs.resolveFilename(filename, searchPath)
 if not found:
     message = 'WeaponGlobals.pkl file not found on %s' % searchPath
-    raise IOError, message
+    raise IOError(message)
 data = vfs.readFile(filename, 1)
-__skillInfo = cPickle.loads(data)
+__skillInfo = pickle.loads(data)
 __attackEffectsSkillInfo = {}
 __columnHeadings = __skillInfo.pop('columnHeadings')
-for heading, value in __columnHeadings.items():
-    exec '%s = %s' % (heading, value) in globals()
+for heading, value in list(__columnHeadings.items()):
+    exec('%s = %s' % (heading, value), globals())
 
 del searchPath
 del __columnHeadings
@@ -101,7 +101,7 @@ __enemyWeapons = {InventoryType.MonsterWeaponL1: COMBAT,InventoryType.MonsterWea
 __typeWeapons = {ItemGlobals.SWORD: COMBAT,ItemGlobals.GUN: FIREARM,ItemGlobals.DOLL: VOODOO,ItemGlobals.DAGGER: THROWING,ItemGlobals.GRENADE: GRENADE,ItemGlobals.STAFF: STAFF,ItemGlobals.AXE: COMBAT,ItemGlobals.FENCING: COMBAT,ItemGlobals.POTION: CONSUMABLE,ItemGlobals.QUEST_PROP: COMBAT}
 
 def getWeaponTypes():
-    return __humanWeapons.keys() + __enemyWeapons.keys()
+    return list(__humanWeapons.keys()) + list(__enemyWeapons.keys())
 
 
 def getHumanWeaponTypes():
@@ -225,7 +225,7 @@ __invId2RepId = {InventoryType.MeleeWeaponL1: InventoryType.MeleeRep,InventoryTy
 __typeId2RepId = {ItemGlobals.SWORD: InventoryType.CutlassRep,ItemGlobals.GUN: InventoryType.PistolRep,ItemGlobals.DOLL: InventoryType.DollRep,ItemGlobals.DAGGER: InventoryType.DaggerRep,ItemGlobals.GRENADE: InventoryType.GrenadeRep,ItemGlobals.STAFF: InventoryType.WandRep,ItemGlobals.AXE: InventoryType.CutlassRep,ItemGlobals.FENCING: InventoryType.CutlassRep,ItemGlobals.CANNON: InventoryType.CannonRep,ItemGlobals.SAILING: InventoryType.SailingRep,ItemGlobals.MONSTER: InventoryType.MonsterRep,ItemGlobals.FISHING: InventoryType.FishingRep,ItemGlobals.QUEST_PROP: InventoryType.MeleeRep}
 
 def getRepId(inventoryId):
-    if inventoryId <= ItemGlobals.CHARM_RANGE and inventoryId not in range(InventoryType.begin_FishingLures, InventoryType.end_FishingLures):
+    if inventoryId <= ItemGlobals.CHARM_RANGE and inventoryId not in list(range(InventoryType.begin_FishingLures, InventoryType.end_FishingLures)):
         typeId = ItemGlobals.getType(inventoryId)
         return __typeId2RepId.get(typeId, 0)
     else:
@@ -300,12 +300,12 @@ BACKSTAB_ANGLE = 60
 CHARGEABLE_WEAPONS = [
  InventoryType.PistolRep, InventoryType.GrenadeRep, InventoryType.WandRep]
 __skills = {}
-for skillId, skillData in __skillInfo.items():
+for skillId, skillData in list(__skillInfo.items()):
     repCat = skillData[REPUTATION_CATEGORY_INDEX]
     __skills.setdefault(repCat, []).append(skillId)
 
 def getAllSkillIds():
-    return __skillInfo.keys()
+    return list(__skillInfo.keys())
 
 
 def getSkills(weaponRepId):
@@ -424,7 +424,7 @@ def getSkillAmmoInventoryId(skillId):
 
 def getAllAmmoSkills():
     skillIds = []
-    for skillId in __skillInfo.keys():
+    for skillId in list(__skillInfo.keys()):
         if getSkillAmmoInventoryId(skillId):
             skillIds.append(skillId)
 
@@ -471,7 +471,7 @@ def getSkillTrack(skillId):
 
 
 def getSkillIcon(skillId):
-    if not __skillInfo.has_key(skillId):
+    if skillId not in __skillInfo:
         return 'base'
     icon = __skillInfo[skillId][SKILL_ICON_INDEX]
     if icon:
@@ -1052,7 +1052,7 @@ def getComboBonus(val):
 
 
 def skillTableSanityCheck():
-    for skillId, skillInfo in __skillInfo.items():
+    for skillId, skillInfo in list(__skillInfo.items()):
         maxQuant = getSkillMaxQuantity(skillId)
         ammoInvId = getSkillAmmoInventoryId(skillId)
         if maxQuant != INF_QUANT and maxQuant != STAFF_QUANT:

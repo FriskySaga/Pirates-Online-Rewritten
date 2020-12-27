@@ -5,7 +5,7 @@ from direct.gui.DirectGui import DirectFrame, DirectButton, DGG
 from direct.fsm import FSM
 from pirates.audio.SoundGlobals import loadSfx
 from pandac.PandaModules import MouseButton, Point2, Point3, Vec2, NodePath, VBase3
-import RepairGlobals
+from . import RepairGlobals
 from pirates.audio import SoundGlobals
 GOAL_EMPTY = -1
 GOAL_NONE = 0

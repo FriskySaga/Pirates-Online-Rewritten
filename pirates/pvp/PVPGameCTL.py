@@ -101,7 +101,7 @@ class PVPGameCTL(PVPGameBase):
             ship.refreshProximityText()
 
     def startTreasureCarry(self):
-        print 'start treasure carry'
+        print('start treasure carry')
         if localAvatar.gameFSM.getCurrentOrNextState() != 'LandTreasureRoam' and localAvatar.gameFSM.getCurrentOrNextState() != 'WaterTreasureRoam':
             return
         self.dropDisabled = 0
@@ -110,14 +110,14 @@ class PVPGameCTL(PVPGameBase):
         self.accept('enterProximityOfInteractive', self.temporarilyDisableDrop)
 
     def stopTreasureCarry(self):
-        print 'stop treasure carry'
+        print('stop treasure carry')
         self.ignore(InteractiveBase.USE_KEY_EVENT)
         if localAvatar.gameFSM.getCurrentOrNextState() != 'WaterTreasureRoam' and localAvatar.gameFSM.getCurrentOrNextState() != 'LandTreasureRoam' and self.dropDisabled == 0:
-            print 'leaving state, drop treasure'
+            print('leaving state, drop treasure')
             self.requestDropTreasure()
 
     def temporarilyDisableDrop(self):
-        print 'disableDrop'
+        print('disableDrop')
         self.dropDisabled = 1
         self.ignore(InteractiveBase.USE_KEY_EVENT)
         self.accept('exitProximityOfInteractive', self.startTreasureCarry)
@@ -145,7 +145,7 @@ class PVPGameCTL(PVPGameBase):
 
     def handleUseKey(self, interactiveObj):
         if localAvatar.lootCarried > 0 and interactiveObj.isExclusiveInteraction():
-            print 'dropping treasure now...'
+            print('dropping treasure now...')
             self.requestDropTreasure()
         if isinstance(interactiveObj, DistributedSimpleShip.DistributedSimpleShip):
             self.handleShipUse(interactiveObj)
@@ -166,7 +166,7 @@ class PVPGameCTL(PVPGameBase):
             self.scoreList.append({'Team': teams[currIdx],'Score': scores[currIdx]})
 
         self.scoreList.sort(self.sortScores)
-        print 'got new score list %s' % self.scoreList
+        print('got new score list %s' % self.scoreList)
         messenger.send(self.getItemChangeMsg())
 
     def sortScores(self, item1, item2):

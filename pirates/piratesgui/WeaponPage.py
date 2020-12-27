@@ -17,7 +17,7 @@ from pirates.reputation import ReputationGlobals
 from pirates.piratesgui.ReputationMeter import ReputationMeter
 import copy
 from pirates.inventory import ItemGlobals, InventoryGlobals
-from GuiButton import GuiButton
+from .GuiButton import GuiButton
 TOKEN_LIST = [
  InventoryType.CutlassToken, InventoryType.PistolToken, InventoryType.DollToken, InventoryType.DaggerToken, InventoryType.GrenadeToken, InventoryType.WandToken]
 
@@ -123,7 +123,7 @@ class WeaponPage(InventoryPage.InventoryPage):
             self.potionRepMeter.reparentTo(self)
             self.potionRepMeter.flattenLight()
             zIndex += 1
-        items = dict(map(lambda x: (x.getType(), x.getCount()), inventory.getConsumables().values()))
+        items = dict([(x.getType(), x.getCount()) for x in list(inventory.getConsumables().values())])
         possibleItems = ItemGlobals.getAllHealthIds()
         havePorky = items.get(ItemGlobals.ROAST_PORK)
         if not havePorky and ItemGlobals.ROAST_PORK in possibleItems:
@@ -148,10 +148,10 @@ class WeaponPage(InventoryPage.InventoryPage):
         return
 
     def refreshList(self, newWeaponId=None):
-        for panel in self.weaponPanels.values():
+        for panel in list(self.weaponPanels.values()):
             panel.destroy()
 
-        for panel in self.tonicButtons.values():
+        for panel in list(self.tonicButtons.values()):
             panel.destroy()
 
         if self.fishingIcon is not None:
@@ -187,6 +187,6 @@ class WeaponPage(InventoryPage.InventoryPage):
         possibleTonics = ItemGlobals.getAllHealthIds()
         for tonicId in possibleTonics:
             tonicAmt = inv.getItemQuantity(InventoryType.ItemTypeConsumable, tonicId)
-            if self.tonicButtons.has_key(tonicId):
+            if tonicId in self.tonicButtons:
                 self.tonicButtons[tonicId].updateQuantity(tonicAmt)
                 self.tonicButtons[tonicId].checkAmount()

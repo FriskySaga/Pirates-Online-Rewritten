@@ -2,7 +2,7 @@ import math
 from pandac.PandaModules import *
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import TeamUtils
-import WeaponGlobals
+from . import WeaponGlobals
 from pirates.inventory import ItemGlobals
 
 class WeaponBaseBase():

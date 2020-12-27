@@ -5,7 +5,7 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from otp.otpbase import OTPLocalizer
 from pirates.inventory.InventoryUIGlobals import *
-import InventoryUIPlunderGridContainer
+from . import InventoryUIPlunderGridContainer
 
 class InventoryPlunderPanel(DirectFrame):
 

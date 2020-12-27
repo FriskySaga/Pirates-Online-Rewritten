@@ -7,11 +7,11 @@ from direct.actor import Actor
 from direct.task import Task
 from pandac.PandaModules import *
 from pandac.PandaModules import CardMaker
-from PotionBoardPiece import PotionBoardPiece
+from .PotionBoardPiece import PotionBoardPiece
 from pirates.piratesgui import GuiButton
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesbase import PLocalizer
-import PotionGlobals
+from . import PotionGlobals
 
 class PotionRecipe(DirectFrame):
 

@@ -66,7 +66,7 @@ class Scoreboard(DistributedObject):
         self._names = {}
         self._teams = {}
         self._types = {}
-        for stat, dict in self._stats.iteritems():
+        for stat, dict in self._stats.items():
             dict = {}
 
     def setScores(self, scores):
@@ -85,7 +85,7 @@ class Scoreboard(DistributedObject):
 
     def getTeamScores(self, team):
         scores = []
-        for id, score in self._scores.iteritems():
+        for id, score in self._scores.items():
             if self._teams[id] == team and self._types[id] == PVPGlobals.SHIP_SCORE:
                 scores.append({'ID': id,'Score': score})
 
@@ -98,7 +98,7 @@ class Scoreboard(DistributedObject):
     def getColumnLabels(self):
         columns = [
          PLocalizer.PVPShip, PLocalizer.PVPScore]
-        for stat in self._stats.keys():
+        for stat in list(self._stats.keys()):
             columns.append(PVPGlobals.statText[stat])
 
         return columns
@@ -127,7 +127,7 @@ class Scoreboard(DistributedObject):
             id = scoreItemDict.get('ID')
             score = scoreItemDict.get('Score')
             stats = [['Score', str(score)]]
-            for stat, dict in self._stats.iteritems():
+            for stat, dict in self._stats.items():
                 stats.append([PVPGlobals.statText[stat], str(dict.get(id))])
 
             if localAvatar.getShip() and localAvatar.getShip().doId == id:

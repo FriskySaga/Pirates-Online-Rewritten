@@ -52,7 +52,7 @@ class DistributedInvasionObjectAI(DistributedObjectAI, FSM):
         taskMgr.doMethodLater(self.timerSeconds, self.startInvasion, '%s-invasion-start-timer ' % self.__class__.__name__)
 
     def startInvasion(self, task):
-        print('Starting Invasion with class %s' % self.__class__.__name__)
+        print(('Starting Invasion with class %s' % self.__class__.__name__))
         
         #TEMP
         self.air.holidayMgr.d_requestHolidayRemoval(self.holidayId)

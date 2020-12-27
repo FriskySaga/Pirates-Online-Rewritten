@@ -5,7 +5,7 @@ from direct.fsm import FSM
 from direct.interval.IntervalGlobal import *
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import RepairGlobals
+from . import RepairGlobals
 MIN_SCALE = 1.5
 MAX_SCALE_ADD = 1.0
 MAX_SCRUB_AMT = 20.0

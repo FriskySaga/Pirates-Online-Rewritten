@@ -15,7 +15,7 @@ from otp.otpbase import OTPGlobals
 from otp.friends.FriendInfo import FriendInfo
 from pirates.piratesbase import Freebooter
 from pirates.band import BandConstance
-import GuiButton
+from . import GuiButton
 from direct.showbase.DirectObject import *
 import copy
 MODE_FRIEND_AVATAR = 0
@@ -367,7 +367,7 @@ class PirateMemberButton(GuiButton.GuiButton):
                         text0_fg = self.OnlineTextColor
                 else:
                     if self.mode == MODE_GUILD:
-                        if base.cr.guildManager.id2Rank.has_key(self.avId):
+                        if self.avId in base.cr.guildManager.id2Rank:
                             self.modeInfo[2] = base.cr.guildManager.id2Rank.get(self.avId)
                         self.shipIcon.setPos(self.owner.memberWidth - 0.4, 0, 0.035)
                         if self.avId == localAvatar.doId:

@@ -97,7 +97,7 @@ class SimpleStoreColorPicker(BorderFrame):
         self.setBin('gui-fixed', 1)
         offsetx = -0.5 * self.sizeX + 0.12
         offsety = 0.5 * self.sizeZ - 0.055
-        colorSet = colorsNotOwned = range(0, 21)
+        colorSet = colorsNotOwned = list(range(0, 21))
         numcolors = len(colorsNotOwned)
         colorsOwned = []
         charGui = loader.loadModel('models/gui/char_gui')
@@ -936,7 +936,7 @@ class SimpleStoreGUI(DirectFrame):
 
     def filterStockItems(self, stock, pirate):
         newStock = {}
-        for id in stock.keys():
+        for id in list(stock.keys()):
             item = stock[id]
             if not item or not item.canBeUsed(pirate):
                 pass
@@ -946,7 +946,7 @@ class SimpleStoreGUI(DirectFrame):
         return newStock
 
     def getStockIds(self, stock):
-        return stock.keys()
+        return list(stock.keys())
 
     def createTabs(self):
         pass
@@ -1017,14 +1017,14 @@ class CatalogStoreGUI(SimpleStoreGUI):
             self.previewFemale.detachNode()
             self.previewFemale = None
         self.destroyPreviewBuffer()
-        for id in self.previewCards.keys():
+        for id in list(self.previewCards.keys()):
             self.previewCards[id].detachNode()
             self.previewCards.pop(id)
 
         return
 
     def createTabs(self):
-        stockHolidayIds = set([ item.holidayId for item in self.stock.itervalues() if item.holidayId ])
+        stockHolidayIds = set([ item.holidayId for item in self.stock.values() if item.holidayId ])
         if not stockHolidayIds:
             return
         firstTab = max(stockHolidayIds)
@@ -1053,19 +1053,19 @@ class CatalogStoreGUI(SimpleStoreGUI):
     def updateCatalogRender(self, tabId):
         self.unapplyStockFromPirate(self.currTabMaleStock, self.previewMale, self.maleDNA)
         self.currTabMaleStock = {}
-        for uid in self.maleStock.iterkeys():
+        for uid in self.maleStock.keys():
             if self.tabIdFromItemId(uid) == tabId:
                 self.currTabMaleStock[uid] = self.maleStock[uid]
 
         self.applyStockToPirate(self.currTabMaleStock, self.previewMale)
         self.unapplyStockFromPirate(self.currTabFemaleStock, self.previewFemale, self.femaleDNA)
         self.currTabFemaleStock = {}
-        for uid in self.femaleStock.iterkeys():
+        for uid in self.femaleStock.keys():
             if self.tabIdFromItemId(uid) == tabId:
                 self.currTabFemaleStock[uid] = self.femaleStock[uid]
 
         self.applyStockToPirate(self.currTabFemaleStock, self.previewFemale)
-        for card in self.previewCards.itervalues():
+        for card in self.previewCards.values():
             card.detachNode()
 
         if not self.previewCards.get(tabId):
@@ -1132,11 +1132,11 @@ class CatalogStoreGUI(SimpleStoreGUI):
             self.previewFemale.setY(10)
 
     def unapplyStockFromPirate(self, stock, pirate, originalStyle):
-        for stockItem in stock.itervalues():
+        for stockItem in stock.values():
             stockItem.unapply(pirate, originalStyle)
 
     def applyStockToPirate(self, stock, pirate):
-        for stockItem in stock.itervalues():
+        for stockItem in stock.values():
             stockItem.apply(pirate)
 
     def createPreviewCard(self):
@@ -1233,11 +1233,11 @@ class JewelryStoreGUI(SimpleStoreGUI):
     def setTab(self, tabId):
         SimpleStoreGUI.setTab(self, tabId)
         items = SimpleStoreGUI.getTabItems(self, tabId)
-        for item in items.itervalues():
+        for item in items.values():
             item.jewelryType = tabId
 
     def createTabs(self):
-        for key, value in self.tabInfos.iteritems():
+        for key, value in self.tabInfos.items():
             self.addTab(key, PLocalizer.JewelryNames.get(key), image=value[0], image_scale=value[1])
 
 
@@ -1251,7 +1251,7 @@ class TattooStoreGUI(SimpleStoreGUI):
         SimpleStoreGUI.__init__(self, PLocalizer.TattooShop, npc, shopId, **kw)
 
     def getTabItemIds(self, tabId):
-        allIds = self.stock.keys()
+        allIds = list(self.stock.keys())
         tabType = SimpleTattooItem.itemTypeFromTattooType(tabId)
         tabIds = [ aId for aId in allIds if self.tabIdFromItemId(aId) == tabType ]
         return tabIds
@@ -1259,7 +1259,7 @@ class TattooStoreGUI(SimpleStoreGUI):
     def setTab(self, tabId):
         SimpleStoreGUI.setTab(self, tabId)
         items = SimpleStoreGUI.getTabItems(self, tabId)
-        for item in items.itervalues():
+        for item in items.values():
             item.zone = tabId
 
     def createTabs(self):

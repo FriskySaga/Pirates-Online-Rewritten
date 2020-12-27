@@ -6,7 +6,7 @@ class QuestOffer(POD):
 
     @staticmethod
     def create(questId, holder, timerReset=False, branchReset=False):
-        if QuestDB.QuestDict.has_key(questId):
+        if questId in QuestDB.QuestDict:
             questDNA = QuestDB.QuestDict[questId]
             initialTaskStates = questDNA.getInitialTaskStates(holder)
             rewards = questDNA.getRewards()
@@ -47,13 +47,13 @@ class QuestOffer(POD):
         self.setRewardStructs(rewardStructs)
 
     def getQuestDNA(self):
-        if QuestDB.QuestDict.has_key(self.questId):
+        if self.questId in QuestDB.QuestDict:
             return QuestDB.QuestDict[self.questId]
         else:
             return QuestLadderDB.getContainer(self.questId)
 
     def isLadder(self):
-        if not QuestDB.QuestDict.has_key(self.questId):
+        if self.questId not in QuestDB.QuestDict:
             return True
         return False
 

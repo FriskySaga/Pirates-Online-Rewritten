@@ -1,5 +1,5 @@
-import Weapon
-import WeaponGlobals
+from . import Weapon
+from . import WeaponGlobals
 from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from pandac.PandaModules import *

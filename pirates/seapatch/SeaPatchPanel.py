@@ -1,8 +1,8 @@
 from pandac.PandaModules import *
 from direct.tkwidgets.AppShell import *
 from direct.showbase.TkGlobal import *
-from tkFileDialog import *
-from tkSimpleDialog import askstring
+from tkinter.filedialog import *
+from tkinter.simpledialog import askstring
 import os
 from direct.tkwidgets import Dial
 from direct.tkwidgets import Floater
@@ -330,7 +330,7 @@ class SeaPatchPanel(AppShell):
         kw['min'] = min
         kw['resolution'] = resolution
         kw['numDigits'] = numDigits
-        widget = apply(Floater.Floater, (parent,), kw)
+        widget = Floater.Floater(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)
@@ -340,7 +340,7 @@ class SeaPatchPanel(AppShell):
     def createAngleDial(self, parent, category, text, balloonHelp, command=None, **kw):
         kw['text'] = text
         kw['style'] = 'mini'
-        widget = apply(Dial.AngleDial, (parent,), kw)
+        widget = Dial.AngleDial(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)
@@ -352,7 +352,7 @@ class SeaPatchPanel(AppShell):
         kw['min'] = min
         kw['max'] = max
         kw['resolution'] = resolution
-        widget = apply(Slider.Slider, (parent,), kw)
+        widget = Slider.Slider(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)
@@ -361,7 +361,7 @@ class SeaPatchPanel(AppShell):
 
     def createVector2Entry(self, parent, category, text, balloonHelp, command=None, **kw):
         kw['text'] = text
-        widget = apply(VectorWidgets.Vector2Entry, (parent,), kw)
+        widget = VectorWidgets.Vector2Entry(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)
@@ -370,7 +370,7 @@ class SeaPatchPanel(AppShell):
 
     def createVector3Entry(self, parent, category, text, balloonHelp, command=None, **kw):
         kw['text'] = text
-        widget = apply(VectorWidgets.Vector3Entry, (parent,), kw)
+        widget = VectorWidgets.Vector3Entry(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)
@@ -379,7 +379,7 @@ class SeaPatchPanel(AppShell):
 
     def createColorEntry(self, parent, category, text, balloonHelp, command=None, **kw):
         kw['text'] = text
-        widget = apply(VectorWidgets.ColorEntry, (parent,), kw)
+        widget = VectorWidgets.ColorEntry(*(parent,), **kw)
         widget['command'] = command
         widget.pack(fill=X)
         self.bind(widget, balloonHelp)

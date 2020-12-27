@@ -6,7 +6,7 @@ from pirates.distributed.DistributedInteractive import DistributedInteractive
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.effects.PotionTableSmoke import PotionTableSmoke
-import PotionTableMsgPanel
+from . import PotionTableMsgPanel
 import time
 
 class DistributedPotionCraftingTable(DistributedInteractive):

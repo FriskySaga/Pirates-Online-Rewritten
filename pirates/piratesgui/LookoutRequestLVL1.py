@@ -81,7 +81,7 @@ class LookoutRequestLVL1(InventoryPage, InventoryRequestGameType):
 
     def setInviteOptions(self, options, additionalAvs=[]):
         self.inviteModes = options
-        self.additionalAvs = filter(lambda x: x, additionalAvs)
+        self.additionalAvs = [x for x in additionalAvs if x]
 
     def clearInviteOptions(self):
         self.inviteModes = [
@@ -133,10 +133,10 @@ class LookoutRequestLVL1(InventoryPage, InventoryRequestGameType):
         self.updateMode(PiratesGuiGlobals.REQUEST_CAT_MODE)
 
     def showStatus(self):
-        if self.foundType and self.searchParams.has_key('type'):
+        if self.foundType and 'type' in self.searchParams:
             self.foundType.show()
             self.foundType['text'] = PLocalizer.LookoutFoundStatusType % self.searchParams['type']
-        if self.foundCat and self.searchParams.has_key('cat'):
+        if self.foundCat and 'cat' in self.searchParams:
             self.foundCat.show()
             self.foundCat['text'] = PLocalizer.LookoutFoundStatusCat % self.searchParams['cat']
         if self.SearchContButton:
@@ -320,7 +320,7 @@ class LookoutRequestLVL1(InventoryPage, InventoryRequestGameType):
         def teleportConfirmation(confirmed):
             if confirmed:
                 self.submitJoin()
-                if self.searchParams and self.searchParams.has_key('catId'):
+                if self.searchParams and 'catId' in self.searchParams:
                     if self.searchParams['catId'] == PiratesGlobals.GAME_TYPE_PVP:
                         base.localAvatar.d_setBandPvp(1)
                     elif self.searchParams['catId'] == PiratesGlobals.GAME_TYPE_PG:
@@ -697,11 +697,11 @@ class LookoutRequestLVL1(InventoryPage, InventoryRequestGameType):
             messenger.send('guiMgrToggleLookout')
 
     def clearClipPlaneHack(self, canvas):
-        print 'setting clip plane off'
+        print('setting clip plane off')
 
         def blahblah():
             canvas.setClipPlaneOff()
-            print 'has clip plane off %s' % canvas.hasClipPlaneOff()
+            print('has clip plane off %s' % canvas.hasClipPlaneOff())
 
         DelayedCall(Functor(blahblah), delay=1)
 
@@ -933,7 +933,7 @@ class LookoutRequestLVL1(InventoryPage, InventoryRequestGameType):
         if self.currMode == PiratesGuiGlobals.SEARCH_MODE or self.currMode == PiratesGuiGlobals.INVITE_MODE or self.currMode == PiratesGuiGlobals.CHALLENGE_MODE or self.currMode == PiratesGuiGlobals.INVITE_ACCEPTED_MODE:
             inviting = self.currMode == PiratesGuiGlobals.INVITE_MODE or self.currMode == PiratesGuiGlobals.CHALLENGE_MODE or self.currMode == PiratesGuiGlobals.INVITE_ACCEPTED_MODE
             if inviting == False and self.guiMgr.isSeaChestAllowed():
-                if self.searchParams and self.searchParams.has_key('cat') and self.searchParams['cat'] == PLocalizer.TMGame and self.guiMgr.crewHUD.crew:
+                if self.searchParams and 'cat' in self.searchParams and self.searchParams['cat'] == PLocalizer.TMGame and self.guiMgr.crewHUD.crew:
                     description = PLocalizer.LookoutFoundCrewMsg
                 else:
                     description = PLocalizer.LookoutFoundMsg

@@ -8,7 +8,7 @@ from pirates.battle import WeaponGlobals
 from pirates.effects import CombatEffect
 from pirates.effects.AttuneSmoke import AttuneSmoke
 from pirates.effects import ExplodingBarrel
-import NPCSkeletonGameFSM
+from . import NPCSkeletonGameFSM
 import random
 
 class DistributedBomberZombie(DistributedBattleNPC.DistributedBattleNPC, BomberZombie.BomberZombie):

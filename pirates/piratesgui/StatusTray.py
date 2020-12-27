@@ -117,7 +117,7 @@ class StatusTray(GuiTray.GuiTray):
         self.pvpIcon.flattenStrong()
         privateerLogos = loader.loadModel('models/textureCards/sailLogo')
         self.privateerLogos = {PVPGlobals.FrenchTeam: privateerLogos.find('**/logo_french_flag'),PVPGlobals.SpanishTeam: privateerLogos.find('**/logo_spanish_flag')}
-        for logo in self.privateerLogos.itervalues():
+        for logo in self.privateerLogos.values():
             logo.setScale(0.074)
             logo.flattenStrong()
 
@@ -171,7 +171,7 @@ class StatusTray(GuiTray.GuiTray):
         del self.hpMeterUpYellowIval
         self.statusEffectsPanel.destroy()
         del self.statusEffectsPanel
-        for key in self.icons.keys():
+        for key in list(self.icons.keys()):
             self.icons[key].removeNode()
 
         del self.icons
@@ -423,15 +423,15 @@ class StatusTray(GuiTray.GuiTray):
         GuiTray.GuiTray.hide(self, *args, **kwargs)
 
     def updateStatusEffects(self, effects):
-        effectIdList = effects.keys()
+        effectIdList = list(effects.keys())
         for effectKeyId in effectIdList:
             effectId, attackerId, duration, timeLeft, ts, buffs = effects[effectKeyId]
-            if effectKeyId not in self.skillEffects.keys() and effectId not in [WeaponGlobals.C_VOODOO_STUN, WeaponGlobals.C_VOODOO_HEX_STUN, WeaponGlobals.C_INTERRUPTED, WeaponGlobals.C_OPENFIRE, WeaponGlobals.C_TAKECOVER, WeaponGlobals.C_ATTUNE, WeaponGlobals.C_SPIRIT, WeaponGlobals.C_BANE, WeaponGlobals.C_MOJO, WeaponGlobals.C_WRECKHULL, WeaponGlobals.C_WRECKMASTS, WeaponGlobals.C_SINKHER, WeaponGlobals.C_INCOMING, WeaponGlobals.C_SUMMON_GHOST]:
+            if effectKeyId not in list(self.skillEffects.keys()) and effectId not in [WeaponGlobals.C_VOODOO_STUN, WeaponGlobals.C_VOODOO_HEX_STUN, WeaponGlobals.C_INTERRUPTED, WeaponGlobals.C_OPENFIRE, WeaponGlobals.C_TAKECOVER, WeaponGlobals.C_ATTUNE, WeaponGlobals.C_SPIRIT, WeaponGlobals.C_BANE, WeaponGlobals.C_MOJO, WeaponGlobals.C_WRECKHULL, WeaponGlobals.C_WRECKMASTS, WeaponGlobals.C_SINKHER, WeaponGlobals.C_INCOMING, WeaponGlobals.C_SUMMON_GHOST]:
                 self.statusEffectsPanel.addStatusEffect(effectId, duration, timeLeft, ts, attackerId)
             else:
                 self.statusEffectsPanel.updateStatusEffect(effectId, duration, timeLeft, ts, attackerId)
 
-        for effectKeyId in self.skillEffects.keys():
+        for effectKeyId in list(self.skillEffects.keys()):
             if effectKeyId not in effectIdList:
                 buff = self.skillEffects.get(effectKeyId)
                 if buff:

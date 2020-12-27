@@ -282,13 +282,13 @@ class Quest(POD):
         timeRemaining = self.getTimeRemaining()
         returnGiverIds = self.questDNA.getReturnGiverIds()
         if returnGiverIds:
-            npcNames = map(lambda id: PLocalizer.NPCNames.get(id, PLocalizer.DefaultTownfolkName), returnGiverIds)
+            npcNames = [PLocalizer.NPCNames.get(id, PLocalizer.DefaultTownfolkName) for id in returnGiverIds]
             if len(returnGiverIds) == 1:
                 if timeLimit and not timeRemaining:
                     return PLocalizer.QuestRestartReturnId % {'npcName': npcNames[0]}
                 elif choice and not choiceComplete:
                     return PLocalizer.SingleChoiceQuestReturnId % {'npcName': npcNames[0]}
-                elif filter(lambda x: isinstance(self.getTasks()[0], x), [QuestTaskDNA.VisitTaskDNA, QuestTaskDNA.DeliverItemTaskDNA]):
+                elif [x for x in [QuestTaskDNA.VisitTaskDNA, QuestTaskDNA.DeliverItemTaskDNA] if isinstance(self.getTasks()[0], x)]:
                     return PLocalizer.SingleQuestReturnIdCollect % {'npcName': npcNames[0]}
                 else:
                     return PLocalizer.SingleQuestReturnId % {'npcName': npcNames[0]}

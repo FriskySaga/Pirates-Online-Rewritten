@@ -295,7 +295,7 @@ class TitlesPage(InventoryPage.InventoryPage):
 
     def loadGui(self):
         count = 0
-        for key in TitleGlobals.TitlesDict.keys():
+        for key in list(TitleGlobals.TitlesDict.keys()):
             if not self.shouldShowTitle(key):
                 continue
             yPos = 0.01 - count * 0.2

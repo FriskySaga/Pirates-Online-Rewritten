@@ -4,8 +4,8 @@ from direct.interval.IntervalGlobal import *
 from direct.showbase.PythonUtil import *
 from pirates.piratesbase import PiratesGlobals
 from pirates.effects import PolyTrail
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 from direct.showbase import PythonUtil
 from direct.task import Task
 import random

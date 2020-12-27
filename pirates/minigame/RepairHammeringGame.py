@@ -3,12 +3,12 @@ import random
 from pandac.PandaModules import Point3, NodePath
 from direct.gui.DirectGui import DirectLabel
 from direct.task import Task
-from RepairMincroGame import RepairMincroGame
-from RepairNail import RepairNail, NAIL_COLLIDE_MASK
+from .RepairMincroGame import RepairMincroGame
+from .RepairNail import RepairNail, NAIL_COLLIDE_MASK
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import RepairGlobals
+from . import RepairGlobals
 SHRINK = -1
 GROW = 1
 

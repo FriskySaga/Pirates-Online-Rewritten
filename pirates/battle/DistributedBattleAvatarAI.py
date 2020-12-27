@@ -1,6 +1,6 @@
 from direct.directnotify import DirectNotifyGlobal
 from pirates.reputation. DistributedReputationAvatarAI import  DistributedReputationAvatarAI
-from Teamable import Teamable
+from .Teamable import Teamable
 from direct.distributed.ClockDelta import globalClockDelta
 from pirates.piratesbase import EmoteGlobals
 

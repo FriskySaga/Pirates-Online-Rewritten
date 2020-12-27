@@ -7,9 +7,9 @@ from pirates.piratesgui import PiratesGuiGlobals
 class BorderFrame(DirectFrame):
     pieceNames = ('headBoard', 'background', 'top', 'right', 'bottom', 'left', 'topRight',
                   'bottomRight', 'bottomLeft', 'topLeft')
-    nodeNames = dict(zip(pieceNames, ('headBoard', 'middle', 'top1', 'right', 'bottom',
+    nodeNames = dict(list(zip(pieceNames, ('headBoard', 'middle', 'top1', 'right', 'bottom',
                                       'left', 'topRight', 'bottomRight', 'bottomLeft',
-                                      'topLeft')))
+                                      'topLeft'))))
 
     def __init__(self, parent=None, **kw):
         optiondefs = (('relief', None, None), ('borderScale', 0.3, self.setBorderScale), ('bgBuffer', 0.025, self.setBgBuffer), ('bgColorScale', VBase4(1, 1, 1, 1), self.setBgColorScale), ('bgTransparency', 0, self.setBgTransparent), ('imageColorScale', VBase4(1, 1, 1, 1), None), ('cornerWidth', 0.15, None), ('draggable', 0, None), ('frameSize', (-0.5, 0.5, -0.5, 0.5), self.setFrameSize), ('modelName', 'general_frame_f', None), ('showHeadBoard', False, None), ('nameTag', '', None), ('state', DGG.NORMAL, self.setState), ('showBackground', True, None), ('flatten', 1, None))
@@ -59,7 +59,7 @@ class BorderFrame(DirectFrame):
     def loadGeometry(self):
         if not self.pieces:
             modelGeom = loader.loadModel('models/gui/' + self['modelName'])
-            self.pieces = dict(zip(self.pieceNames, [ modelGeom.find('**/%s' % self.nodeNames[pieceName]) for pieceName in self.pieceNames ]))
+            self.pieces = dict(list(zip(self.pieceNames, [ modelGeom.find('**/%s' % self.nodeNames[pieceName]) for pieceName in self.pieceNames ])))
             self.nameTag = modelGeom.find('**/nameTag')
             for k in ('top', 'right', 'bottom', 'left'):
                 tex = self.pieces[k].findTexture(TextureStage.getDefault())
@@ -104,10 +104,10 @@ class BorderFrame(DirectFrame):
         self.guiComponents = {self.pieceNames[0]: self.copyFlattenedChild(self.pieces[self.pieceNames[0]], self.background)
            }
         if self['draggable']:
-            self.guiComponents.update(dict(zip(self.pieceNames[1:], [ DirectButton(parent=self.frameParent, guiId=self.guiId + '-' + pieceName, relief=None, state=self['state'], geom=self.pieces[pieceName], rolloverSound=None, clickSound=None, pressEffect=0) for pieceName in self.pieceNames[1:] ])))
+            self.guiComponents.update(dict(list(zip(self.pieceNames[1:], [ DirectButton(parent=self.frameParent, guiId=self.guiId + '-' + pieceName, relief=None, state=self['state'], geom=self.pieces[pieceName], rolloverSound=None, clickSound=None, pressEffect=0) for pieceName in self.pieceNames[1:] ]))))
         else:
-            self.guiComponents.update(dict(zip(self.pieceNames[1:], [ self.copyFlattenedChild(self.pieces[pieceName], self.frameParent)
-             for pieceName in self.pieceNames[1:] ])))
+            self.guiComponents.update(dict(list(zip(self.pieceNames[1:], [ self.copyFlattenedChild(self.pieces[pieceName], self.frameParent)
+             for pieceName in self.pieceNames[1:] ]))))
         self.guiComponents['background'].setColorScale(self['bgColorScale'])
         self.guiComponents['background'].setTransparency(self['bgTransparency'])
         for guiComp in self.guiComponents:

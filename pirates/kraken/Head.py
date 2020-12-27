@@ -40,7 +40,7 @@ class Head(Creature):
             self.loadModel(filePrefix + 'low', 'modelRoot', 'low', copy=1)
             hasLOD = True
             self.setLODs()
-        except Exception, e:
+        except Exception as e:
             hasLOD = False
             self.loadModel(self.ModelInfo[0], copy=1)
 

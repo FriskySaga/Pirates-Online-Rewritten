@@ -6,7 +6,7 @@ from direct.tkwidgets import Floater
 from direct.tkwidgets import Slider
 from direct.tkwidgets import VectorWidgets
 from direct.tkwidgets import Valuator
-import tkColorChooser
+import tkinter.colorchooser
 from direct.directtools.DirectUtil import getTkColorString
 import Pmw
 from direct.gui import DirectGuiGlobals as DGG
@@ -14,7 +14,7 @@ from pirates.piratesbase import PLocalizer as PL
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import TODGlobals
 from pandac.PandaModules import *
-from Tkinter import *
+from tkinter import *
 
 class TimeOfDayPanel(AppShell):
     appname = 'Time Of Day Panel'
@@ -183,7 +183,7 @@ class TimeOfDayPanel(AppShell):
         def popupFogColorPicker():
             baseColor = self.todMgr.getFogColor()
             initColor = self.clipLightValue(baseColor * 255.0, 255.0)
-            color = tkColorChooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
+            color = tkinter.colorchooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
             if color[0] is not None:
                 self.fogColor.set((round(color[0][0] / 255.0, 2), round(color[0][1] / 255.0, 2), round(color[0][2] / 255.0, 2)))
             return
@@ -250,7 +250,7 @@ class TimeOfDayPanel(AppShell):
         def popupAmbientColorPicker():
             baseColor = self.todMgr.getFillLightColor()
             initColor = self.clipLightValue(baseColor * 255.0, 255.0)
-            color = tkColorChooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
+            color = tkinter.colorchooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
             if color[0] is not None:
                 self.ambientColor.set((round(color[0][0] / 255.0, 2), round(color[0][1] / 255.0, 2), round(color[0][2] / 255.0, 2)))
             return
@@ -281,7 +281,7 @@ class TimeOfDayPanel(AppShell):
         def popupDirectionalColorPicker():
             baseColor = self.todMgr.getFrontLightColor()
             initColor = self.clipLightValue(baseColor * 127.5, 255.0)
-            color = tkColorChooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
+            color = tkinter.colorchooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
             if color[0] is not None:
                 self.directionalColor.set((round(color[0][0] / 127.5, 2), round(color[0][1] / 127.5, 2), round(color[0][2] / 127.5, 2)))
             return
@@ -311,7 +311,7 @@ class TimeOfDayPanel(AppShell):
         def popupBackColorPicker():
             baseColor = self.todMgr.getBackLightColor()
             initColor = self.clipLightValue(baseColor * 127.5, 255.0)
-            color = tkColorChooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
+            color = tkinter.colorchooser.askcolor(parent=interior, initialcolor=(initColor[0], initColor[1], initColor[2]))
             if color[0] is not None:
                 self.backLightColor.set((round(color[0][0] / 127.5, 2), round(color[0][1] / 127.5, 2), round(color[0][2] / 127.5, 2)))
             return
@@ -860,9 +860,9 @@ class TimeOfDayPanel(AppShell):
 
     def printSettings(self):
         if self.editor:
-            print self.todMgr.getEnviroDictString(environment=TODGlobals.ENV_DATAFILE, tabs=1, heading="'TodSettings' :")
-            print ''
-            print self.todMgr.listAlteredTODs(TODGlobals.ENV_DATAFILE)
+            print(self.todMgr.getEnviroDictString(environment=TODGlobals.ENV_DATAFILE, tabs=1, heading="'TodSettings' :"))
+            print('')
+            print(self.todMgr.listAlteredTODs(TODGlobals.ENV_DATAFILE))
         else:
             f = open('NewTODData.py', 'w')
             importString1 = 'from pandac.PandaModules import Point3, VBase3, Vec4, Vec3\n'
@@ -876,7 +876,7 @@ class TimeOfDayPanel(AppShell):
                     envHeading = '%s = ' % TODGlobals.ENVIRONMENT_ID_SETTING_DICT[environment]
                     outString = self.todMgr.getEnviroDictString(environment=environment, tabs=0, heading=envHeading)
                     f.write('\n')
-                    print outString
+                    print(outString)
                     f.write(outString)
 
             f.write('\n')

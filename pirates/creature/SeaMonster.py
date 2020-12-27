@@ -143,7 +143,7 @@ class SeaMonster(UsesAnimationMixer, Avatar.Avatar, UsesEffectNode):
 
     def getDeathAnimName(self, animNum=None):
         animStrings = ['death']
-        if animNum not in range(len(animStrings)):
+        if animNum not in list(range(len(animStrings))):
             animNum = random.choice([0])
         return animStrings[animNum]
 
@@ -185,7 +185,7 @@ class SeaMonster(UsesAnimationMixer, Avatar.Avatar, UsesEffectNode):
             dist = [
              0, 6, 20, 280]
         else:
-            raise StandardError, 'Invalid avatar-detail: %s' % avatarDetail
+            raise Exception('Invalid avatar-detail: %s' % avatarDetail)
         self.addLOD('low', dist[3], dist[2])
         self.addLOD('med', dist[2], dist[1])
         self.addLOD('hi', dist[1], dist[0])
@@ -215,7 +215,7 @@ class SeaMonster(UsesAnimationMixer, Avatar.Avatar, UsesEffectNode):
             elif avatarDetail == 'low':
                 dist = [0, 60, 200, 2800]
             else:
-                raise StandardError, 'Invalid avatar-detail: %s' % avatarDetail
+                raise Exception('Invalid avatar-detail: %s' % avatarDetail)
             cls.actor.setLODNode()
             cls.actor.addLOD('low', dist[3], dist[2])
             cls.actor.addLOD('med', dist[2], dist[1])

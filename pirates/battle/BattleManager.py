@@ -1,6 +1,6 @@
 import math
 from pandac.PandaModules import NodePath
-import BattleManagerBase
+from . import BattleManagerBase
 from pirates.battle import WeaponGlobals
 from pirates.piratesbase import TeamUtils
 from pirates.battle import DistributedBattleNPC

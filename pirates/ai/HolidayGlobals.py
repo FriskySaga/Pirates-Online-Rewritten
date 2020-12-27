@@ -78,7 +78,7 @@ def getHolidayRestartable(holidayId):
 
 def getHolidayConfigAttrDict(configDefs, attrName, defaultValue=None):
     attrDict = {}
-    for key in configDefs.iterkeys():
+    for key in configDefs.keys():
         attrDict[key] = configDefs[key].get(attrName, defaultValue)
 
     return attrDict
@@ -146,10 +146,10 @@ holidayClassNameDict = {
 
 def getAllHolidayIds():
     allHolidayIds = []
-    for holidayClass in holidayNameDict.iterkeys():
+    for holidayClass in holidayNameDict.keys():
         entry = holidayNameDict.get(holidayClass)
         if isinstance(entry, type({})):
-            holidayConfigs = entry.keys()
+            holidayConfigs = list(entry.keys())
             holidayConfigs.sort()
             for holidayConfig in holidayConfigs:
                 allHolidayIds.append(getHolidayId(holidayClass, holidayConfig))
@@ -162,9 +162,9 @@ def getAllHolidayIds():
 
 def getAllHolidayNames():
     allHolidayNames = []
-    for holidayName in holidayNameDict.values():
+    for holidayName in list(holidayNameDict.values()):
         if isinstance(holidayName, type({})):
-            allHolidayNames.extend(holidayName.values())
+            allHolidayNames.extend(list(holidayName.values()))
         else:
             allHolidayNames.append(holidayName)
 
@@ -182,10 +182,10 @@ def getHolidayName(holidayId):
 
 def getHolidayIdFromName(holidayName):
     holidayName = holidayName.lower()
-    for holidayClass in holidayNameDict.iterkeys():
+    for holidayClass in holidayNameDict.keys():
         entry = holidayNameDict.get(holidayClass)
         if isinstance(entry, type({})):
-            for holidayConfig in entry.iterkeys():
+            for holidayConfig in entry.keys():
                 if entry.get(holidayConfig).lower() == holidayName:
                     return getHolidayId(holidayClass, holidayConfig)
 
@@ -449,11 +449,11 @@ def getHolidayMsgs(holidayId):
 def getHolidayStartMsg(holidayId, paidStatus, chat=0):
     holidayMsgs = getHolidayMsgs(holidayId)
     if holidayMsgs:
-        if holidayMsgs.has_key(MSG_START_ALL):
+        if MSG_START_ALL in holidayMsgs:
             return holidayMsgs.get(MSG_START_ALL)[chat]
-        elif holidayMsgs.has_key(MSG_START_UNLIMITED) and paidStatus:
+        elif MSG_START_UNLIMITED in holidayMsgs and paidStatus:
             return holidayMsgs.get(MSG_START_UNLIMITED)[chat]
-        elif holidayMsgs.has_key(MSG_START_BASIC) and not paidStatus:
+        elif MSG_START_BASIC in holidayMsgs and not paidStatus:
             return holidayMsgs.get(MSG_START_BASIC)[chat]
     return None
 
@@ -465,11 +465,11 @@ def getHolidayStartChatMsg(holidayId, paidStatus):
 def getHolidayEndMsg(holidayId, paidStatus, chat=0):
     holidayMsgs = getHolidayMsgs(holidayId)
     if holidayMsgs:
-        if holidayMsgs.has_key(MSG_END_ALL):
+        if MSG_END_ALL in holidayMsgs:
             return holidayMsgs.get(MSG_END_ALL)[chat]
-        elif holidayMsgs.has_key(MSG_END_UNLIMITED) and paidStatus:
+        elif MSG_END_UNLIMITED in holidayMsgs and paidStatus:
             return holidayMsgs.get(MSG_END_UNLIMITED)[chat]
-        elif holidayMsgs.has_key(MSG_END_BASIC) and not paidStatus:
+        elif MSG_END_BASIC in holidayMsgs and not paidStatus:
             return holidayMsgs.get(MSG_END_BASIC)[chat]
     return None
 
@@ -481,11 +481,11 @@ def getHolidayEndChatMsg(holidayId, paidStatus):
 def getHolidayStatusMsg(holidayId, paidStatus):
     holidayMsgs = getHolidayMsgs(holidayId)
     if holidayMsgs:
-        if holidayMsgs.has_key(MSG_CHAT_STATUS):
+        if MSG_CHAT_STATUS in holidayMsgs:
             return holidayMsgs.get(MSG_CHAT_STATUS)
-        elif holidayMsgs.has_key(MSG_CHAT_STATUS_UNLIMITED) and paidStatus:
+        elif MSG_CHAT_STATUS_UNLIMITED in holidayMsgs and paidStatus:
             return holidayMsgs.get(MSG_CHAT_STATUS_UNLIMITED)
-        elif holidayMsgs.has_key(MSG_CHAT_STATUS_BASIC) and not paidStatus:
+        elif MSG_CHAT_STATUS_BASIC in holidayMsgs and not paidStatus:
             return holidayMsgs.get(MSG_CHAT_STATUS_BASIC)
     return None
 
@@ -493,6 +493,6 @@ def getHolidayStatusMsg(holidayId, paidStatus):
 def getHolidayIcon(holidayId):
     holidayMsgs = getHolidayMsgs(holidayId)
     if holidayMsgs:
-        if holidayMsgs.has_key(MSG_ICON):
+        if MSG_ICON in holidayMsgs:
             return holidayMsgs.get(MSG_ICON)
     return None

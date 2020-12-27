@@ -4,7 +4,7 @@ from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui.OnscreenText import OnscreenText
 from otp.avatar.Avatar import Avatar
-import AvatarTypes
+from . import AvatarTypes
 from pirates.battle import WeaponGlobals
 from pirates.piratesbase import PiratesGlobals
 from pirates.pirate.BipedAnimationMixer import BipedAnimationMixer
@@ -210,7 +210,7 @@ class Biped(UsesAnimationMixer, Avatar, UsesEffectNode):
         hFov = 90
         vFov = 35
         if base.cr.targetMgr:
-            allTargets = base.cr.targetMgr.objectDict.values()
+            allTargets = list(base.cr.targetMgr.objectDict.values())
         else:
             allTargets = []
         visibleTargets = []
@@ -273,8 +273,8 @@ class Biped(UsesAnimationMixer, Avatar, UsesEffectNode):
 
     def getDeathAnimName(self, animNum=None):
         animStrings = ['death', 'death2', 'death3', 'death4']
-        if animNum not in range(len(animStrings)):
-            animNum = random.choice(range(0, len(animStrings)))
+        if animNum not in list(range(len(animStrings))):
+            animNum = random.choice(list(range(0, len(animStrings))))
         return animStrings[animNum]
 
     def setChatAbsolute(self, chatString, chatFlags, dialogue=None, interrupt=1):
@@ -330,7 +330,7 @@ class Biped(UsesAnimationMixer, Avatar, UsesEffectNode):
 
     @classmethod
     def initSfx(cls):
-        for name, effect in cls.SfxNames.iteritems():
+        for name, effect in cls.SfxNames.items():
             if name not in cls.sfx:
                 sound = SoundGlobals.loadSfx(effect)
                 if sound and sound.getActive():

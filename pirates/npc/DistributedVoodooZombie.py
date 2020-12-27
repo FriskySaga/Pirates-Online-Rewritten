@@ -94,7 +94,7 @@ class DistributedVoodooZombie(DistributedBattleNPC.DistributedBattleNPC, Human.H
             self.loaded = 0
 
     def setDNAId(self, dnaId):
-        if dnaId and NPCList.NPC_LIST.has_key(dnaId):
+        if dnaId and dnaId in NPCList.NPC_LIST:
             dnaDict = NPCList.NPC_LIST[dnaId]
             customDNA = HumanDNA.HumanDNA()
             customDNA.loadFromNPCDict(dnaDict)

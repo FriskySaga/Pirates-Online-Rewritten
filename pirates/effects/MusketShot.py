@@ -7,8 +7,8 @@ from direct.particles import Particles
 from direct.particles import ForceGroup
 import random
 from pirates.piratesbase import PiratesGlobals
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 from otp.otpbase import OTPRender
 
 class MusketShot(PooledEffect, EffectController):

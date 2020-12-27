@@ -527,7 +527,7 @@ class InventoryType():
 
     @classmethod
     def getIslandUidFromTeleportToken(cls, token):
-        for key in cls.__islandToTeleportTokenMap.keys():
+        for key in list(cls.__islandToTeleportTokenMap.keys()):
             if cls.__islandToTeleportTokenMap[key] == token:
                 return key
 
@@ -1502,8 +1502,8 @@ class InventoryId():
 
 
 def receiveSwitchField(field, itemInit=tuple):
-    return map(lambda x: itemInit(*x), field)
+    return [itemInit(*x) for x in field]
 
 
 def prepareSwitchField(field):
-    return map(lambda x: (tuple(x),), field)
+    return [(tuple(x),) for x in field]

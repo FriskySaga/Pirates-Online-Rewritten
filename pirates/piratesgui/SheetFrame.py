@@ -19,7 +19,7 @@ class SheetFrame(ListFrame.ListFrame):
         for guiitem in self.items:
             y -= guiitem.getHeight()
 
-        print 'y = %s' % y
+        print('y = %s' % y)
         for gui in self.items:
             if self.hideAll == False:
                 gui.descText.wrtReparentTo(gui)

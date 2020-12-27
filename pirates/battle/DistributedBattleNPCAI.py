@@ -29,7 +29,9 @@ class DistributedBattleNPCAI(DistributedBattleAvatarAI):
     def getName(self):
         return self.name
 
-    def setSpawnPosHpr(self, (x, y, z), (h, p, r)):
+    def setSpawnPosHpr(self, xxx_todo_changeme, xxx_todo_changeme1):
+        (x, y, z) = xxx_todo_changeme
+        (h, p, r) = xxx_todo_changeme1
         self.spawnPos = [x, y, z, h, p, r]
 
     def d_setSpawnPosHpr(self, x, y, z, h, p, r):

@@ -414,7 +414,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
             self.storeAlteredSetting(environment, todState, 'LightSwitch')
             self.storeAlteredSetting(environment, todState, 'Direction')
 
-        print 'Inserting env%s tod %s\nambient %s\nfront %s\nback %s\nfogColor %s\nfogExp %s\nfogRange %s\n' % (self.environment, self.currentState, ambientColor, frontColor, backColor, fogColor, fogExp, fogRange)
+        print('Inserting env%s tod %s\nambient %s\nfront %s\nback %s\nfogColor %s\nfogExp %s\nfogRange %s\n' % (self.environment, self.currentState, ambientColor, frontColor, backColor, fogColor, fogExp, fogRange))
 
     def insertEnvDict(self, envIndex, envDict):
         for todName in envDict:
@@ -430,7 +430,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
                 env, tod, settingName, settingDict[settingName])
 
     def insertTODSetting(self, env, todId, settingName, settingValue):
-        print 'insertTODSetting %s %s %s %s' % (env, todId, settingName, settingValue)
+        print('insertTODSetting %s %s %s %s' % (env, todId, settingName, settingValue))
         tod = TODGlobals.StateDict.get(todId, None)
         if tod is None:
             return None
@@ -454,7 +454,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
             return None
         elif settingName == 'Direction':
             sameCount = 0
-            for compIndex in xrange(3):
+            for compIndex in range(3):
                 if parentSettingValue[compIndex] % 360.0 == settingValue[compIndex] % 360.0:
                     sameCount += 1
                     continue
@@ -997,19 +997,19 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
         return hoursIntoCycle
 
     def getEnvAtTime(self, baseEnv, timeForEnv):
-        print 'getEnvAtTime %s %s' % (baseEnv, timeForEnv)
+        print('getEnvAtTime %s %s' % (baseEnv, timeForEnv))
         subEntry = self.envSubstitutionDict.get(baseEnv)
         if not subEntry:
-            print ' base %s' % baseEnv
+            print(' base %s' % baseEnv)
             return baseEnv
         else:
             timeStamp = globalClockDelta.networkToLocalTime(
                 subEntry[3], bits=32)
             if timeForEnv > timeStamp:
-                print ' sub2 %s' % subEntry[2]
+                print(' sub2 %s' % subEntry[2])
                 return subEntry[2]
             else:
-                print ' sub1 %s' % subEntry[1]
+                print(' sub1 %s' % subEntry[1])
                 return subEntry[1]
 
     def addEnvSub(self, baseEnv, envReplacement, netTime=None):
@@ -1040,7 +1040,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
         if previousStateTransTime and timeStamp < previousStateTransTime and baseEnv == self.environment:
             needStartRetro = 1
 
-        print 'Adding EnvSub for %s stamp %s current time %s netTime %s' % (baseEnv, timeStamp, globalClock.getFrameTime(), localNetTime)
+        print('Adding EnvSub for %s stamp %s current time %s netTime %s' % (baseEnv, timeStamp, globalClock.getFrameTime(), localNetTime))
         if envEntry:
             lastEnv = envEntry[2]
         else:
@@ -1082,7 +1082,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
 
     def getSubTimeList(self, cycleType, env):
         if self.notify.getDebug():
-            print 'getSubTimeList'
+            print('getSubTimeList')
         cycleSpeed = self.cycleSpeed
         if cycleSpeed <= 0:
             cycleSpeed = 1
@@ -1102,7 +1102,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
         subCycleTimeTransEnd = None
         sub = self.envSubstitutionDict.get(env)
         if self.notify.getDebug():
-            print ' sub was %s for %s' % (sub, env)
+            print(' sub was %s for %s' % (sub, env))
         gameTimeToSeconds = currentGameTime * REALSECONDS_PER_GAMEHOUR
         cycleStartFrameTime = currentFrameTime - gameTimeToSeconds
         cycleEndFrameTime = currentFrameTime + \
@@ -1116,10 +1116,10 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
             netTime = sub[3]
             timeStamp = globalClockDelta.networkToLocalTime(netTime, bits=32)
             if self.notify.getDebug():
-                print 'Sub TimeStamp %s current Time %s' % (timeStamp, currentFrameTime)
+                print('Sub TimeStamp %s current Time %s' % (timeStamp, currentFrameTime))
             if timeStamp > fieldStartFrameTime and timeStamp < fieldEndFrameTime:
                 if self.notify.getDebug():
-                    print ' sub found in current cycle'
+                    print(' sub found in current cycle')
                 start = timeStamp - cycleStartFrameTime
                 subCycleTimeStart = float(start) / REALSECONDS_PER_GAMEHOUR
                 subCycleTimeTransEnd = subCycleTimeStart + sub[3]
@@ -1206,7 +1206,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
         nextIndex = None
         previousIndex = None
         stateStartTime = None
-        for stateIndex in xrange(len(absoluteCycleList)):
+        for stateIndex in range(len(absoluteCycleList)):
             state = absoluteCycleList[stateIndex]
             tod = state[0]
             time = state[1]
@@ -1579,7 +1579,7 @@ class TimeOfDayManager(FSM.FSM, TimeOfDayManagerBase.TimeOfDayManagerBase):
         return remTime - stateDuration
 
     def setEnvironment(self, envId, envData=None):
-        print 'setEnvironment %s %s %s' % (TODGlobals.ENVIRONMENT_NAMES.get(envId, 'unnamed'), envId, envData)
+        print('setEnvironment %s %s %s' % (TODGlobals.ENVIRONMENT_NAMES.get(envId, 'unnamed'), envId, envData))
         envName = TODGlobals.ENVIRONMENT_NAMES.get(envId, 'Unknown')
         self.notify.debug('setEnvironment: %s' % envId)
         if self.environment == envId and envData is None:

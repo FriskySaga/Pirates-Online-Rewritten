@@ -48,7 +48,7 @@ class SiegeManager(DistributedObject, SiegeManagerBase):
         return self._pvpTeamJoinable.get(teamId, True)
 
     def sendTalk(self, message):
-        print 'Seige Manager Sending Message %s' % message
+        print('Seige Manager Sending Message %s' % message)
         self.sendUpdate('setTalkGroup', [0, 0, '', message, [], 0])
 
     def sendWLChat(self, message):
@@ -58,7 +58,7 @@ class SiegeManager(DistributedObject, SiegeManagerBase):
         self.sendUpdate('sendSC', [msgIndex])
 
     def setTalkGroup(self, fromAv, fromAC, avatarName, chat, mods, flags):
-        print 'Seige Manager- SetTalkGroup %s' % chat
+        print('Seige Manager- SetTalkGroup %s' % chat)
         teamName = self.getPVPChatTeamName(localAvatar.getSiegeTeam())
         message, scrubbed = localAvatar.scrubTalk(chat, mods)
         base.talkAssistant.receiveShipPVPMessage(fromAv, fromAC, avatarName, teamName, message, scrubbed)
@@ -76,7 +76,7 @@ class SiegeManager(DistributedObject, SiegeManagerBase):
             base.talkAssistant.receiveShipPVPMessage(avatarId, DISLid, name, teamName, message)
 
     def recvSpeedChat(self, avatarId, msgIndex, name):
-        print 'siege manager recvSpeedChat'
+        print('siege manager recvSpeedChat')
         if not self.cr.avatarFriendsManager.checkIgnored(avatarId):
             displayMess = '%s %s %s' % (name, self.getPVPChatTeamName(localAvatar.getSiegeTeam()), SCDecoders.decodeSCStaticTextMsg(msgIndex))
             message = SCDecoders.decodeSCStaticTextMsg(msgIndex)

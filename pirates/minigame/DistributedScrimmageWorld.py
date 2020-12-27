@@ -1,4 +1,4 @@
-import DistributedMiniGameWorld
+from . import DistributedMiniGameWorld
 from pirates.piratesgui.CannonDefenseCountdownUI import CannonDefenseCountdownUI
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer

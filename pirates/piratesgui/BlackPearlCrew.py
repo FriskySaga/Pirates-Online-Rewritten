@@ -34,7 +34,7 @@ class BlackPearlCrew(DirectFrame):
         DirectFrame.destroy(self)
 
     def update(self):
-        for crewMemberId in self.crewButtons.keys():
+        for crewMemberId in list(self.crewButtons.keys()):
             self.updateCrewMember(crewMemberId)
 
     def updateCrewMember(self, uniqueId):

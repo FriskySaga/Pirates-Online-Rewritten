@@ -12,7 +12,7 @@ from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.pirate import AvatarTypes
 from pirates.battle.EnemySkills import EnemySkills
 from pirates.inventory import ItemGlobals
-import TargetManagerBase
+from . import TargetManagerBase
 
 class TargetManager(DistributedObject.DistributedObject, TargetManagerBase.TargetManagerBase):
     notify = directNotify.newCategory('TargetManager')

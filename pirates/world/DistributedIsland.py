@@ -778,7 +778,7 @@ class DistributedIsland(DistributedGameArea, DistributedCartesianGrid, ZoneLOD, 
         if world:
             water = world.getWater()
             if water:
-                for uid, obj in self.floatables.iteritems():
+                for uid, obj in self.floatables.items():
                     water.addFloatable(uid, obj, mass=5)
 
     def stopFloatables(self):
@@ -1062,7 +1062,7 @@ class DistributedIsland(DistributedGameArea, DistributedCartesianGrid, ZoneLOD, 
 
             def flowLava(task):
                 dt = globalClock.getDt()
-                for key in lavaSpeed.keys():
+                for key in list(lavaSpeed.keys()):
                     offset = lavaGeom.getTexOffset(tsSet[key])[0]
                     offset -= lavaSpeed[key] * dt
                     offset %= 1.0

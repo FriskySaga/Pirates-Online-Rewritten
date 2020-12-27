@@ -2,7 +2,7 @@ import random
 from pirates.piratesbase import PLocalizer, PiratesGlobals
 from direct.interval.IntervalGlobal import Sequence, Parallel, Wait, Func
 from pirates.uberdog.UberDogGlobals import InventoryType
-import FishingGlobals
+from . import FishingGlobals
 from direct.fsm import FSM
 from pirates.audio import SoundGlobals
 

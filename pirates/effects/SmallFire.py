@@ -5,7 +5,7 @@ from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
 from pirates.piratesgui.GameOptions import Options
-from EffectController import EffectController
+from .EffectController import EffectController
 
 class SmallFire(EffectController, NodePath):
     cardScale = 64.0

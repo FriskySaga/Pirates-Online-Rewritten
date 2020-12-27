@@ -9,7 +9,7 @@ from pirates.battle import EnemyGlobals
 import string
 import random
 import os
-import cPickle
+import pickle
 
 vfs = VirtualFileSystem.getGlobalPtr()
 filename = Filename('DropGlobals.pkl')
@@ -21,9 +21,9 @@ else:
 
 found = vfs.resolveFilename(filename, searchPath)
 if not found:
-    print 'DropGlobals.pkl file not found: %s' % filename.cStr()
+    print('DropGlobals.pkl file not found: %s' % filename.cStr())
 data = vfs.readFile(filename, 1)
-__dropInfo = cPickle.loads(data)
+__dropInfo = pickle.loads(data)
 __lootDropCache = {}
 __lootStoreCache = {}
 __lootShipCache = {}
@@ -32,21 +32,21 @@ filenameDrops = Filename('CommonDrops.pkl')
 searchPathDrops = DSearchPath()
 foundDrops = vfs.resolveFilename(filenameDrops, searchPath)
 if not foundDrops:
-    print 'CommonDrops.pkl file not found: %s' % filenameDrops.cStr()
+    print('CommonDrops.pkl file not found: %s' % filenameDrops.cStr())
 commonDropData = vfs.readFile(filenameDrops, 1)
-__commonDropInfo = cPickle.loads(commonDropData)
+__commonDropInfo = pickle.loads(commonDropData)
 __staticIdTypeList = {}
-for heading, value in __columnHeadings.items():
+for heading, value in list(__columnHeadings.items()):
     try:
         newHeading = string.replace(heading, '\r', '')
-        exec '%s = %s' % (newHeading, value) in globals()
+        exec('%s = %s' % (newHeading, value), globals())
     except:
         newHeading = string.replace(heading, '\r', '')
-        exec "__staticIdTypeList['%s'] = %s" % (newHeading, value) in globals()
+        exec("__staticIdTypeList['%s'] = %s" % (newHeading, value), globals())
 
 __staticCommonDropList = {}
 __typeCommonDropList = {}
-for heading, value in __commonDropInfo.items():
+for heading, value in list(__commonDropInfo.items()):
     if value == 'x':
         value = 1
     else:
@@ -54,21 +54,21 @@ for heading, value in __commonDropInfo.items():
     try:
         newHeading = string.replace(heading, '\r', '')
         id = None
-        exec 'id = (AvatarTypes.%s.getFaction(), AvatarTypes.%s.getTrack(), AvatarTypes.%s.getId())' % (heading, heading, heading)
-        exec '__typeCommonDropList[id] = %s' % value in globals()
+        exec('id = (AvatarTypes.%s.getFaction(), AvatarTypes.%s.getTrack(), AvatarTypes.%s.getId())' % (heading, heading, heading))
+        exec('__typeCommonDropList[id] = %s' % value, globals())
     except:
         newHeading = string.replace(heading, '\r', '')
-        exec "__staticCommonDropList['%s'] = %s" % (newHeading, value) in globals()
+        exec("__staticCommonDropList['%s'] = %s" % (newHeading, value), globals())
 
 filenameShipMaterialDrops = Filename('ShipMaterialDrops.pkl')
 searchPathDrops = DSearchPath()
 foundShipMaterialDrops = vfs.resolveFilename(filenameShipMaterialDrops, searchPath)
 if not foundShipMaterialDrops:
-    print 'ShipMaterialDrops.pkl file not found: %s' % filenameDrops.cStr()
+    print('ShipMaterialDrops.pkl file not found: %s' % filenameDrops.cStr())
 shipMaterialDropData = vfs.readFile(filenameShipMaterialDrops, 1)
-__shipMaterialDropInfo = cPickle.loads(shipMaterialDropData)
+__shipMaterialDropInfo = pickle.loads(shipMaterialDropData)
 __shipMaterialDropList = {}
-for heading, value in __shipMaterialDropInfo.items():
+for heading, value in list(__shipMaterialDropInfo.items()):
     entryValue = 0
     if value == 2:
         entryValue = 2
@@ -78,7 +78,7 @@ for heading, value in __shipMaterialDropInfo.items():
         entryValue = 0
     if hasattr(ShipGlobals, heading):
         newHeading = string.replace(heading, '\r', '')
-        exec '__shipMaterialDropList[ShipGlobals.%s] = %s' % (newHeading, entryValue) in globals()
+        exec('__shipMaterialDropList[ShipGlobals.%s] = %s' % (newHeading, entryValue), globals())
 
 del searchPath
 del __columnHeadings
@@ -142,7 +142,7 @@ def getItemRarityRate(containerType):
 
 
 def getAllItemIds():
-    return __dropInfo.keys()
+    return list(__dropInfo.keys())
 
 
 __shipTypeList = {ShipGlobals.NAVY_FERRET: NAVY_FERRET,ShipGlobals.NAVY_BULWARK: NAVY_BULWARK,ShipGlobals.NAVY_PANTHER: NAVY_PANTHER,ShipGlobals.NAVY_GREYHOUND: NAVY_GREYHOUND,ShipGlobals.NAVY_VANGUARD: NAVY_VANGUARD,ShipGlobals.NAVY_CENTURION: NAVY_CENTURION,ShipGlobals.NAVY_KINGFISHER: NAVY_KINGFISHER,ShipGlobals.NAVY_MONARCH: NAVY_MONARCH,ShipGlobals.NAVY_MAN_O_WAR: NAVY_MAN_O_WAR,ShipGlobals.NAVY_PREDATOR: NAVY_PREDATOR,ShipGlobals.NAVY_COLOSSUS: NAVY_COLOSSUS,ShipGlobals.NAVY_DREADNOUGHT: NAVY_DREADNOUGHT,ShipGlobals.EITC_SEA_VIPER: EITC_SEA_VIPER,ShipGlobals.EITC_SENTINEL: EITC_SENTINEL,ShipGlobals.EITC_CORVETTE: EITC_CORVETTE,ShipGlobals.EITC_BLOODHOUND: EITC_BLOODHOUND,ShipGlobals.EITC_IRONWALL: EITC_IRONWALL,ShipGlobals.EITC_MARAUDER: EITC_MARAUDER,ShipGlobals.EITC_BARRACUDA: EITC_BARRACUDA,ShipGlobals.EITC_OGRE: EITC_OGRE,ShipGlobals.EITC_WARLORD: EITC_WARLORD,ShipGlobals.EITC_CORSAIR: EITC_CORSAIR,ShipGlobals.EITC_BEHEMOTH: EITC_BEHEMOTH,ShipGlobals.SKEL_PHANTOM: SKEL_PHANTOM,ShipGlobals.SKEL_REVENANT: SKEL_REVENANT,ShipGlobals.SKEL_STORM_REAPER: SKEL_STORM_REAPER,ShipGlobals.SKEL_BLACK_HARBINGER: SKEL_BLACK_HARBINGER,ShipGlobals.SKEL_DEATH_OMEN: SKEL_DEATH_OMEN,ShipGlobals.SKEL_SHADOW_CROW_SP: SKEL_SHADOW_CROW_SP,ShipGlobals.SKEL_HELLHOUND_SP: SKEL_HELLHOUND_SP,ShipGlobals.SKEL_BLOOD_SCOURGE_SP: SKEL_BLOOD_SCOURGE_SP,ShipGlobals.SKEL_SHADOW_CROW_FR: SKEL_SHADOW_CROW_FR,ShipGlobals.SKEL_HELLHOUND_FR: SKEL_HELLHOUND_FR,ShipGlobals.SKEL_BLOOD_SCOURGE_FR: SKEL_BLOOD_SCOURGE_FR,ShipGlobals.GOLIATH: GOLIATH,ShipGlobals.FLYING_DUTCHMAN: FLYING_DUTCHMAN,ShipGlobals.JOLLY_ROGER: JOLLY_ROGER,ShipGlobals.HUNTER_VENGEANCE: HUNTER_VENGEANCE,ShipGlobals.HUNTER_CUTTER_SHARK: HUNTER_CUTTER_SHARK,ShipGlobals.HUNTER_FLYING_STORM: HUNTER_FLYING_STORM,ShipGlobals.HUNTER_KILLYADED: HUNTER_KILLYADED,ShipGlobals.HUNTER_RED_DERVISH: HUNTER_RED_DERVISH,ShipGlobals.HUNTER_CENTURY_HAWK: HUNTER_CENTURY_HAWK,ShipGlobals.HUNTER_SCORNED_SIREN: HUNTER_SCORNED_SIREN,ShipGlobals.HUNTER_TALLYHO: HUNTER_TALLYHO,ShipGlobals.HUNTER_BATTLEROYALE: HUNTER_BATTLEROYALE,ShipGlobals.HUNTER_EN_GARDE: HUNTER_EN_GARDE}
@@ -157,7 +157,7 @@ getShipMaterialDropByClass(ShipGlobals.HUNTER_VENGEANCE)
 def getShipDropItemsByClass(shipClass):
     dropItems = []
     shipType = __shipTypeList.get(shipClass)
-    if __lootShipCache.has_key(shipClass):
+    if shipClass in __lootShipCache:
         return __lootShipCache[shipClass]
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
@@ -187,14 +187,14 @@ def getEnemyDropItemsByType(type, uniqueId):
     shouldUseCommonDrop = 1
     isStatic = 0
     dropKey = None
-    if __staticCommonDropList.has_key(uniqueId):
+    if uniqueId in __staticCommonDropList:
         shouldUseCommonDrop = __staticCommonDropList[uniqueId]
         isStatic = 1
         dropKey = uniqueId
     else:
         typeKey = (
          type.getFaction(), type.getTrack(), type.getId())
-        if __typeCommonDropList.has_key(typeKey):
+        if typeKey in __typeCommonDropList:
             shouldUseCommonDrop = __typeCommonDropList[typeKey]
             dropKey = typeKey
     dropItems = []
@@ -202,7 +202,7 @@ def getEnemyDropItemsByType(type, uniqueId):
     isBoss = 1
     if not enemyType:
         enemyType = __enemyTypeList.get(type)
-    if dropKey and __lootDropCache.has_key(dropKey):
+    if dropKey and dropKey in __lootDropCache:
         return __lootDropCache[dropKey]
     for itemId in __dropInfo:
         item = __dropInfo[itemId]
@@ -226,7 +226,7 @@ def getStoreItems(uniqueId):
     storeItems = []
     shopKeeper = __staticIdTypeList.get(uniqueId)
     if shopKeeper:
-        if __lootStoreCache.has_key(uniqueId):
+        if uniqueId in __lootStoreCache:
             return __lootStoreCache[uniqueId]
         for itemId in __dropInfo:
             item = __dropInfo[itemId]
@@ -266,7 +266,7 @@ def getQuestPropItems():
 __fishTables = []
 for index in [FishSmall, FishMed, FishLarge, FishLegendary]:
     dropTable = []
-    for itemId, item in __dropInfo.iteritems():
+    for itemId, item in __dropInfo.items():
         if not isLive(item):
             continue
         if index < len(item):
@@ -282,9 +282,9 @@ def getFishDrops(size):
 def createZippedDist(unsummedDist, outcomes):
     hundredSum = abs(sum(unsummedDist) - 100) < 0.1
     if hundredSum:
-        return zip([ sum(unsummedDist[:x]) for x in range(len(unsummedDist)) ], outcomes)
+        return list(zip([ sum(unsummedDist[:x]) for x in range(len(unsummedDist)) ], outcomes))
     else:
-        return zip([ sum(unsummedDist[:x]) * 100 for x in range(len(unsummedDist)) ], outcomes)
+        return list(zip([ sum(unsummedDist[:x]) * 100 for x in range(len(unsummedDist)) ], outcomes))
 
 
 def rollDistribution(zippedDist):

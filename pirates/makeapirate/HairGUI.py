@@ -7,8 +7,8 @@ from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from pirates.piratesbase import PLocalizer
 from pirates.pirate import HumanDNA
-from CharGuiBase import CharGuiSlider, CharGuiPicker
-import MakeAPirateGlobals
+from .CharGuiBase import CharGuiSlider, CharGuiPicker
+from . import MakeAPirateGlobals
 import random
 
 class HairGUI(DirectFrame, StateData.StateData):
@@ -307,7 +307,7 @@ class HairGUI(DirectFrame, StateData.StateData):
         if optionsLeft:
             if self.main.lastDialog:
                 self.main.lastDialog.stop()
-            choice = random.choice(range(0, optionsLeft))
+            choice = random.choice(list(range(0, optionsLeft)))
             dialog = self.main.JSD_HAIR[idx][choice]
             base.playSfx(dialog, node=self.avatar.pirate)
             self.main.lastDialog = dialog

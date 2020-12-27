@@ -17,7 +17,7 @@ from pirates.battle.EnemySkills import *
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 from pirates.inventory import ItemGlobals
-import PiratesGuiGlobals
+from . import PiratesGuiGlobals
 Tolerance = 20
 FrameSize = 0.12
 Center = [
@@ -109,7 +109,7 @@ def AllComboSkills(repId, minlvl):
 def FindSkills(repId, skilltrack, minlvl):
     inv = base.localAvatar.getInventory()
     if inv == None:
-        print 'WARNING - FindSkills came up with no inventory for ', repId
+        print('WARNING - FindSkills came up with no inventory for ', repId)
         return []
     choices = []
     if repId == InventoryType.FishingRep:
@@ -213,7 +213,7 @@ def FindSkills(repId, skilltrack, minlvl):
 def getAllSkills(repId, skilltrack, wantWeaponSkill=0):
     inv = base.localAvatar.getInventory()
     if inv == None:
-        print 'WARNING - getAllSkills came up with no inventory for ', repId
+        print('WARNING - getAllSkills came up with no inventory for ', repId)
         return []
     minlvl = 2
     choices = []
@@ -843,7 +843,7 @@ class SkillTray():
                     self.skillTray.setX(self.skillTray.getX() - 0.075)
             elif self.origMap[i][1] == True:
                 skillId = self.traySkillMap[i]
-                if linkedSkillIds.has_key(skillId):
+                if skillId in linkedSkillIds:
                     skillId = linkedSkillIds[skillId]
                 name = PLocalizer.InventoryTypeNames[skillId]
                 hotkey = str(i + 1)

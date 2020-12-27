@@ -6,8 +6,8 @@ from direct.interval.IntervalGlobal import *
 from direct.actor import Actor
 from pirates.piratesbase import PiratesGlobals
 from pirates.effects import PolyTrail
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 from otp.otpbase import OTPRender
 import random
 

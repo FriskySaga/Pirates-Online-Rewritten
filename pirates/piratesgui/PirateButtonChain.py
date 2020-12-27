@@ -10,7 +10,7 @@ from pirates.piratesbase import PiratesGlobals
 from otp.otpbase import OTPGlobals
 from otp.friends.FriendInfo import FriendInfo
 from pirates.piratesbase import Freebooter
-import GuiButton
+from . import GuiButton
 
 class PirateButtonChain():
 

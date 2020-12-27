@@ -14,7 +14,7 @@ from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import Freebooter
 from pirates.quest.QuestTaskDNA import PotionsTaskDNA
-import PotionGlobals
+from . import PotionGlobals
 
 class PotionRecipePicker(DirectFrame):
 

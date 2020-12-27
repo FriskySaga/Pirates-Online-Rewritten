@@ -45,7 +45,7 @@ from pirates.audio.SoundGlobals import loadSfx
 from pirates.inventory import ItemGlobals
 from pirates.piratesgui import PVPRankGui
 from direct.fsm.StatePush import FunctionCall
-import ShipBalance
+from . import ShipBalance
 from pirates.effects import TextEffect
 from pirates.piratesbase import TODGlobals
 from pirates.ship import HighSeasGlobals
@@ -490,7 +490,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         return 0
 
     def handleOutOfRange(self, entry):
-        print '[DistributedSimpleShip] handleOutOfRange'
+        print('[DistributedSimpleShip] handleOutOfRange')
         if self.redirectTrack:
             self.redirectTrack.pause()
             self.redirectTrack = None
@@ -516,7 +516,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         self.boarders = boarders
 
     def startSteering(self, pilotId):
-        print '[DistributedSimpleShip] startSteering %s' % pilot
+        print('[DistributedSimpleShip] startSteering %s' % pilot)
         if localAvatar.doId == pilotId:
             localAvatar.b_setGameState('ShipPilot', [self])
             self.accept(self.exitWorldEvent, self.handleOutOfRange)
@@ -757,7 +757,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
 
     def enableOnDeckInteractions(self):
         self.notify.debug('enableOnDeckInteractions')
-        for cannon in self.cannons.values():
+        for cannon in list(self.cannons.values()):
             if cannon[1]:
                 cannon[1].setAllowInteract(1)
                 cannon[1].checkInUse()
@@ -768,14 +768,14 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 self.wheel[1].setAllowInteract(1)
                 self.wheel[1].checkInUse()
                 self.wheel[1].refreshState()
-        for spot in self.repairSpots.values():
+        for spot in list(self.repairSpots.values()):
             spot.setAllowInteract(1)
             spot.checkInUse()
             spot.refreshState()
 
     def disableOnDeckInteractions(self):
         self.notify.debug('disableOnDeckInteractions')
-        for cannon in self.cannons.values():
+        for cannon in list(self.cannons.values()):
             if cannon[1]:
                 cannon[1].setAllowInteract(0, forceOff=True)
                 cannon[1].refreshState()
@@ -784,7 +784,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
             if self.wheel[1]:
                 self.wheel[1].setAllowInteract(0, forceOff=True)
                 self.wheel[1].refreshState()
-        for spot in self.repairSpots.values():
+        for spot in list(self.repairSpots.values()):
             spot.setAllowInteract(0, forceOff=True)
             spot.refreshState()
 
@@ -867,7 +867,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         avgFBheight = [0.0, 0.0, 0.0]
 
         def calcWithWaves():
-            for sp, node in self._sampleNPs.items():
+            for sp, node in list(self._sampleNPs.items()):
                 height = water.calcFilteredHeight(minWaveLength=3.0 * self._maxSampleDistance, node=node)
                 if height == 0:
                     if config.GetBool('ships-rock-fakely', 0):
@@ -1144,7 +1144,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         return
 
     def isRamming(self):
-        for buffKeyId in self.skillEffects.keys():
+        for buffKeyId in list(self.skillEffects.keys()):
             buffId = self.skillEffects[buffKeyId][0]
             if WeaponGlobals.C_RAM == buffId:
                 return True
@@ -1225,7 +1225,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 self.shipStatusDisplay.hideWrongPort()
             if localAvatar.getGameState() == 'ShipPilot':
                 localAvatar.b_setGameState(localAvatar.gameFSM.defaultState)
-            for np, disabledBits in self.disabledCollisionBits.items():
+            for np, disabledBits in list(self.disabledCollisionBits.items()):
                 cMask = np.node().getIntoCollideMask()
                 cMask |= disabledBits
                 np.node().setIntoCollideMask(cMask)
@@ -1469,7 +1469,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         if not TeamUtils.damageAllowed(target, self):
             localAvatar.guiMgr.createWarning(PLocalizer.FriendlyFireWarning, PiratesGuiGlobals.TextFG6)
             return
-        for buffKeyId in self.skillEffects.keys():
+        for buffKeyId in list(self.skillEffects.keys()):
             buffId = self.skillEffects[buffKeyId][0]
             if WeaponGlobals.C_RAM == buffId:
                 self.sendRequestShipRam(targetId, pos)
@@ -1765,7 +1765,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
 
     def getNearestRopeAnchorNode(self, node):
         booms = []
-        for mast, distMast in self.masts.values():
+        for mast, distMast in list(self.masts.values()):
             booms.extend(mast.locators.findAllMatches('**/joint_anchor_net_*;+s'))
 
         booms = sorted([ (node.getDistance(boom), boom) for boom in booms ])
@@ -2067,7 +2067,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
         newPriority = WeaponGlobals.getBuffPriority(effectId)
         newCategory = WeaponGlobals.getBuffCategory(effectId)
         if newPriority:
-            for buffKeyId in self.skillEffects.keys():
+            for buffKeyId in list(self.skillEffects.keys()):
                 buffId = self.skillEffects[buffKeyId][0]
                 priority = WeaponGlobals.getBuffPriority(buffId)
                 category = WeaponGlobals.getBuffCategory(buffId)
@@ -2101,7 +2101,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
     def setSkillEffects(self, buffs):
         for effectId, attackerId, timestamp, duration, timeLeft, recur, buffData in buffs:
             buffKeyId = '%s-%s' % (effectId, attackerId)
-            if buffKeyId not in self.skillEffects.keys():
+            if buffKeyId not in list(self.skillEffects.keys()):
                 self.skillEffects[buffKeyId] = [
                  effectId, attackerId, duration, timeLeft, timestamp, buffData[0]]
                 self.addStatusEffect(effectId, attackerId, duration, timeLeft, timestamp, buffData[0])
@@ -2111,7 +2111,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 effect[4] = timestamp
 
         killList = []
-        for buffKeyId in self.skillEffects.keys():
+        for buffKeyId in list(self.skillEffects.keys()):
             foundEntry = 0
             for entry in buffs:
                 id = '%s-%s' % (entry[0], entry[1])
@@ -2129,7 +2129,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
 
     def getSkillEffects(self):
         buffIds = []
-        for buffKeyId in self.skillEffects.keys():
+        for buffKeyId in list(self.skillEffects.keys()):
             buffId = self.skillEffects[buffKeyId][0]
             if buffId not in buffIds:
                 buffIds.append(buffId)
@@ -2207,7 +2207,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
                 if self.model:
                     self.model.stopOpenFireEffect()
             slowDown = True
-            for buffKeyId in self.skillEffects.keys():
+            for buffKeyId in list(self.skillEffects.keys()):
                 buffId = self.skillEffects[buffKeyId][0]
                 if WeaponGlobals.C_FULLSAIL == buffId or WeaponGlobals.C_RAM == buffId:
                     slowDown = False
@@ -2216,7 +2216,7 @@ class DistributedSimpleShip(DistributedMovingObject, Teamable, DistributedFlagsh
 
     def findAllBuffCopyKeys(self, effectId):
         buffCopies = []
-        for buffKeyId in self.skillEffects.keys():
+        for buffKeyId in list(self.skillEffects.keys()):
             if self.skillEffects[buffKeyId][0] == effectId:
                 buffCopies.append(buffKeyId)
 

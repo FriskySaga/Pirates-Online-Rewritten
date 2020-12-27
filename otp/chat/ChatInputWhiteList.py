@@ -230,16 +230,16 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         pass
 
     def __execMessage(self, message):
-        print '_execMessage %s' % message
+        print('_execMessage %s' % message)
         if not ChatInputTyped.ExecNamespace:
             ChatInputTyped.ExecNamespace = {}
-            exec 'from pandac.PandaModules import *' in globals(), self.ExecNamespace
+            exec('from pandac.PandaModules import *', globals(), self.ExecNamespace)
             self.importExecNamespace()
         try:
             return str(eval(message, globals(), ChatInputTyped.ExecNamespace))
         except SyntaxError:
             try:
-                exec message in globals(), ChatInputTyped.ExecNamespace
+                exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except:
                 exception = sys.exc_info()[0]

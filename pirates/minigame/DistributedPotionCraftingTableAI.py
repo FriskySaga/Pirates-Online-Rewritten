@@ -13,7 +13,7 @@ class DistributedPotionCraftingTableAI(DistributedInteractiveAI):
         self.avatar2game = {}
 
     def delete(self):
-        for game in avatar2game.values():
+        for game in list(avatar2game.values()):
             game.requestDelete()
 
         self.ignoreAll()

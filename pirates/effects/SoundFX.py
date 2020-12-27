@@ -8,7 +8,7 @@ class SoundFX(NodePath):
 
     def __init__(self, sfxFile, volume=0.5, looping=True, delayMin=0, delayMax=0, pos=None, hpr=None, parent=None, listenerNode=None, taskName='playSfx', drawIcon=False):
         NodePath.NodePath.__init__(self, 'soundFX')
-        print 'SoundFX __init__ %s' % sfxFile
+        print('SoundFX __init__ %s' % sfxFile)
         base.mySFX = self
         self.volume = volume
         self.looping = looping

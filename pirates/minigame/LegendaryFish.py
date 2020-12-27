@@ -5,11 +5,11 @@ from panda3d.core import TextNode
 from direct.gui.DirectGui import DirectFrame, DirectLabel, DirectWaitBar, DGG
 from direct.gui.OnscreenImage import OnscreenImage
 from pandac.PandaModules import TransparencyAttrib
-import FishingGlobals
-import MinigameUtils
-from LegendaryFishFSM import LegendaryFishFSM
-from BlendActor import BlendActor
-from Fish import Fish
+from . import FishingGlobals
+from . import MinigameUtils
+from .LegendaryFishFSM import LegendaryFishFSM
+from .BlendActor import BlendActor
+from .Fish import Fish
 from pirates.piratesbase import CollectionMap
 
 class LegendaryFish(Fish):

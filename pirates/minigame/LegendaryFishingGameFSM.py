@@ -1,8 +1,8 @@
 import random
 from direct.interval.IntervalGlobal import Sequence, Parallel, Wait, Func
 from pirates.uberdog.UberDogGlobals import InventoryType
-from FishingGameFSM import FishingGameFSM
-import FishingGlobals
+from .FishingGameFSM import FishingGameFSM
+from . import FishingGlobals
 from pirates.audio import SoundGlobals
 from direct.fsm import FSM
 

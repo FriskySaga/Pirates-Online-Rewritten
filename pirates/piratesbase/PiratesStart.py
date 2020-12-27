@@ -1,11 +1,11 @@
-print 'PiratesStart: Starting the game.'
-import __builtin__
+print('PiratesStart: Starting the game.')
+import builtins
 
 class game():
     name = 'pirates'
     process = 'client'
 
-__builtin__.game = game()
+builtins.game = game()
 
 import time
 import os
@@ -23,21 +23,21 @@ gc.disable()
 try:
     launcher
 except:
-    print 'Creating PiratesDummyLauncher'
+    print('Creating PiratesDummyLauncher')
     from pirates.launcher.PiratesDummyLauncher import PiratesDummyLauncher
     launcher = PiratesDummyLauncher()
-    __builtin__.launcher = launcher
+    builtins.launcher = launcher
 
 from direct.gui import DirectGuiGlobals
-import PiratesGlobals
+from . import PiratesGlobals
 DirectGuiGlobals.setDefaultFontFunc(PiratesGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
-import PiratesBase
+from . import PiratesBase
 PiratesBase.PiratesBase()
 from direct.showbase.ShowBaseGlobal import *
 
 if base.win == None:
-    print 'Unable to open window; aborting.'
+    print('Unable to open window; aborting.')
     sys.exit()
 
 launcher.setPandaErrorCode(0)
@@ -57,7 +57,7 @@ hdr = Hdr()
 from pirates.seapatch.Reflection import Reflection
 Reflection.initialize(render)
 serverVersion = base.config.GetString('server-version', 'no_version_set')
-print 'serverVersion: ', serverVersion
+print('serverVersion: ', serverVersion)
 from pirates.distributed import PiratesClientRepository
 cr = PiratesClientRepository.PiratesClientRepository(serverVersion, launcher)
 base.initNametagGlobals()

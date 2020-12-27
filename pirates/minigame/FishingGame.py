@@ -22,14 +22,14 @@ from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesbase import TODGlobals
-import FishingGlobals
-from FishingGameFSM import FishingGameFSM
-from FishManager import FishManager
-from FishingGameGUI import FishingGameGUI
-from LegendaryFishingGameGUI import LegendaryFishingGameGUI
-from FishLure import FishLure
-from FishingTutorialManager import FishingTutorialManager
-from LegendaryFishingGameFSM import LegendaryFishingGameFSM
+from . import FishingGlobals
+from .FishingGameFSM import FishingGameFSM
+from .FishManager import FishManager
+from .FishingGameGUI import FishingGameGUI
+from .LegendaryFishingGameGUI import LegendaryFishingGameGUI
+from .FishLure import FishLure
+from .FishingTutorialManager import FishingTutorialManager
+from .LegendaryFishingGameFSM import LegendaryFishingGameFSM
 from pirates.effects.SeaBottomBubbleEffect import SeaBottomBubbleEffect
 from pirates.effects.LureHittingWaterBubbleEffect import LureHittingWaterBubbleEffect
 from pirates.effects.PooledEffect import PooledEffect
@@ -39,6 +39,7 @@ from pirates.minigame.LegendaryTellGUI import LegendaryTellGUI
 from pirates.world.LocationConstants import LocationIds
 from direct.fsm.FSM import RequestDenied
 from pirates.seapatch.Water import Water
+import importlib
 
 class FishingGame(DirectObject.DirectObject):
 
@@ -295,7 +296,7 @@ class FishingGame(DirectObject.DirectObject):
                 self.lure.hideCollisionVisuals()
 
     def codeReload(self):
-        reload(FishingGlobals)
+        importlib.reload(FishingGlobals)
         self.fishManager.loseInterest()
         if FishingGlobals.wantDebugCollisionVisuals:
             self.fishManager.reloadCollisions()
@@ -792,7 +793,7 @@ class FishingGame(DirectObject.DirectObject):
             try:
                 self.fsm.request('LureStall')
             except RequestDenied:
-                raise StandardError, 'Requesting LureStall from state %s\nTime Difference between LureStall Requests: %s' % (self.fsm.getCurrentOrNextState(), globalClock.getFrameTime() - self.lureStallTime)
+                raise Exception('Requesting LureStall from state %s\nTime Difference between LureStall Requests: %s' % (self.fsm.getCurrentOrNextState(), globalClock.getFrameTime() - self.lureStallTime))
 
             self.lureStallTime = globalClock.getFrameTime()
         if skillId == InventoryType.FishingRodPull:

@@ -25,7 +25,7 @@ class ChatBalloon:
         if node.isGeomNode():
             return node
 
-        for i in xrange(node.getNumChildren()):
+        for i in range(node.getNumChildren()):
             n = ChatBalloon.find_geom_node(node.getChild(i))
             if n:
                 return n
@@ -38,7 +38,7 @@ class ChatBalloon:
             return None
 
         child = None
-        for i in xrange(node.getNumChildren()):
+        for i in range(node.getNumChildren()):
             child = node.getChild(i)
             if child.getName() == 'middle':
                 return n
@@ -53,7 +53,7 @@ class ChatBalloon:
         if node.getName() == 'chatBalloon':
             return self.scan_balloon(node)
 
-        for i in xrange(node.getNumChildren()):
+        for i in range(node.getNumChildren()):
             if self.scan(node.getChild(i)):
                 return True
 
@@ -62,7 +62,7 @@ class ChatBalloon:
     def scan_balloon(self, node):
         self.copy_node = node.copySubgraph()
 
-        for i in xrange(node.getNumChildren()):
+        for i in range(node.getNumChildren()):
             child = node.getChild(i)
             if child.getName() == 'top':
                 self.top_node = child
@@ -80,7 +80,7 @@ class ChatBalloon:
             return True
 
         else:
-            print "ChatBalloon geometry does not include top, middle, and bottom nodes."  # WARNING
+            print("ChatBalloon geometry does not include top, middle, and bottom nodes.")  # WARNING
             return False
 
     def generate(self, text, font, wordwrap, text_color, balloon_color, for_3d,

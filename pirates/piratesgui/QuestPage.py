@@ -10,7 +10,7 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.uberdog.UberDogGlobals import *
 from pirates.piratesgui import BorderFrame
 from pirates.uberdog import DistributedInventoryBase
-import GuiButton
+from . import GuiButton
 from pirates.quest.QuestDetailGUI import QuestDetailGUI
 from pirates.piratesgui import PDialog
 from otp.otpbase import OTPGlobals
@@ -129,8 +129,8 @@ class QuestPage(InventoryPage.InventoryPage):
             self.titleList.showTracked(questId)
             quest = localAvatar.getQuestById(questId)
             if quest is None:
-                print 'Tracked quest not found on avatar!\n  Tracked quest: %s\n  Current quests: %s' % (questId,
-                 map(lambda q: q.getQuestId(), localAvatar.getQuests()))
+                print('Tracked quest not found on avatar!\n  Tracked quest: %s\n  Current quests: %s' % (questId,
+                 [q.getQuestId() for q in localAvatar.getQuests()]))
                 localAvatar.guiMgr.hideTrackedQuestInfo()
             elif localAvatar.questStep:
                 mapPage = localAvatar.guiMgr.mapPage
@@ -159,7 +159,7 @@ class QuestPage(InventoryPage.InventoryPage):
         self.updateQuestTitles(quest, newQuest=True)
 
     def updateQuestTitles(self, quest=None, newQuest=False, findNewTrackable=True):
-        questIds = map(lambda q: q.getQuestId(), localAvatar.getQuests())
+        questIds = [q.getQuestId() for q in localAvatar.getQuests()]
         self.titleList.update(questIds, quest, newQuest)
         if localAvatar.activeQuestId:
             self.titleList.showTracked(localAvatar.activeQuestId)
@@ -182,7 +182,7 @@ class QuestPage(InventoryPage.InventoryPage):
 
     def showQuestDetails(self, questId):
         self.hideSpecialInfo()
-        if questId in self.specialInfoData.keys():
+        if questId in list(self.specialInfoData.keys()):
             self.specialButton['text'] = self.specialInfoData[questId].get('buttonOn')
             self.specialButton['command'] = self.showSpecialInfo
             self.specialButton['extraArgs'] = [questId]
@@ -325,7 +325,7 @@ class QuestPage(InventoryPage.InventoryPage):
         self.tmReadyDialog.hide()
 
     def showSpecialInfo(self, containerId=None):
-        if not self.specialInfoPanel.has_key(containerId):
+        if containerId not in self.specialInfoPanel:
             panelClass = self.specialInfoData[containerId].get('class')
             self.specialInfoPanel[containerId] = panelClass()
             self.specialInfoPanel[containerId].reparentTo(self.detailFrame)
@@ -336,7 +336,7 @@ class QuestPage(InventoryPage.InventoryPage):
         self.detailFrame.setQuestTitleOnly(containerId)
 
     def hideSpecialInfo(self, containerId=None):
-        for specialPanelId in self.specialInfoPanel.keys():
+        for specialPanelId in list(self.specialInfoPanel.keys()):
             self.specialInfoPanel[specialPanelId].hide()
 
         if containerId:

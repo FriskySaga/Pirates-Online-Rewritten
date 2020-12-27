@@ -1,4 +1,4 @@
-from MinigameFSM import MinigameFSM
+from .MinigameFSM import MinigameFSM
 from direct.directnotify import DirectNotifyGlobal
 
 class RepairGameFSM(MinigameFSM):

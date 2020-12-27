@@ -56,7 +56,7 @@ class InventoryUIStackContainer(InventoryUIContainer.InventoryUIContainer):
         for itemId in self.itemList:
             skillRepId = WeaponGlobals.getSkillReputationCategoryId(itemId)
             if self.isSkillValid(itemId):
-                if not repCategoryDict.has_key(skillRepId):
+                if skillRepId not in repCategoryDict:
                     repCategoryDict[skillRepId] = []
                 repCategoryDict[skillRepId].append(itemId)
 
@@ -154,13 +154,13 @@ class InventoryUIStackContainer(InventoryUIContainer.InventoryUIContainer):
         return Point3(xPos, 0.0, zPos)
 
     def cellClicked(self, cell, mouseAction=MOUSE_CLICK, task=None):
-        print 'Stack Cell Clicked'
+        print('Stack Cell Clicked')
         if self.manager.heldItem:
             worked = 0
             if self.manager.heldItem.itemType == ITEM_STACK:
                 if cell.inventoryItem:
                     if cell.inventoryItem.itemType == ITEM_STACK and self.manager.heldItem.ammoId == cell.inventoryItem.ammoId:
-                        print 'Combine stack into cell'
+                        print('Combine stack into cell')
                         worked = 1
                 self.manager.itemPickup = worked or PICKUP_CLICK
         elif mouseAction == MOUSE_CLICK and cell.inventoryItem.itemType == ITEM_STACK:

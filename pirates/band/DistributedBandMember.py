@@ -39,13 +39,13 @@ class DistributedBandMember(DistributedObject, PAvatarHandle):
     @classmethod
     def getLeaderNameLocalAvatar(cls):
         b_set = cls.getBandSetLocalAvatar()
-        print '----------------------------'
+        print('----------------------------')
         for b in b_set:
-            print '----------------------------%s-%s' % (b.isManager, b.name)
+            print('----------------------------%s-%s' % (b.isManager, b.name))
             if b.isManager:
                 return b.name
 
-        print '---------------------------- Return None'
+        print('---------------------------- Return None')
         return None
 
     @classmethod
@@ -89,7 +89,7 @@ class DistributedBandMember(DistributedObject, PAvatarHandle):
             self.band_map[self.bandId].remove(self)
             if len(self.band_map[self.bandId]) <= 0:
                 del self.band_map[self.bandId]
-        if self.avatarId != 0 and self.allBandmembers.has_key(self.avatarId):
+        if self.avatarId != 0 and self.avatarId in self.allBandmembers:
             del self.allBandmembers[self.avatarId]
         if self.shipMessageDoLater:
             taskMgr.remove(self.shipMessageDoLater)
@@ -199,7 +199,7 @@ class DistributedBandMember(DistributedObject, PAvatarHandle):
 
     def setMessage(self, fromAvatarId, message):
         if self.avatarId != fromAvatarId:
-            print message
+            print(message)
 
     def setShipDeployMessage(self, fromAvatarId, shipId, shipName, locationName, siege):
         self.shipId = shipId

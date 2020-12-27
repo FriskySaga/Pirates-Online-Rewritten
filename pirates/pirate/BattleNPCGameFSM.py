@@ -6,7 +6,7 @@ from direct.task import Task
 from pirates.battle import WeaponGlobals
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
-import BattleAvatarGameFSM
+from . import BattleAvatarGameFSM
 
 class BattleNPCGameFSM(BattleAvatarGameFSM.BattleAvatarGameFSM):
 

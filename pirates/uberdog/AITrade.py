@@ -1,4 +1,4 @@
-from AITradeBase import AITradeBase
+from .AITradeBase import AITradeBase
 from pirates.uberdog.UberDogGlobals import *
 from pirates.reputation import ReputationGlobals
 from direct.directnotify.DirectNotifyGlobal import directNotify
@@ -96,7 +96,7 @@ class AITrade(AITradeBase):
         elif token == PadresDelFuegoTeleportToken:
             self.givePadresDelFuegoTeleportToken()
         else:
-            print 'AITrade.grantTeleportToken() encountered an unexpected error'
+            print('AITrade.grantTeleportToken() encountered an unexpected error')
 
     def takeTortugaTeleportToken(self, amount=1):
         self.takeStack(InventoryType.TortugaTeleportToken, amount)

@@ -39,7 +39,7 @@ class ModularAreaBuilder(SectionAreaBuilder):
                 continue
             self.sections[zone].setAttrib(lightAttrib)
 
-        for uid, obj in self.largeObjects.iteritems():
+        for uid, obj in self.largeObjects.items():
             visZone = obj.getTag('visZone')
             modular = obj.getTag('modular')
             if modular:
@@ -81,7 +81,7 @@ class ModularAreaBuilder(SectionAreaBuilder):
 
     def handleLighting(self, obj, visZone):
         parent = self.sectionsToParent.get(visZone)
-        if parent and self.areaLights.has_key(parent):
+        if parent and parent in self.areaLights:
             obj.setAttrib(self.areaLights[parent])
         SectionAreaBuilder.handleLighting(self, obj, visZone)
 
@@ -94,7 +94,7 @@ class ModularAreaBuilder(SectionAreaBuilder):
     def addSectionObj(self, obj, visZone, logError=0):
         SectionAreaBuilder.addSectionObj(self, obj, visZone)
         parent = self.sectionsToParent.get(visZone)
-        if parent and self.areaLights.has_key(parent):
+        if parent and parent in self.areaLights:
             obj.setAttrib(self.areaLights[parent])
         elif logError:
             errorMessage = 'Chest missing parent visZone %s location %s position %s' % (visZone, localAvatar.getLocation(), localAvatar.getPos())

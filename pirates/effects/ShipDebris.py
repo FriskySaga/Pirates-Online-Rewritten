@@ -6,7 +6,7 @@ from direct.distributed import DistributedObject
 from pirates.effects.DustRing import DustRing
 from pirates.effects.SmallSplash import SmallSplash
 import random
-from PooledEffect import PooledEffect
+from .PooledEffect import PooledEffect
 DebrisDict = {'0': 'models/props/testBoard','1': 'models/props/testBoard'}
 
 class ShipDebris(PooledEffect):

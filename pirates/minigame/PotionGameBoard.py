@@ -10,9 +10,9 @@ from pandac.PandaModules import CardMaker
 from pandac.PandaModules import Vec2
 from direct.task import Task
 from pirates.piratesbase import PLocalizer
-from PotionBoardPiece import PotionBoardPiece
+from .PotionBoardPiece import PotionBoardPiece
 from pirates.piratesgui import PiratesGuiGlobals
-import PotionGlobals
+from . import PotionGlobals
 
 class PotionGameBoard(DirectFrame):
 
@@ -36,8 +36,8 @@ class PotionGameBoard(DirectFrame):
 
     def initBoard(self):
         self.boardPieces = []
-        ColumnList = range(self.numColumns)
-        RowList = range(self.numRows)
+        ColumnList = list(range(self.numColumns))
+        RowList = list(range(self.numRows))
         for columnIndex in ColumnList:
             self.boardPieces.append([])
             for rowIndex in RowList:

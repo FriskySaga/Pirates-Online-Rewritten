@@ -76,14 +76,14 @@ __NPCSalutations = {AvatarTypes.Townfolk: {'greetings': PLocalizer.TownfolkGreet
 
 def getStringsForLocalAvatar(npc, type):
     list = []
-    if __NPCSalutations.has_key(npc.getUniqueId()):
+    if npc.getUniqueId() in __NPCSalutations:
         list = __NPCSalutations.get(npc.getUniqueId()).get(type)
-    if not list and __NPCSalutations.has_key(npc.avatarType):
+    if not list and npc.avatarType in __NPCSalutations:
         list = __NPCSalutations.get(npc.avatarType).get(type)
     if not list:
         list = __NPCSalutations.get(AvatarTypes.Townfolk).get(type)
     for dict in list:
-        if dict.has_key('prereqs'):
+        if 'prereqs' in dict:
             passed = True
             for prereq in dict.get('prereqs'):
                 if not prereq.avIsReady(localAvatar):

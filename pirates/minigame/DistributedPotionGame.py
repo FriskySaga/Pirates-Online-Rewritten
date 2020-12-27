@@ -4,10 +4,10 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from pirates.uberdog.UberDogGlobals import InventoryType
-import PotionGlobals
-import PotionRecipeData
+from . import PotionGlobals
+from . import PotionRecipeData
 from pirates.reputation import ReputationGlobals
-from PotionGame import PotionGame
+from .PotionGame import PotionGame
 from pirates.world.LocationConstants import LocationIds
 
 class DistributedPotionGame(DistributedObject):

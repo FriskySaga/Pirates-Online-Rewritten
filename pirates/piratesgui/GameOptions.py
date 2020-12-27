@@ -35,13 +35,13 @@ class OptionSpace():
     def read_integer(self, input_file):
         s = string.strip(input_file.readline())
         if self.debug:
-            print s
+            print(s)
         return string.atoi(s)
 
     def read_float(self, input_file):
         s = string.strip(input_file.readline())
         if self.debug:
-            print s
+            print(s)
         return string.atof(s)
 
     def read_string(self, input_file):
@@ -599,7 +599,7 @@ class Options(OptionSpace):
         else:
             string = string + 'compressed-textures 0\n'
         if self.debug:
-            print string
+            print(string)
         return string
 
     def setRuntimeOptions(self):
@@ -856,7 +856,7 @@ class Options(OptionSpace):
             if size > 0:
                 string = 'geom-cache-size ' + size.__repr__() + '\n'
                 if self.debug:
-                    print string
+                    print(string)
                 self.setPrc(string)
 
     def getPhysicalMemory(self, pipe):
@@ -1110,7 +1110,7 @@ class Options(OptionSpace):
 
                     system_key = (
                      '0x%04x' % di.getVendorId(), '0x%04x' % di.getDeviceId(), '%s.%d.%d.%d' % (os.name, di.getOsPlatformId(), di.getOsVersionMajor(), di.getOsVersionMinor()))
-                    if GameOptionsMatrix.GameOptionsMatrix.has_key(system_key):
+                    if system_key in GameOptionsMatrix.GameOptionsMatrix:
                         options_from_data = GameOptionsMatrix.GameOptionsMatrix[system_key][0]
                         if validate_gameOptions(options_from_data):
                             self.reflection = int(options_from_data[1:2])
@@ -1983,13 +1983,13 @@ class GameOptions(BorderFrame):
             windowed_index = self.resolutionToIndex(self.options.window_width, self.options.window_height, False)
             self.setPaid()
         fullscreen_index = self.resolutionToIndex(self.options.fullscreen_width, self.options.fullscreen_height, False)
-        for i in xrange(len(self.windowed_resolutions_button_array)):
+        for i in range(len(self.windowed_resolutions_button_array)):
             if i == windowed_index:
                 self.highlight_button(self.windowed_resolutions_button_array[i])
             else:
                 self.fade_button(self.windowed_resolutions_button_array[i])
 
-        for i in xrange(len(self.fullscreen_resolutions_button_array)):
+        for i in range(len(self.fullscreen_resolutions_button_array)):
             if base.inAdFrame:
                 self.inactive_button(self.fullscreen_resolutions_button_array[i])
             elif i == fullscreen_index:

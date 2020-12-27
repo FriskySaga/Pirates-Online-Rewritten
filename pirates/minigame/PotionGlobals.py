@@ -45,7 +45,7 @@ def potionBuffIdToInventoryTypeId(effectId):
 
 
 def potionInventoryTypeIdToBuffId(inventoryTypeId):
-    for buffId, potion in __potionBuffs.iteritems():
+    for buffId, potion in __potionBuffs.items():
         if potion['potionId'] == inventoryTypeId:
             return buffId
 
@@ -91,7 +91,7 @@ def getPotionHaveMadeFlag(effectId):
 
 
 def getPotionForHaveMadeID(madeID):
-    for potionID, potion in __potionBuffs.iteritems():
+    for potionID, potion in __potionBuffs.items():
         if potion['haveMade'] == madeID:
             return potionID
 

@@ -5,7 +5,7 @@ SOUND_FX_LIST = {'Cannon Fire': [loadSfxString(SoundGlobals.SFX_WEAPON_CANNON_FI
 def getSFXList():
     resultDic = {}
     totalList = []
-    for sfxGroup in SOUND_FX_LIST.keys():
+    for sfxGroup in list(SOUND_FX_LIST.keys()):
         sfxList = [
          [
           sfxGroup], SOUND_FX_LIST[sfxGroup]]

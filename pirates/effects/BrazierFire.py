@@ -4,7 +4,7 @@ from pirates.piratesgui.GameOptions import Options
 from pirates.effects.LightFire import LightFire
 from pirates.effects.GentleSmoke import GentleSmoke
 from pirates.effects.LightSparks import LightSparks
-from EffectController import EffectController
+from .EffectController import EffectController
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 

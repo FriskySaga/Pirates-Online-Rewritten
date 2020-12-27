@@ -19,8 +19,8 @@ from pirates.inventory import ItemGlobals
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.audio import SoundGlobals
-from FishingGame import FishingGame
-import FishingGlobals
+from .FishingGame import FishingGame
+from . import FishingGlobals
 
 class DistributedFishingSpot(DistributedInteractive.DistributedInteractive, Lootable):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFishingSpot')
@@ -174,7 +174,7 @@ class DistributedFishingSpot(DistributedInteractive.DistributedInteractive, Loot
             self.loadingSequence = Sequence(Func(self.fadeOut), Wait(self.fadeTime + 0.1), Func(self.checkAndLoadFishingGame), Wait(1.5), Func(self.requestPlayerIdleState), Func(self.fadeIn))
             self.loadingSequence.start()
         else:
-            print '--------------------- DistributedFishingSpot : Trouble fading out!'
+            print('--------------------- DistributedFishingSpot : Trouble fading out!')
         taskMgr.doMethodLater(FishingGlobals.idleDuration, self.bootFromFishing, self.uniqueName('bootFromFishing'))
         self.accept('mouse1', self.resetBootCheck)
         self.accept('fishing-skill-used', self.resetBootCheck)

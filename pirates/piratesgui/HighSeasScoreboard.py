@@ -115,7 +115,7 @@ class HighSeasScoreboard(GuiPanel.GuiPanel):
         if self.rightPanel:
             self.rightPanel.destroy()
             self.rightPanel = None
-        for grid in self.grids.values():
+        for grid in list(self.grids.values()):
             grid.destroy()
 
         self.grids = {}
@@ -161,7 +161,7 @@ class HighSeasScoreboard(GuiPanel.GuiPanel):
         headingHeight = 0.03
         marginHeight = 0.1
         containerCount = 0
-        for grid in self.grids.values():
+        for grid in list(self.grids.values()):
             gridHasStuff = 0
             for cell in grid.cellList:
                 if cell.inventoryItem:
@@ -298,7 +298,7 @@ class HighSeasScoreboard(GuiPanel.GuiPanel):
     def checkAllContainers(self, event=None):
         self.arrangeGrids()
         panelHasStuff = 0
-        for grid in self.grids.values():
+        for grid in list(self.grids.values()):
             for cell in grid.cellList:
                 if cell.inventoryItem:
                     panelHasStuff = 1
@@ -312,7 +312,7 @@ class HighSeasScoreboard(GuiPanel.GuiPanel):
             if not self.isEmpty():
                 self.closePanel()
             return
-        self.manager.takeAllLoot(self.grids.values(), playSound=playSound)
+        self.manager.takeAllLoot(list(self.grids.values()), playSound=playSound)
         self.checkAllContainers()
 
     def makeLootLabel(self, text, height):
@@ -420,4 +420,4 @@ class HighSeasScoreboard(GuiPanel.GuiPanel):
                         continue
 
         if base.cr.lootMgr and containers:
-            base.cr.lootMgr.d_requestItems(list(containers.iteritems()))
+            base.cr.lootMgr.d_requestItems(list(containers.items()))

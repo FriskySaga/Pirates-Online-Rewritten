@@ -5,7 +5,7 @@ from direct.actor import Actor
 from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
-from PooledEffect import PooledEffect
+from .PooledEffect import PooledEffect
 from direct.task import Task
 import random
 from otp.otpbase import OTPRender
@@ -70,7 +70,7 @@ class Wake(PooledEffect):
         else:
             spn.setEffect(CompassEffect.make(base.cr.activeWorld.getWater().patchNP, CompassEffect.PZ))
         if self.use_water_bin:
-            mask = 4294967295L
+            mask = 4294967295
             stencil = StencilAttrib.make(1, StencilAttrib.SCFEqual, StencilAttrib.SOKeep, StencilAttrib.SOKeep, StencilAttrib.SOKeep, 1, mask, mask)
             self.spNP.setAttrib(stencil)
             if not base.useStencils:
@@ -270,7 +270,7 @@ class Wake(PooledEffect):
                     water_shadow.setHpr(180, 0, 0)
                 self.shadow = water_shadow
             else:
-                print 'ERROR: -------------- shadow model not found for ship class', ship.shipClass
+                print('ERROR: -------------- shadow model not found for ship class', ship.shipClass)
         self.wake.setScale(wake_scale)
         if not hasattr(base, 'pe'):
             self.wake.setHpr(180, 0, 0)

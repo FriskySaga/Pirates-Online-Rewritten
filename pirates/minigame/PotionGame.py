@@ -7,17 +7,17 @@ from direct.showbase import DirectObject
 from direct.task import Task
 from pandac.PandaModules import *
 from pandac.PandaModules import CardMaker
-from PotionGameFSM import PotionGameFSM
-from PotionRecipePicker import PotionRecipePicker
-from PotionRecipe import PotionRecipe
-from PotionResults import PotionResults
-from PotionFail import PotionFail
-from PotionBoardPiece import PotionBoardPiece
-from PotionGameBoard import PotionGameBoard
-from PotionHint import PotionHint
-from PotionInfo import PotionInfo
-import PotionGlobals
-import PotionRecipeData
+from .PotionGameFSM import PotionGameFSM
+from .PotionRecipePicker import PotionRecipePicker
+from .PotionRecipe import PotionRecipe
+from .PotionResults import PotionResults
+from .PotionFail import PotionFail
+from .PotionBoardPiece import PotionBoardPiece
+from .PotionGameBoard import PotionGameBoard
+from .PotionHint import PotionHint
+from .PotionInfo import PotionInfo
+from . import PotionGlobals
+from . import PotionRecipeData
 from pirates.piratesgui import GuiButton
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesgui import PiratesConfirm
@@ -360,7 +360,7 @@ class PotionGame(DirectObject.DirectObject):
 
                                 piece.wrtReparentTo(self.currentRecipe)
                                 piece.setY(-5)
-                                print 'adding animation for completed ingredient'
+                                print('adding animation for completed ingredient')
                                 self.animationList.append(Sequence(piece.moveToBoardVerySlow(ingredient.column, ingredient.row), Func(ingredient.updateDisplay), Func(piece.removeNode), Func(self.gameBoard.kill, piece)))
                                 self.postAnimationList.append(self.showIngredientXP(ingredient))
 

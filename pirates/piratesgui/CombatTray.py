@@ -28,12 +28,12 @@ from pirates.inventory import ItemGlobals
 from pirates.battle import EnemyGlobals
 import time
 import math
-import PiratesGuiGlobals
-from SkillButton import SkillButton
-from GuiTray import GuiTray
-from GuiButton import GuiButton
+from . import PiratesGuiGlobals
+from .SkillButton import SkillButton
+from .GuiTray import GuiTray
+from .GuiButton import GuiButton
 import copy
-from TonicsPanel import TonicsPanel
+from .TonicsPanel import TonicsPanel
 STAFF_INTERVAL = 0.4
 AIM_ASSIST_DURATION = 2.0
 
@@ -221,12 +221,12 @@ class TonicButton(SkillButton):
             defaultTonic = None
         inv = localAvatar.getInventory()
         if inv and inv.isReady():
-            tonics = dict(map(lambda x: (x.getType(), x.getCount()), filter(lambda x: ItemGlobals.isAutoTonic(x.getType()), inv.getConsumables().values())))
+            tonics = dict([(x.getType(), x.getCount()) for x in [x for x in list(inv.getConsumables().values()) if ItemGlobals.isAutoTonic(x.getType())]])
             if tonics.get(ItemGlobals.ROAST_PORK) > 0:
                 return ItemGlobals.ROAST_PORK
             idealAmount = max(0, localAvatar.getMaxHp() * 0.8 - localAvatar.getHp())
             bestTonicId = defaultTonic
-            for tonicId, count in sorted(tonics.iteritems()):
+            for tonicId, count in sorted(tonics.items()):
                 if count:
                     bestTonicId = tonicId
                     skillId = WeaponGlobals.getSkillIdForAmmoSkillId(tonicId)
@@ -493,7 +493,7 @@ class CombatTray(GuiTray):
     def setupFromInventoryManager(self, manager):
         self.inventoryUIManager = manager
         buttonSize = self.inventoryUIManager.standardButtonSize
-        weaponSlots = range(Locations.RANGE_EQUIP_WEAPONS[0], Locations.RANGE_EQUIP_WEAPONS[1] + 1)
+        weaponSlots = list(range(Locations.RANGE_EQUIP_WEAPONS[0], Locations.RANGE_EQUIP_WEAPONS[1] + 1))
         self.slotDisplay = InventoryUICombatTrayGrid.InventoryUICombatTrayGrid(self.inventoryUIManager, buttonSize * float(len(weaponSlots)), buttonSize * 1.0, int(len(weaponSlots)), 1, slotList=weaponSlots)
         self.slotDisplay.reparentTo(self)
         self.slotDisplay.setPos(-0.6, 0.0, 0.01)
@@ -1268,7 +1268,7 @@ class CombatTray(GuiTray):
                 itemCat = InventoryType.ItemTypeConsumable
 
             amt = inv.getItemQuantity(itemCat, ammoItemId)
-            if localAvatar.guiMgr.weaponPage.tonicButtons.has_key(ammoItemId):
+            if ammoItemId in localAvatar.guiMgr.weaponPage.tonicButtons:
                 localAvatar.guiMgr.weaponPage.tonicButtons[ammoItemId].updateQuantity(amt - 1)
 
             for skillButton in localAvatar.guiMgr.weaponPage.tonicButtons:
@@ -1845,7 +1845,7 @@ class CombatTray(GuiTray):
         self.ignore('skillStarted')
         self.ignore('skillFinished')
         self.ignore('reloadFinished')
-        for i in xrange(1, 9):
+        for i in range(1, 9):
             self.ignore('%d' % i)
 
         self.ignoreInput()

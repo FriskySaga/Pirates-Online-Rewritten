@@ -25,7 +25,7 @@ from pirates.inventory import InventorySellConfirm
 from pirates.inventory import DropGlobals
 from pirates.inventory import InventoryGlobals
 from pirates.world.DistributedIsland import DistributedIsland
-import cPickle
+import pickle
 
 class DistributedShopKeeper():
     notify = directNotify.newCategory('DistributedShopKeeper')
@@ -360,7 +360,7 @@ class DistributedShopKeeper():
     def __prepareSwitchStatement(self, values):
         ready = []
         for value in values:
-            ready.append(cPickle.dumps(value))
+            ready.append(pickle.dumps(value))
         return prepareSwitchField(ready)
 
     def sendRequestMakeSale(self, buying=[], selling=[]):

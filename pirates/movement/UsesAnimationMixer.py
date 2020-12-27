@@ -140,4 +140,4 @@ class UsesAnimationMixer():
         return self.__mixer is not None
 
     def printMixer(self):
-        print self.__mixer
+        print(self.__mixer)

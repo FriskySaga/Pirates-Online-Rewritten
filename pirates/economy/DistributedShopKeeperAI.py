@@ -4,7 +4,7 @@ from otp.uberdog.RejectCode import RejectCode
 from pirates.uberdog.UberDogGlobals import InventoryType, InventoryId
 from pirates.uberdog import UberDogGlobals
 from pirates.economy import EconomyGlobals
-import cPickle
+import pickle
 
 class DistributedShopKeeperAI(DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedShopKeeperAI')
@@ -15,7 +15,7 @@ class DistributedShopKeeperAI(DistributedObjectAI):
     def __reverseSwitchStatement(self, values):
         ready = []
         for value in values:
-            ready.append(cPickle.loads(value[0]))
+            ready.append(pickle.loads(value[0]))
         return ready
 
     def requestMusic(self, music):

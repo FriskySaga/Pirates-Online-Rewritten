@@ -4,8 +4,8 @@ from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
 import random
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 
 class CurseHit(PooledEffect, EffectController):
     cardScale = 128.0

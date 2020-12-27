@@ -51,7 +51,7 @@ class InventoryUISellContainer(InventoryUIContainer.InventoryUIContainer):
         messenger.send('UpdateSellContainer')
 
     def hasItemsToSell(self):
-        for cell in self.gridDict.values():
+        for cell in list(self.gridDict.values()):
             if cell.inventoryItem:
                 return True
 
@@ -59,14 +59,14 @@ class InventoryUISellContainer(InventoryUIContainer.InventoryUIContainer):
 
     def calculateTotalGoldValue(self):
         totalCost = 0
-        for cell in self.gridDict.values():
+        for cell in list(self.gridDict.values()):
             if cell.inventoryItem:
                 totalCost += ItemGlobals.getGoldCost(cell.inventoryItem.getId()) * cell.inventoryItem.amount
 
         return totalCost
 
     def clearSale(self):
-        for cell in self.gridDict.values():
+        for cell in list(self.gridDict.values()):
             if cell.inventoryItem:
                 cell.inventoryItem.inventoryCell['state'] = DGG.NORMAL
                 cell.inventoryItem.inventoryCell.clearColorScale()

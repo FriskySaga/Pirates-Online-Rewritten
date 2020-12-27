@@ -93,7 +93,7 @@ StateBreakdownList = {}
 StateBeginTimeList = {}
 StateTransitionTimeList = {}
 NumStates = {}
-cycles = CycleStateTimeList.keys()
+cycles = list(CycleStateTimeList.keys())
 for cycleKey in cycles:
     totalHours = 0.0
     StateBreakdownList[cycleKey] = {}
@@ -158,7 +158,7 @@ def getStateName(stateId):
 
 
 def getStateId(stateName):
-    stateKeys = StateDict.keys()
+    stateKeys = list(StateDict.keys())
     for stateId in stateKeys:
         if StateDict.get(stateId) == stateName:
             return stateId

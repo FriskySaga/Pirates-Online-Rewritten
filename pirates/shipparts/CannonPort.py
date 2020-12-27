@@ -86,7 +86,7 @@ class CannonPort(NodePath):
             model = loader.loadModel('models/shipparts/pir_a_shp_can_broadside_%s' % name)
             CannonPort.portBundles.append(model.find('**/+AnimBundleNode').node().getBundle())
 
-        for val, suffix in CannonPortDict.iteritems():
+        for val, suffix in CannonPortDict.items():
             model = loader.loadModel('models/shipparts/pir_r_shp_can_broadside_%s' % suffix)
             char = model.find('**/+Character')
             root = NodePath('Port')

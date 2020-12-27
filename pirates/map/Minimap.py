@@ -185,9 +185,9 @@ class AreaMap(Map):
             self.removeObject(shop)
 
         self.shops = set()
-        for holiday in self.capturePoints.keys():
+        for holiday in list(self.capturePoints.keys()):
             zones = self.capturePoints.pop(holiday, {})
-            for object in zones.itervalues():
+            for object in zones.values():
                 self.removeObject(object)
 
         Map.destroy(self)
@@ -208,7 +208,7 @@ class AreaMap(Map):
         return self.mapOverlay
 
     def getCapturePoint(self, holidayId, zone):
-        if self.capturePoints.has_key(holidayId):
+        if holidayId in self.capturePoints:
             return self.capturePoints[holidayId][zone]
         return None
 
@@ -263,13 +263,13 @@ class AreaMap(Map):
             taskMgr.doMethodLater(10, self.handleInvasionEnded, 'handleInvasionEnded', extraArgs=[area, holiday])
         else:
             self.map.findAllMatches('**/=Holiday=%s;+s' % (holiday,)).stash()
-            for object in self.capturePoints.pop(holiday, {}).itervalues():
+            for object in self.capturePoints.pop(holiday, {}).values():
                 self.removeObject(object)
 
     def handleInvasionEnded(self, area, holiday):
         if not localAvatar.guiMgr.invasionScoreboard:
             self.map.findAllMatches('**/=Holiday=%s;+s' % (holiday,)).stash()
-            for object in self.capturePoints.pop(holiday, {}).itervalues():
+            for object in self.capturePoints.pop(holiday, {}).values():
                 self.removeObject(object)
 
 

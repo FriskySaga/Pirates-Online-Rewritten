@@ -23,7 +23,7 @@ class WorldCreatorAI(WorldCreatorBase, DirectObject):
 
     def getObjectParentUid(self, objKey):
         found = None
-        for fileName in self.fileDicts.keys():
+        for fileName in list(self.fileDicts.keys()):
             found = self.getObjectDataFromFileByUid(objKey, fileName, getParentUid=True)
             if found:
                 break
@@ -31,7 +31,7 @@ class WorldCreatorAI(WorldCreatorBase, DirectObject):
 
     def getObjectFilenameByUid(self, objKey, getParentUid=True):
         file = None
-        for fileName in self.fileDicts.keys():
+        for fileName in list(self.fileDicts.keys()):
             found = self.getObjectDataFromFileByUid(objKey, fileName, getParentUid=getParentUid)
             if found:
                 file = fileName

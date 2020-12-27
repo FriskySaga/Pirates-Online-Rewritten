@@ -105,7 +105,7 @@ class BodyShapeChanger(BorderFrame):
         self.confirmDialog = PDialog.PDialog(text=PLocalizer.BodyTypeConfirm, style=OTPDialog.YesNo, command=self.doConfirmBody)
 
     def doConfirmBody(self, choice):
-        print 'doConfirmBody %s' % choice
+        print('doConfirmBody %s' % choice)
         if localAvatar.getGameState() not in 'Halt':
             self.destroy()
             return

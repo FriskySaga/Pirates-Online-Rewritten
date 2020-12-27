@@ -213,7 +213,7 @@ class DistributedTimeOfDayManagerAI(DistributedObjectAI, TimeOfDayManagerBase):
 
         weatherId = self.weatherId
         while weatherId == self.weatherId:
-            weatherId = random.choice(TODGlobals.WEATHER_TYPES.keys())
+            weatherId = random.choice(list(TODGlobals.WEATHER_TYPES.keys()))
         speed = random.randint(10, 15)
 
         valid = True

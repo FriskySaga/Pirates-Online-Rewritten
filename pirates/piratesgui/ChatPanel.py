@@ -772,7 +772,7 @@ class ChatPanel(DirectFrame, FSM):
         self.chatBar.disableWhiteListChat()
 
     def checkEmotes(self):
-        for id in PLocalizer.EmoteCommands.values():
+        for id in list(PLocalizer.EmoteCommands.values()):
             if type(id) == type((0, )):
                 pass
 

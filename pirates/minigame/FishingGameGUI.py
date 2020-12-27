@@ -9,8 +9,8 @@ from pirates.piratesgui.GuiButton import GuiButton
 from pirates.piratesgui.PDialog import PDialog
 from direct.task import Task
 from direct.interval.IntervalGlobal import Sequence, Parallel, Wait, Func
-import FishingGlobals
-from FishingResults import FishingResults
+from . import FishingGlobals
+from .FishingResults import FishingResults
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.inventory import ItemGlobals
 from pirates.piratesgui import PiratesGuiGlobals

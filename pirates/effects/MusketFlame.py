@@ -7,8 +7,8 @@ from direct.particles import Particles
 from direct.particles import ForceGroup
 import random
 from pirates.piratesbase import PiratesGlobals
-from EffectController import EffectController
-from PooledEffect import PooledEffect
+from .EffectController import EffectController
+from .PooledEffect import PooledEffect
 
 class MusketFlame(PooledEffect, EffectController):
     cardScale = 64.0

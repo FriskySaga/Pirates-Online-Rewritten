@@ -58,15 +58,15 @@ class InventoryFSM(FSM):
         accumulators.append([InventoryType.OverallRep, 0])
 
         categoryLimits = []
-        for key, limit in InventoryInit.CategoryLimits.iteritems():
+        for key, limit in InventoryInit.CategoryLimits.items():
             categoryLimits.append((key, limit))
 
         stackLimits = []
-        for key, limit in InventoryInit.StackLimits.iteritems():
+        for key, limit in InventoryInit.StackLimits.items():
             stackLimits.append((key, limit))
 
         startStacks = []
-        for key, amount in InventoryInit.StackStartsWith.iteritems():
+        for key, amount in InventoryInit.StackStartsWith.items():
             startStacks.append((key, amount))
 
         self.manager.air.dbInterface.createObject(self.manager.air.dbId, self.manager.air.dclassesByName['PirateInventoryUD'],

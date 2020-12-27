@@ -4,8 +4,8 @@ from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
 import random
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 
 class VoodooSmoke(PooledEffect, EffectController):
     cardScale = 64.0

@@ -128,7 +128,7 @@ class HolidayManagerAI(DistributedObjectAI):
         return holidayId in InvasionGlobals.INVASION_NUMBERS
 
     def getActiveInvasion(self):
-        return sorted([i if i in InvasionGlobals.INVASION_NUMBERS else None for i in self.activeHolidays.keys()], key=lambda x: (x is None, x))[0]
+        return sorted([i if i in InvasionGlobals.INVASION_NUMBERS else None for i in list(self.activeHolidays.keys())], key=lambda x: (x is None, x))[0]
 
     def startInvasionHoliday(self, holidayId):
         if self.invasionManager != None:

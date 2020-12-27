@@ -4,7 +4,7 @@ from direct.actor import Actor
 from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
-from EffectController import EffectController
+from .EffectController import EffectController
 from pirates.piratesgui.GameOptions import Options
 import random
 

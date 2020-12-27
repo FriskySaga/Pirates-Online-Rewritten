@@ -26,22 +26,22 @@ class QuestGoal():
     def __init__(self, typeInfo):
         self.__goalDataStr = None
         if typeInfo == None:
-            self.__goalType = types.ListType
+            self.__goalType = list
             self.__goalData = []
             return
-        if type(typeInfo) == types.StringType:
+        if type(typeInfo) == bytes:
             typeInfo = [typeInfo]
         self.__goalData = typeInfo
         self.__goalType = type(self.__goalData)
         return
 
     def getType(self):
-        if self.__goalType == types.DictType:
+        if self.__goalType == dict:
             return self.Type_Custom
         return self.Type_Uid
 
     def getTargetType(self):
-        if self.__goalType == types.DictType:
+        if self.__goalType == dict:
             return self.__goalData.get(self.TYPE_IDX)
         return (0, 0, 0, 0)
 
@@ -49,12 +49,12 @@ class QuestGoal():
         return self.getTargetType() in self.GOAL_TYPES_OCEAN
 
     def getLocation(self):
-        if self.__goalType == types.DictType:
+        if self.__goalType == dict:
             return self.__goalData.get(self.LOCATION_IDX)
         return None
 
     def compareTo(self, object, goalOwner=None):
-        if self.__goalType == types.DictType:
+        if self.__goalType == dict:
             goalLevel = self.__goalData.get(self.LEVEL_IDX, 0)
             if goalLevel > 0 and goalLevel > object.getLevel():
                 return 1
@@ -105,13 +105,13 @@ class QuestGoal():
              (0, '')]
         else:
             results = ''
-        if self.__goalType == types.ListType:
+        if self.__goalType == list:
             if all:
                 uidData = self.__goalData
             else:
                 uidData = self.__goalData[:1]
             if uidMgr:
-                results = zip(map(lambda x: uidMgr.getDoId(x, None), uidData), uidData)
+                results = list(zip([uidMgr.getDoId(x, None) for x in uidData], uidData))
             elif len(uidData) == 0:
                 results = ''
             else:
@@ -123,7 +123,7 @@ class QuestGoal():
             return self.__goalDataStr
         if self.__goalData == None:
             resultStr = ''
-        if self.__goalType == types.ListType:
+        if self.__goalType == list:
             resultStr = str(self.__goalData)
         else:
             strRep = ''
@@ -184,7 +184,7 @@ class QuestStep():
         self.nearVis = nearVis
 
     def __repr__(self):
-        return 'QuestStep(%d, %d, %d, %s, %s, %s, %s, %s, %s, %s)' % (self.getOriginDoId(), self.getStepDoId(), self.getStepType(), `(self.getPosH())`, self.getIsland(), self.getTargetArea(), self.targetAvatarType, self.nodeSizes, self.nearOffset, self.nearVis)
+        return 'QuestStep(%d, %d, %d, %s, %s, %s, %s, %s, %s, %s)' % (self.getOriginDoId(), self.getStepDoId(), self.getStepType(), repr((self.getPosH())), self.getIsland(), self.getTargetArea(), self.targetAvatarType, self.nodeSizes, self.nearOffset, self.nearVis)
 
     def __cmp__(self, other):
         return not isinstance(other, QuestStep) or cmp(self.originDoId, other.originDoId) or cmp(self.stepDoId, other.stepDoId) or cmp(self.stepType, other.stepType) or cmp(self.posH, other.posH) or cmp(self.islandUid, other.islandUid) or cmp(self.targetAreaUid, other.targetAreaUid) or cmp(self.targetAvatarType, other.targetAvatarType) or cmp(self.nodeSizes, other.nodeSizes) or cmp(self.nearOffset, other.nearOffset) or cmp(self.nearVis, other.nearVis)

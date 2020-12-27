@@ -265,7 +265,7 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
             if not self.islands:
                 self.notify.debug('black pearl island not here yet...')
                 return Task.cont
-            island = self.islands.values()[0]
+            island = list(self.islands.values())[0]
             island.goOnStage()
             island.forceZoneLevel(0)
             island.builder.loadObjects()
@@ -365,7 +365,7 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
         base.cr.loadingScreen.hide()
         self.stashGoliath()
         base.localAvatar.guiMgr.radarGui.zoomFSM.request('Zoom2')
-        island = self.islands.values()[0]
+        island = list(self.islands.values())[0]
         island.setZoneLevel(0)
         self.setupCaptureSphere(island)
         base.transitions.fadeIn()
@@ -396,7 +396,7 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
     @report(types=['frameCount', 'deltaStamp', 'args'], dConfigParam='blackpearl')
     def enterStageTwo(self):
         self.disableCaptureSphere()
-        island = self.islands.values()[0]
+        island = list(self.islands.values())[0]
         self.unstashPearl()
         self.unstashAttackShips()
         self.attackShipsSunk = 0
@@ -592,10 +592,10 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
     def fireShipCannonsAtTarget(self, ship, target):
         if not (ship and target):
             return
-        for cannonData in ship.cannons.values():
+        for cannonData in list(ship.cannons.values()):
             cannonProp, cannon = cannonData
             relPos = target.getPos(cannonProp.cannonPost)
-            print 'relPos = %s' % relPos
+            print('relPos = %s' % relPos)
             if relPos[1] > 0:
                 delay = random.random()
                 if delay < 0.9:
@@ -647,16 +647,16 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
         self.showRulesPanel(3)
 
     def setupBarricades(self):
-        if not self.barricades.keys():
-            for key in TreasureMapBlackPearlGlobals.DrawbridgeCollisionDict.keys():
+        if not list(self.barricades.keys()):
+            for key in list(TreasureMapBlackPearlGlobals.DrawbridgeCollisionDict.keys()):
                 barricadePair = TreasureMapBlackPearlGlobals.DrawbridgeCollisionDict[key]
-                newBarricade = FortBarricade.FortBarricade(self.islands.values()[0], barricadePair)
+                newBarricade = FortBarricade.FortBarricade(list(self.islands.values())[0], barricadePair)
                 self.barricades[key] = newBarricade
                 if key == 2 or key == 3:
                     self.barricades[key].disableCollisions()
 
     def destroyBarricade(self, barricadeId):
-        if barricadeId in self.barricades.keys():
+        if barricadeId in list(self.barricades.keys()):
             self.barricades[barricadeId].disableCollisions()
             if barricadeId not in self.barricadesDestroyed:
                 self.barricadesDestroyed.append(barricadeId)
@@ -664,15 +664,15 @@ class TreasureMapBlackPearl(DistributedTreasureMapInstance.DistributedTreasureMa
                 localAvatar.guiMgr.messageStack.addTextMessage(PLocalizer.DrawbridgePassable)
 
     def disableBarricadeCollisions(self, barricadeId):
-        if barricadeId in self.barricades.keys():
+        if barricadeId in list(self.barricades.keys()):
             self.barricades[barricadeId].disableCollisions()
 
     def enableBarricadeCollisions(self, barricadeId):
-        if barricadeId in self.barricades.keys():
+        if barricadeId in list(self.barricades.keys()):
             self.barricades[barricadeId].enableCollisions()
 
     def barricadeWarning(self, barricadeId):
-        if barricadeId in self.barricades.keys():
+        if barricadeId in list(self.barricades.keys()):
             if barricadeId not in self.barricadesWarned:
                 self.barricadesWarned.append(barricadeId)
                 localAvatar.guiMgr.messageStack.addTextMessage(PLocalizer.BridgeNeedsToBeDestroyed % (barricadeId + 1))

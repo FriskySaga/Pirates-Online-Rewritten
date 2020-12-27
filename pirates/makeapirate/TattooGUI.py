@@ -6,15 +6,15 @@ from direct.gui import DirectGuiGlobals
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from pirates.piratesbase import PLocalizer
-from CharGuiBase import CharGuiSlider, CharGuiPicker
+from .CharGuiBase import CharGuiSlider, CharGuiPicker
 import random
 from pirates.pirate import HumanDNA
 from math import sin
 from math import cos
 from math import pi
-import TattooGlobals
-import PirateMale
-import PirateFemale
+from . import TattooGlobals
+from . import PirateMale
+from . import PirateFemale
 Zone1_Tab = 0
 Zone2_Tab = 1
 Zone3_Tab = 2
@@ -545,7 +545,7 @@ class TattooGUI(DirectFrame, StateData.StateData):
             self.reparentCommonGui(self.zone8Frame, self.zone8FrameTitle)
 
     def setEdit(self, mode):
-        print 'editing %s' % mode
+        print('editing %s' % mode)
         self.guiNextTattooButton.show()
         self.guiLastTattooButton.show()
         self.oXSlider.show()

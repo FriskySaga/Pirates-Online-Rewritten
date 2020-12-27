@@ -81,18 +81,18 @@ if pvpMode < 3:
     del GameTypes[PiratesGlobals.GAME_TYPE_PVP]['style'][PiratesGlobals.GAME_STYLE_SHIP_BATTLE]
 
 def getGameTypes():
-    print GameTypes
-    return GameTypes.keys()
+    print(GameTypes)
+    return list(GameTypes.keys())
 
 
 def getGameStyles(gameType, gameStyle=None, callback=None):
-    if GameTypes.has_key(gameType) and GameTypes[gameType].has_key('style'):
+    if gameType in GameTypes and 'style' in GameTypes[gameType]:
         styleInfo = GameTypes[gameType]['style']
         if _styleInfoIsDynamic(styleInfo):
             return styleInfo(gameType, gameStyle, callback)
-        callback(styleInfo.keys())
+        callback(list(styleInfo.keys()))
         return (
-         None, styleInfo.keys())
+         None, list(styleInfo.keys()))
     return None
 
 
@@ -108,10 +108,10 @@ def _styleInfoIsDynamic(styleInfo):
 def getGameOptions(gameType, gameStyle=None, callback=None):
     requestId = None
     gameOptions = {}
-    if GameTypes.has_key(gameType):
-        if GameTypes[gameType].has_key('options'):
+    if gameType in GameTypes:
+        if 'options' in GameTypes[gameType]:
             return GameTypes[gameType]['options']
-        elif gameStyle != None and GameTypes[gameType].has_key('style'):
+        elif gameStyle != None and 'style' in GameTypes[gameType]:
             styleInfo = GameTypes[gameType]['style']
             if _styleInfoIsDynamic(styleInfo):
 
@@ -123,7 +123,7 @@ def getGameOptions(gameType, gameStyle=None, callback=None):
                         callback(foundOptions)
 
                 requestId, gameOptions = styleInfo(gameType, gameStyle, extractOptions)
-            elif styleInfo.has_key(gameStyle):
+            elif gameStyle in styleInfo:
                 gameOptions = styleInfo[gameStyle]['options']
                 if callback:
                     callback(gameOptions)
@@ -132,7 +132,7 @@ def getGameOptions(gameType, gameStyle=None, callback=None):
 
 
 def getGameTypeString(value, type, category=None):
-    if category != None and PiratesGlobals.DYNAMIC_GAME_STYLE_PROPS.has_key(category):
+    if category != None and category in PiratesGlobals.DYNAMIC_GAME_STYLE_PROPS:
         typeInfo = PiratesGlobals.DYNAMIC_GAME_STYLE_PROPS[category].get(value)
         if typeInfo:
             if type == 'style':

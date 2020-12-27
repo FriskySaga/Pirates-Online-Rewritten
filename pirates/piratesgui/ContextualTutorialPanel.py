@@ -105,13 +105,13 @@ class ContextualTutorialPanel(DirectFrame):
         newData = '%s%s%s' % (contextId, number, part)
         if oldData == newData:
             return
-        if self.titleLabels.has_key(oldData):
+        if oldData in self.titleLabels:
             self.titleLabels[oldData].hide()
             self.messageLabels[oldData].hide()
         self.contextId = contextId
         self.number = number
         self.part = part
-        if self.titleLabels.has_key(newData):
+        if newData in self.titleLabels:
             self.titleLabels[newData].show()
             self.messageLabels[newData].show()
             self.contextId = contextId
@@ -217,16 +217,16 @@ class ContextualTutorialPanel(DirectFrame):
                                 self.filled = True
                                 self.titleLabels[newData] = titleLabel
                                 self.messageLabels[newData] = messageLabel
-                            if self.noHintsLabels.has_key(self.type):
+                            if self.type in self.noHintsLabels:
                                 self.noHintsLabels[self.type].hide()
-                        if self.noHintsLabels.has_key(type):
+                        if type in self.noHintsLabels:
                             if contextId in (InventoryType.ChatPreferences, InventoryType.CursedBlades):
                                 self.noHintsLabels[type].hide()
                                 self.noHintsCheck.hide()
                             else:
                                 self.noHintsLabels[type].show()
                                 self.noHintsCheck.show()
-                        if self.noHintsLabels.has_key(self.type):
+                        if self.type in self.noHintsLabels:
                             self.noHintsLabels[self.type].hide()
                     if contextId in (InventoryType.ChatPreferences, InventoryType.CursedBlades):
                         text = ''

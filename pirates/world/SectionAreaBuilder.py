@@ -212,7 +212,7 @@ class SectionAreaBuilder(AreaBuilderBase):
     @report(types=['args'], dConfigParam='minimap')
     def _postSubObjectsStep(self):
         self.largeObjectsRoot.findAllMatches('**/collision_zone_*;+s').wrtReparentTo(self.collisions)
-        for zone in self.tempSections.values():
+        for zone in list(self.tempSections.values()):
             zone.lodRoot.flattenStrong()
             if base.options.getTerrainDetailSetting() == 0:
                 zone.lodRoot.getChild(0).reparentTo(zone)
@@ -235,7 +235,7 @@ class SectionAreaBuilder(AreaBuilderBase):
                 uid = section.getName()[15:]
                 self.sectionsToParent[uid] = uid
 
-        for uid, obj in self.largeObjects.iteritems():
+        for uid, obj in self.largeObjects.items():
             visZone = obj.getTag('visZone')
             if visZone:
                 visData = self.visTable.get(visZone)
@@ -287,7 +287,7 @@ class SectionAreaBuilder(AreaBuilderBase):
             for zone in zones:
                 self.visHelper[zone].add(zoneName)
 
-        for obj in self.largeObjects.values():
+        for obj in list(self.largeObjects.values()):
             obj.stash()
 
         self.terrainDict = {}
@@ -388,7 +388,7 @@ class SectionAreaBuilder(AreaBuilderBase):
             return
         if geometry in self.sectionObjs:
             return
-        if not self.visHelper.has_key(visZone):
+        if visZone not in self.visHelper:
             self.notify.warning('object %s tried to be placed in visZone %s, which does not exist in %s' % (str(geometry), str(visZone), str(self.master.uniqueId)))
             return
         AreaBuilderBase.addSectionObj(self, geometry, visZone)

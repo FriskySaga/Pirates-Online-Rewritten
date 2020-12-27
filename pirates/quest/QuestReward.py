@@ -30,7 +30,7 @@ class QuestReward(POD):
         return
 
     def applyTo(self, trade, av):
-        raise 'derived must override'
+        raise Exception('derived must override')
 
     def getQuestRewardStruct(self):
         rewardStruct = QuestRewardStruct.QuestRewardStruct().copyFrom(self)
@@ -216,7 +216,7 @@ class MaxMojoReward(QuestReward):
 class LuckReward(QuestReward):
 
     def applyTo(self, trade, av):
-        raise 'TODO'
+        raise Exception('TODO')
 
     def getDescriptionText(self):
         return PLocalizer.LuckRewardDesc % self.amount
@@ -225,7 +225,7 @@ class LuckReward(QuestReward):
 class SwiftnessReward(QuestReward):
 
     def applyTo(self, trade, av):
-        raise 'TODO'
+        raise Exception('TODO')
 
     def getDescriptionText(self):
         return PLocalizer.SwiftnessRewardDesc % self.amount
@@ -290,7 +290,7 @@ class PistolUpgradeReward(QuestReward):
         return None
 
     def getDescriptionText(self):
-        if PLocalizer.InventoryTypeNames.has_key(self.amount):
+        if self.amount in PLocalizer.InventoryTypeNames:
             return PLocalizer.InventoryTypeNames.get(self.amount)
         else:
             return PLocalizer.PistolRewardDesc
@@ -361,7 +361,7 @@ class DaggerUpgradeReward(QuestReward):
             trade.setFailureCallback(av.giveFreeInventoryMessage, extraArgs=[InventoryType.ItemTypeWeapon])
 
     def getDescriptionText(self):
-        if PLocalizer.InventoryTypeNames.has_key(self.amount):
+        if self.amount in PLocalizer.InventoryTypeNames:
             return PLocalizer.InventoryTypeNames.get(self.amount)
         else:
             return PLocalizer.DaggerRewardDesc
@@ -394,7 +394,7 @@ class WeaponItemReward(QuestReward):
         trade.giveWeapon(self.amount)
 
     def getDescriptionText(self):
-        if PLocalizer.ItemNames.has_key(self.amount):
+        if self.amount in PLocalizer.ItemNames:
             return PLocalizer.ItemNames.get(self.amount)
         else:
             return 'No named Weapon'
@@ -437,7 +437,7 @@ class CutlassUpgradeReward(QuestReward):
             trade.setFailureCallback(av.giveFreeInventoryMessage, extraArgs=[InventoryType.ItemTypeWeapon])
 
     def getDescriptionText(self):
-        if PLocalizer.InventoryTypeNames.has_key(self.amount):
+        if self.amount in PLocalizer.InventoryTypeNames:
             return PLocalizer.InventoryTypeNames.get(self.amount)
         else:
             return PLocalizer.CutlassRewardDesc
@@ -475,7 +475,7 @@ class DollUpgradeReward(QuestReward):
             trade.setFailureCallback(av.giveFreeInventoryMessage, extraArgs=[InventoryType.ItemTypeWeapon])
 
     def getDescriptionText(self):
-        if PLocalizer.InventoryTypeNames.has_key(self.amount):
+        if self.amount in PLocalizer.InventoryTypeNames:
             return PLocalizer.InventoryTypeNames.get(self.amount)
         else:
             return PLocalizer.DollRewardDesc
@@ -513,7 +513,7 @@ class WandUpgradeReward(QuestReward):
             trade.setFailureCallback(av.giveFreeInventoryMessage, extraArgs=[InventoryType.ItemTypeWeapon])
 
     def getDescriptionText(self):
-        if PLocalizer.InventoryTypeNames.has_key(self.amount):
+        if self.amount in PLocalizer.InventoryTypeNames:
             return PLocalizer.InventoryTypeNames.get(self.amount)
         else:
             return PLocalizer.StaffRewardDesc

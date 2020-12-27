@@ -144,7 +144,7 @@ class InventoryUICardContainer(InventoryUIStackContainer.InventoryUIStackContain
         suitDict = {}
         for cardId in self.itemList:
             suit = PlayingCardGlobals.getSuit(cardId, fromOffset=1)
-            if not suitDict.has_key(suit):
+            if suit not in suitDict:
                 suitDict[suit] = []
             suitDict[suit].append(cardId)
 

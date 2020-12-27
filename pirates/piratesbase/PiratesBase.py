@@ -30,8 +30,8 @@ from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from pirates.piratesgui import PDialog
 from pirates.chat.PWhiteList import PWhiteList
-import PiratesGlobals
-import __builtin__
+from . import PiratesGlobals
+import builtins
 try:
     import embedded
     hasEmbedded = 1
@@ -51,7 +51,7 @@ class PiratesBase(OTPBase):
 
     def __init__(self):
         OTPBase.__init__(self, windowType='none')
-        print cpMgr
+        print(cpMgr)
         self.hasEmbedded = hasEmbedded
         self.shipFactory = None
         self.firstMateVoiceOn = 1
@@ -69,7 +69,7 @@ class PiratesBase(OTPBase):
         if self.config.GetBool('want-dev', 0):
             flavor = self.config.GetString('dev-branch-flavor', '')
             flavor = "".join([c for c in flavor if c.isalpha() or c.isdigit() or c=='_']).rstrip()
-            print(':%s: Loading dev branch flavor: %s' % (self.__class__.__name__, flavor))
+            print((':%s: Loading dev branch flavor: %s' % (self.__class__.__name__, flavor)))
             if flavor:
                 cachePath = '../cache/cache_%s' % (flavor,)
             else:
@@ -114,7 +114,7 @@ class PiratesBase(OTPBase):
         else:
             self.getDisplayResolutions(bits_per_pixel, base.pipe)
         if options_loaded:
-            print 'state = %s' % options.state
+            print('state = %s' % options.state)
             if __dev__:
                 options.save(Options.DEFAULT_FILE_PATH, Options.WORKING_STATE)
             elif options.state == Options.DEFAULT_STATE or options.state == Options.NEW_STATE:
@@ -580,7 +580,7 @@ class PiratesBase(OTPBase):
             try:
                 import webbrowser
                 webbrowser.open(url, new=2, autoraise=True)
-            except WindowsError, e:
+            except WindowsError as e:
                 import os
                 os.system('explorer "%s"' % url)
 
@@ -601,7 +601,7 @@ class PiratesBase(OTPBase):
         elif gridDetail == 'low':
             self.farCull.setPos(0, 200, 0)
         else:
-            raise StandardError, 'Invalid grid-detail: %s' % gridDetail
+            raise Exception('Invalid grid-detail: %s' % gridDetail)
 
     def disableFarCull(self):
         self.farCull.setPos(0, 10000, 0)
@@ -609,12 +609,12 @@ class PiratesBase(OTPBase):
     def setLowMemory(self, lowMemory):
         self.lowMemory = lowMemory
         if lowMemory:
-            GeomVertexArrayData.getIndependentLru().setMaxSize(sys.maxint / 2)
-            VertexDataPage.getGlobalLru(VertexDataPage.RCResident).setMaxSize(sys.maxint / 2)
+            GeomVertexArrayData.getIndependentLru().setMaxSize(sys.maxsize / 2)
+            VertexDataPage.getGlobalLru(VertexDataPage.RCResident).setMaxSize(sys.maxsize / 2)
             taskMgr.setupTaskChain('background', numThreads=0)
         else:
-            GeomVertexArrayData.getIndependentLru().setMaxSize(sys.maxint)
-            VertexDataPage.getGlobalLru(VertexDataPage.RCResident).setMaxSize(sys.maxint)
+            GeomVertexArrayData.getIndependentLru().setMaxSize(sys.maxsize)
+            VertexDataPage.getGlobalLru(VertexDataPage.RCResident).setMaxSize(sys.maxsize)
             taskMgr.setupTaskChain('background', numThreads=1)
 
     def setupRender2d(self):
@@ -712,7 +712,7 @@ class PiratesBase(OTPBase):
         def nullYield(comment=''):
             pass
 
-        __builtin__.yieldThread = nullYield
+        builtins.yieldThread = nullYield
         del nullYield
         base.graphicsEngine.renderFrame()
         self.downloadWatcher = PiratesDownloadWatcher.PiratesDownloadWatcher(PLocalizer.LauncherPhaseNames)

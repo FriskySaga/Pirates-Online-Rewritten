@@ -281,7 +281,7 @@ class NametagGroup:
 
     def addNametag(self, nametag):
         if nametag.group:
-            print 'Attempt to add %s twice to %s.' % (nametag.__class__.__name__, self.name)
+            print('Attempt to add %s twice to %s.' % (nametag.__class__.__name__, self.name))
             return
 
         nametag.group = self
@@ -293,7 +293,7 @@ class NametagGroup:
 
     def removeNametag(self, nametag):
         if not nametag.group:
-            print 'Attempt to removed %s twice from %s.' % (nametag.__class__.__name__, self.name)
+            print('Attempt to removed %s twice from %s.' % (nametag.__class__.__name__, self.name))
             return
 
         if self.manager:

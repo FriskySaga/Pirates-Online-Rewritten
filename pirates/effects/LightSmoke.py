@@ -6,8 +6,8 @@ from direct.particles import Particles
 from direct.particles import ForceGroup
 import random
 from pirates.piratesgui.GameOptions import Options
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 
 class LightSmoke(PooledEffect, EffectController):
     cardScale = 64.0

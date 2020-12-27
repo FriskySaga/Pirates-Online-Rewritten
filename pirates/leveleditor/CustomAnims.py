@@ -11,7 +11,7 @@ PROP_ANIMS = {'models/char/seagull_hi': ['models/char/seagull_flying', 'models/c
 def getPropAnimList():
     resultDic = {}
     totalList = []
-    for propModel in PROP_ANIMS.keys():
+    for propModel in list(PROP_ANIMS.keys()):
         animList = [
          [
           propModel], PROP_ANIMS[propModel]]
@@ -39,7 +39,7 @@ def getHandHeldPropsDict(versionFilter=None, rarityFilter=None, isFromLoot=True,
 
     if versionFilter is not None or rarityFilter is not None or not (isFromLoot == True and isFromShop == True and isFromQuest == True and isFromPromo == True and isFromPVP == True):
         return resultDict
-    for key in INTERACT_ANIMS.keys():
+    for key in list(INTERACT_ANIMS.keys()):
         allIdles = INTERACT_ANIMS[key].get('idles')
         if allIdles:
             if type(allIdles) is type({}):

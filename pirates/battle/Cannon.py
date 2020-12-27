@@ -26,7 +26,7 @@ from pirates.battle.WeaponGlobals import *
 from pirates.ship import ShipGlobals
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import CannonGlobals
+from . import CannonGlobals
 import random
 import math
 cannonTypes = {ShipGlobals.Cannons.L1: 'plain',ShipGlobals.Cannons.L2: 'plain',ShipGlobals.Cannons.L3: 'plain',ShipGlobals.Cannons.Tutorial: 'plain',ShipGlobals.Cannons.Skel_L1: 'skeleton',ShipGlobals.Cannons.Skel_L2: 'skeleton',ShipGlobals.Cannons.Skel_L3: 'skeleton',ShipGlobals.Cannons.BP: 'blackPearl',ShipGlobals.Cannons.Repeater: 'repeater',ShipGlobals.Cannons.Navy: 'navy'}
@@ -358,7 +358,7 @@ class Cannon(NodePath):
         self.bundle.clearControlEffects()
 
     def setupCannonModels(self):
-        for val, suffix in cannonTypes.iteritems():
+        for val, suffix in cannonTypes.items():
             model = loader.loadModel('models/shipparts/pir_r_shp_can_deck_%s' % suffix)
             collisions = loader.loadModel('models/shipparts/pir_r_shp_can_deck_%s_collisions' % suffix)
             animBundle = model.find('**/+AnimBundleNode').node().getBundle()

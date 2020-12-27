@@ -19,7 +19,7 @@ from pirates.piratesgui import BorderFrame
 from pirates.pirate import MasterHuman
 from pirates.pirate import Human
 from pirates.pirate import HumanDNA
-import DistributedPirateProfileMgr
+from . import DistributedPirateProfileMgr
 from pirates.pirate import DistributedPlayerPirate
 from pirates.band import DistributedBandMember
 from direct.showbase.PythonUtil import StackTrace

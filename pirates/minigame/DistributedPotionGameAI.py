@@ -1,7 +1,7 @@
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 from direct.directnotify import DirectNotifyGlobal
-import PotionRecipeData
-import PotionGlobals
+from . import PotionRecipeData
+from . import PotionGlobals
 
 class DistributedPotionGameAI(DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPotionGameAI')
@@ -151,13 +151,13 @@ class DistributedPotionGameAI(DistributedObjectAI):
         if not self.__verifySender():
             return
 
-        print 'BONUS: %s' % bonusLevel
+        print('BONUS: %s' % bonusLevel)
 
     def completeSurvival(self, ingredients, tiles):
         if not self.__verifySender():
             return
 
-        print 'INGREDIENTS %s TILES %s' % (ingredients, tiles)
+        print('INGREDIENTS %s TILES %s' % (ingredients, tiles))
 
     def reset(self):
         if not self.__verifySender():

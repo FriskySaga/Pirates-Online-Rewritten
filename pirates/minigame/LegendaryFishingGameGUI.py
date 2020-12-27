@@ -7,13 +7,13 @@ from direct.gui.OnscreenImage import OnscreenImage
 from pandac.PandaModules import TransparencyAttrib
 from direct.interval.IntervalGlobal import Sequence, Parallel, Wait, Func
 from direct.interval.LerpInterval import LerpHprInterval, LerpPosInterval, LerpColorScaleInterval, LerpScaleInterval
-import FishingGlobals
+from . import FishingGlobals
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesgui import GuiPanel
 from pirates.piratesgui import PiratesGuiGlobals
-from BlendActor import BlendActor
+from .BlendActor import BlendActor
 
 class LegendaryFishingGameGUI():
 
@@ -151,7 +151,7 @@ class LegendaryFishingGameGUI():
         self.luiArrowRotatingSequence.clearToInitial()
         self.luiCloseDialogSequence.pause()
         self.luiCloseDialogSequence.clearToInitial()
-        totalKey = self.UICompoments.keys()
+        totalKey = list(self.UICompoments.keys())
         for iKey in totalKey:
             del self.UICompoments[iKey]
 

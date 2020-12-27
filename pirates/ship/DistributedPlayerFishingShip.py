@@ -34,7 +34,7 @@ class DistributedPlayerFishingShip(DistributedPlayerSimpleShip):
             locator = self.model.locators.find('**/cannon_%s;+s' % spot.index)
             self.loadFishingSpotAtLocator(spot, locator)
         else:
-            print 'ERROR! This fishing spot needs an index!', spot
+            print('ERROR! This fishing spot needs an index!', spot)
 
     def loadFishingSpotAtLocator(self, spot, locator):
         spot.model = loader.loadModel('models/minigames/pir_m_gam_fsh_fishingSpot')

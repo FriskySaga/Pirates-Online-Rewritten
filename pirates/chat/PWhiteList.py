@@ -18,7 +18,7 @@ class PWhiteList(WhiteList):
         found = vfs.resolveFilename(filename, searchPath)
         if not found:
             message = 'pwhitelist.txt file not found on %s' % searchPath
-            raise IOError, message
+            raise IOError(message)
         data = vfs.readFile(filename, 1)
         lines = data.split('\n')
         for token in enumeratePirateNameTokensLower():

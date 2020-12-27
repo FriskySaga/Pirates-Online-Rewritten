@@ -3,11 +3,11 @@ from pandac.PandaModules import TextNode, CardMaker
 from direct.gui.DirectGui import DirectLabel
 from direct.task import Task
 from direct.interval.LerpInterval import LerpFunc
-from RepairMincroGame import RepairMincroGame
+from .RepairMincroGame import RepairMincroGame
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import RepairGlobals
+from . import RepairGlobals
 from pirates.piratesbase import PiratesGlobals
 ROTATION_MAX = -45
 ROTATION_MIN = 45

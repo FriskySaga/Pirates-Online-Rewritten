@@ -217,7 +217,7 @@ class ZoneLOD(DirectObject, StagedObject):
     def childLeft(self, myDoId, parentObj, isIsland=True):
         if isIsland:
             self.builder.left()
-        for island in parentObj.islands.values():
+        for island in list(parentObj.islands.values()):
             if island.doId != myDoId:
                 if isIsland:
                     island.builder.areaGeometry.unstash()
@@ -228,7 +228,7 @@ class ZoneLOD(DirectObject, StagedObject):
     def childArrived(self, myDoId, parentObj, isIsland=True):
         if isIsland:
             self.builder.arrived()
-        for island in parentObj.islands.values():
+        for island in list(parentObj.islands.values()):
             if island.doId != myDoId:
                 if isIsland:
                     island.builder.areaGeometry.stash()

@@ -637,7 +637,7 @@ class AccessoriesStoreGUI(DirectFrame):
             self.colorButtons = []
         offsetx = 0.22
         offsety = 0.25
-        colorSet = colorsNotOwned = range(0, 21)
+        colorSet = colorsNotOwned = list(range(0, 21))
         colorsOwned = []
         numcolors = len(colorsNotOwned)
         charGui = loader.loadModel('models/gui/char_gui')
@@ -1425,7 +1425,7 @@ class AccessoriesStoreGUI(DirectFrame):
                 colorsOwned = []
                 colorsNotOwned = []
                 if ItemGlobals.canDyeItem(uid):
-                    colorSet = range(0, 21)
+                    colorSet = list(range(0, 21))
                 else:
                     colorSet = []
                 if self.mode == SELLING:

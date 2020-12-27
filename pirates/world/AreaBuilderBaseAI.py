@@ -109,7 +109,7 @@ class AreaBuilderBaseAI(DirectObject):
         island.setUndockable(worldIsland.get('Undockable', False))
 
         if 'Objects' in worldIsland:
-            for obj in worldIsland['Objects'].values():
+            for obj in list(worldIsland['Objects'].values()):
                 if obj['Type'] == 'LOD Sphere':
                     island.setZoneSphereSize(*obj['Radi'])
 

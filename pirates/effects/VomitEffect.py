@@ -7,8 +7,8 @@ from direct.particles import ForceGroup
 from direct.task import Task
 from direct.task.TaskManagerGlobal import taskMgr
 from pandac.PandaModules import *
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 
 class VomitEffect(PooledEffect, EffectController):
     cardScale = 128.0

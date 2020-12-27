@@ -19,8 +19,9 @@ from pirates.ai import HolidayGlobals
 from pirates.inventory import ItemGlobals
 from pirates.piratesbase import EmoteGlobals
 from pirates.audio import SoundGlobals
+from functools import reduce
 OL.SpeedChatStaticText = OL.SpeedChatStaticTextPirates.copy()
-for key in OL.SpeedChatStaticTextCommon.iterkeys():
+for key in OL.SpeedChatStaticTextCommon.keys():
     OL.SpeedChatStaticText[key] = OL.SpeedChatStaticTextCommon[key]
 
 InterfaceFont = 'models/fonts/BardiT.bam'
@@ -1106,7 +1107,7 @@ __highSeasAdventureRating = {
 }
 
 def getHighSeasRating(value):
-    probabilityTable = __highSeasAdventureRating.keys()
+    probabilityTable = list(__highSeasAdventureRating.keys())
     probabilityTable.sort()
     for rating in probabilityTable:
         if value <= rating:
@@ -1120,7 +1121,7 @@ __crewAdventureRating = {
 }
 
 def getCrewRating(value):
-    probabilityTable = __crewAdventureRating.keys()
+    probabilityTable = list(__crewAdventureRating.keys())
     probabilityTable.sort()
     for rating in probabilityTable:
         if value <= rating:
@@ -3945,11 +3946,11 @@ TheJollyRoger = "The Tyrant's Blade"
 TheQueenAnnesRevenge = "The Queen Anne's Revenge"
 
 def enumerateShipNames():
-    firstPirate = PirateShipPrefix.keys()
+    firstPirate = list(PirateShipPrefix.keys())
     firstNavy = NavyShipPrefix[: ]
     firstTrading = TradingShipPrefix[: ]
     firstSkeleton = SkeletonShipPrefix[: ]
-    lastPirate = PirateShipSuffix.keys()
+    lastPirate = list(PirateShipSuffix.keys())
     lastNavy = NavyShipSuffix[: ]
     lastTrading = TradingShipSuffix[: ]
     lastSkeleton = SkeletonShipSuffix[: ]
@@ -4009,8 +4010,8 @@ def getHandNameFull(handCode, cards):
     def getRank(card):
         return card % 13
 
-    cardNames = map(lambda card: PlayingCardRanks[getRank(card)], cards)
-    cardNamesPlural = map(lambda card: PlayingCardRanksPlural[getRank(card)], cards)
+    cardNames = [PlayingCardRanks[getRank(card)] for card in cards]
+    cardNamesPlural = [PlayingCardRanksPlural[getRank(card)] for card in cards]
     if handCode == 'Nothing':
         return ''
     elif handCode == 'NoPair':
@@ -5097,7 +5098,7 @@ TitleOff = 'Off'
 import random
 
 def getPVPRating(score):
-    return random.choice(_pvpRating.values())
+    return random.choice(list(_pvpRating.values()))
 
 
 PirateerTitle = 'Dubloon Lagoon'

@@ -4,7 +4,7 @@ from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import Freebooter
 from pirates.piratesgui.GuiButton import GuiButton
-import SkillButton
+from . import SkillButton
 from direct.interval.IntervalGlobal import *
 from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesgui.BorderFrame import BorderFrame

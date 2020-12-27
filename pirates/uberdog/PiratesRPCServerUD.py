@@ -1,7 +1,7 @@
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.task import Task
-from SimpleXMLRPCServer import SimpleXMLRPCServer
-from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler
+from xmlrpc.server import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCRequestHandler
 from threading import Thread
 import traceback
 import json

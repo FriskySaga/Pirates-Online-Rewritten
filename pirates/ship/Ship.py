@@ -51,7 +51,7 @@ class Ship(DirectObject.DirectObject):
         self.char = self.modelRoot.find('**/+Character')
         self.riggingControls = {}
         numBundles = self.char.node().getNumBundles()
-        masts = self.breakAnims.keys()
+        masts = list(self.breakAnims.keys())
         masts.sort()
         self.sinkTimeScale = 1.0
         if self.breakSfx1 is None:
@@ -268,7 +268,7 @@ class Ship(DirectObject.DirectObject):
     def stopIvals(self):
         self.__rollDownIval.pause()
         self.__rollUpIval.pause()
-        for ival in self.__hitSailingIvals.values():
+        for ival in list(self.__hitSailingIvals.values()):
             ival.pause()
 
     def playIdle(self):
@@ -478,7 +478,7 @@ class Ship(DirectObject.DirectObject):
         self.sailStartIval = None
         self.sailStopIval.pause()
         self.sailStopIval = None
-        for ival in self.__breakIvals.values():
+        for ival in list(self.__breakIvals.values()):
             ival.pause()
 
         self.__breakIvals = {}
@@ -735,7 +735,7 @@ class Ship(DirectObject.DirectObject):
         self.cannonsMed.flattenStrong()
         if detailLevel != 0:
             self.cannonsLow.flattenStrong()
-        for cannon in self.cannons.values():
+        for cannon in list(self.cannons.values()):
             cannon.finalize()
 
         for side in self.broadsides:

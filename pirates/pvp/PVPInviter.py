@@ -249,7 +249,7 @@ class PVPInviter(SocialPage.SocialPage):
     def enterChallengeNoMore(self):
         self.message['text'] = PLocalizer.PVPInviterChallengeNoMore % self.avName
         self.bOk.show()
-        if not base.cr.doId2do.has_key(self.avId):
+        if self.avId not in base.cr.doId2do:
             messenger.send(self.avDisableName)
 
     def exitChallengeNoMore(self):

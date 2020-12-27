@@ -100,7 +100,7 @@ def getDefenseCannonAmmoCost(ammoSkillId):
 _defenseCannonAmmoAmount = {InventoryType.DefenseCannonRoundShot: -1,InventoryType.DefenseCannonTargetedShot: 100,InventoryType.DefenseCannonMine: 50,InventoryType.DefenseCannonHotShot: 50,InventoryType.DefenseCannonScatterShot: 50,InventoryType.DefenseCannonPowderKeg: 9,InventoryType.DefenseCannonSmokePowder: 50,InventoryType.DefenseCannonBullet: 50,InventoryType.DefenseCannonColdShot: 50,InventoryType.DefenseCannonBomb: 50,InventoryType.DefenseCannonChumShot: 6,InventoryType.DefenseCannonFireStorm: 25}
 
 def getDefenseCannonAmmoAmount(ammoSkillId):
-    if _defenseCannonAmmoAmount.has_key(ammoSkillId):
+    if ammoSkillId in _defenseCannonAmmoAmount:
         return _defenseCannonAmmoAmount[ammoSkillId]
     return 1
 

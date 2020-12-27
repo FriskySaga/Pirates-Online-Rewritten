@@ -55,7 +55,7 @@ def genText(value, type, modType=MOD_TYPE_MULTIPLE, modifiers={}, effects={}):
                         doubleXPBonus = 0
                         holidayBonus = 0
                         potionBonus = 0
-                        modtypes = modifiers.keys()
+                        modtypes = list(modifiers.keys())
                         if MOD_HOLIDAYBONUS in modtypes:
                             holidayBonus = modifiers.get(MOD_HOLIDAYBONUS)
                             baseVal -= holidayBonus

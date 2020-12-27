@@ -17,7 +17,7 @@ from pirates.inventory import ItemGlobals
 from pirates.effects.TeleportTwister import TeleportTwister
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.piratesgui.RewardPanel import RewardPanel
-from PlayerPirateGameFSM import PlayerPirateGameFSM
+from .PlayerPirateGameFSM import PlayerPirateGameFSM
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 

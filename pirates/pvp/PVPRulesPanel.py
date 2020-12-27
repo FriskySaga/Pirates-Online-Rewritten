@@ -5,7 +5,7 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import GuiTray
 from pirates.piratesgui.BorderFrame import BorderFrame
-import PVPGlobals
+from . import PVPGlobals
 
 class PVPRulesPanel(BorderFrame):
 

@@ -2,7 +2,7 @@ import types
 import random
 import gc
 import time
-import __builtin__
+import builtins
 base.loadingScreen.beginStep('PCR', 20, 15)
 from direct.showbase.ShowBaseGlobal import *
 base.loadingScreen.tick()
@@ -22,7 +22,7 @@ from direct.showbase.PythonUtil import report
 base.loadingScreen.tick()
 from pirates.piratesbase.PiratesGlobals import *
 base.loadingScreen.tick()
-from PiratesMsgTypes import *
+from .PiratesMsgTypes import *
 base.loadingScreen.tick()
 from direct.directnotify.DirectNotifyGlobal import directNotify
 base.loadingScreen.tick()
@@ -66,8 +66,8 @@ from pirates.battle import DistributedBattleNPC
 from pirates.battle import CombatAnimations
 from pirates.band import DistributedBandMember
 from pirates.cutscene import Cutscene
-import PlayGame
-from ShardFSM import ShardFSM
+from . import PlayGame
+from .ShardFSM import ShardFSM
 from pirates.piratesbase import PiratesGlobals
 from pirates.battle import DistributedBattleNPC
 from pirates.ship import DistributedSimpleShip
@@ -205,11 +205,11 @@ class PiratesClientRepository(OTPClientRepository):
         self._interestsToTags = {}
         self._worldStack = []
         if __dev__:
-            __builtin__.go = self.getDo
-            __builtin__.gov = self.getOwnerView
+            builtins.go = self.getDo
+            builtins.gov = self.getOwnerView
             import pdb
-            __builtin__.trace = pdb.set_trace
-            __builtin__.pm = pdb.pm
+            builtins.trace = pdb.set_trace
+            builtins.pm = pdb.pm
             self.effectTypes = {'damageSmoke': ['BlackSmoke'],'damageFire': ['Fire'],'cannonDeckFire': ['CannonSmokeSimple', 'CannonBlastSmoke'],'cannonBSFire': ['MuzzleFlameBS', 'CannonSmokeSimpleBS', 'CannonBlastSmokeBS', 'GrapeshotEffectBS'],'cannonHit': ['SimpleSmokeCloud', 'ExplosionFlip'],'cannonSplash': ['CannonSplash']}
             self.effectToggles = {}
 
@@ -285,7 +285,7 @@ class PiratesClientRepository(OTPClientRepository):
         if __dev__:
             config_slot = base.config.GetInt('login-pirate-slot', -1)
             if config_slot >= 0 and len(avList) > 0:
-                config_subId = base.config.GetInt('login-pirate-subId', avList.keys()[0])
+                config_subId = base.config.GetInt('login-pirate-subId', list(avList.keys())[0])
                 slots = avList.get(config_subId, [])
                 if config_slot in range(len(slots)):
                     potAv = slots[config_slot]
@@ -417,7 +417,7 @@ class PiratesClientRepository(OTPClientRepository):
         self.ignore('avatarListFailed')
         self.ignore('avatarList')
         self.avList = {}
-        for subId, avData in avatars.items():
+        for subId, avData in list(avatars.items()):
             data = []
             self.avList[subId] = data
             for av in avData:
@@ -466,11 +466,11 @@ class PiratesClientRepository(OTPClientRepository):
 
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
     def enterWaitForDeleteAvatarResponse(self, potentialAvatar):
-        raise StandardError, 'This should be handled within AvatarChooser.py'
+        raise Exception('This should be handled within AvatarChooser.py')
 
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
     def exitWaitForDeleteAvatarResponse(self):
-        raise StandardError, 'This should be handled within AvatarChooser.py'
+        raise Exception('This should be handled within AvatarChooser.py')
 
     @report(types=['args', 'deltaStamp', 'module'], dConfigParam='teleport')
     def enterPlayingGame(self):
@@ -499,7 +499,7 @@ class PiratesClientRepository(OTPClientRepository):
         base.ambientMgr.delete()
         base.musicMgr.delete()
         messenger.send('clientLogout')
-        for doId, obj in self.doId2do.items():
+        for doId, obj in list(self.doId2do.items()):
             if not isinstance(obj, LocalPirate) and not isinstance(obj, DistributedDistrict.DistributedDistrict):
                 if hasattr(self, 'disableObject'):
                     self.disableObject(doId)
@@ -661,9 +661,9 @@ class PiratesClientRepository(OTPClientRepository):
         if newObj is not None:
             self.currCamParent = newObj.getDoId()
             self.setViewpoint(newObj, 0)
-            print 'reparenting camera to object %d' % self.currCamParent
+            print('reparenting camera to object %d' % self.currCamParent)
         else:
-            print 'problem finding a new camera parent, will try again'
+            print('problem finding a new camera parent, will try again')
         if task:
             task.delayTime = delay
         return Task.again
@@ -756,26 +756,26 @@ class PiratesClientRepository(OTPClientRepository):
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
     def _removeCurrentShardInterest(self, callback):
         parentId2handles = {}
-        for handle, state in self._interests.items():
+        for handle, state in list(self._interests.items()):
             parentId2handles.setdefault(state.parentId, set())
             parentId2handles[state.parentId].add(handle)
 
         doId2parentId = {}
-        for doId in parentId2handles.keys():
+        for doId in list(parentId2handles.keys()):
             obj = self.getDo(doId)
             if obj is not None:
                 doId2parentId[doId] = obj.parentId
 
         parentId2childIds = {}
-        for doId, parentId in doId2parentId.items():
+        for doId, parentId in list(doId2parentId.items()):
             parentId2childIds.setdefault(parentId, set())
             parentId2childIds[parentId].add(doId)
 
-        print 'parentId2handles: %s' % parentId2handles
-        print 'parentId2childIds: %s' % parentId2childIds
+        print('parentId2handles: %s' % parentId2handles)
+        print('parentId2childIds: %s' % parentId2childIds)
         self.closeShardEGroup = EventGroup('closeShardInterest')
         self.acceptOnce(self.closeShardEGroup.getDoneEvent(), callback)
-        for districtId in self.activeDistrictMap.keys():
+        for districtId in list(self.activeDistrictMap.keys()):
             self._remInterests(districtId, parentId2childIds, parentId2handles)
 
         return
@@ -806,13 +806,13 @@ class PiratesClientRepository(OTPClientRepository):
         OTPClientRepository.exitCloseShard(self)
 
     def startReaderPollTask(self):
-        print '########## startReaderPollTask Pirate'
+        print('########## startReaderPollTask Pirate')
         self.stopReaderPollTask()
         self.accept(CConnectionRepository.getOverflowEventName(), self.handleReaderOverflow)
         taskMgr.add(self.readerPollUntilEmpty, self.uniqueName('readerPollTask'), priority=self.taskPriority, taskChain='net')
 
     def stopReaderPollTask(self):
-        print '########## stopReaderPollTask Pirate'
+        print('########## stopReaderPollTask Pirate')
         self.ignore(CConnectionRepository.getOverflowEventName())
         taskMgr.remove(self.uniqueName('readerPollTask'))
 
@@ -981,17 +981,17 @@ class PiratesClientRepository(OTPClientRepository):
         self.setAllInterestsCompleteCallback(allInterestsClosed)
 
     def printInterestSets(self):
-        print '******************* Interest Sets **************'
+        print('******************* Interest Sets **************')
         format = '%6s %' + str(40) + 's %11s %11s %8s %8s %8s'
-        print format % ('Handle', 'Description', 'ParentId', 'ZoneIdList', 'State',
-                        'Context', 'Event')
-        for id, state in self._interests.items():
+        print(format % ('Handle', 'Description', 'ParentId', 'ZoneIdList', 'State',
+                        'Context', 'Event'))
+        for id, state in list(self._interests.items()):
             if len(state.events) == 0:
                 event = ''
             elif len(state.events) == 1:
                 event = state.events[0]
             else:
                 event = state.events
-            print format % (id, state.desc, state.parentId, state.zoneIdList, state.state, state.context, event)
+            print(format % (id, state.desc, state.parentId, state.zoneIdList, state.state, state.context, event))
 
-        print '************************************************'
+        print('************************************************')

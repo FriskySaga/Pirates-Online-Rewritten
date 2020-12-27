@@ -8,10 +8,10 @@ from direct.gui.DirectGui import *
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-from RepairMincroGame import RepairMincroGame
-from RepairBarnacle import RepairBarnacle
+from .RepairMincroGame import RepairMincroGame
+from .RepairBarnacle import RepairBarnacle
 from pirates.piratesbase import PiratesGlobals
-import RepairGlobals
+from . import RepairGlobals
 
 class RepairCareeningGame(RepairMincroGame):
     scrubSounds = None

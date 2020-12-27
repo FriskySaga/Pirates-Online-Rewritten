@@ -26,7 +26,7 @@ class DistributedInventoryManagerAI(DistributedObjectGlobalAI):
         del self.inventories[inventory.doId]
 
     def getInventory(self, avatarId):
-        for inventory in self.inventories.values():
+        for inventory in list(self.inventories.values()):
 
             if inventory.getOwnerId() == avatarId:
                 return inventory
@@ -60,13 +60,13 @@ class DistributedInventoryManagerAI(DistributedObjectGlobalAI):
         inventory.b_setStackLimit(InventoryType.Hp, avatar.getMaxHp())
         inventory.b_setStackLimit(InventoryType.Mojo, avatar.getMaxMojo())
 
-        for index in xrange(len(inventory.accumulators)):
+        for index in range(len(inventory.accumulators)):
             inventory.d_setAccumulator(*inventory.accumulators[index])
 
-        for index in xrange(len(inventory.stackLimits)):
+        for index in range(len(inventory.stackLimits)):
             inventory.d_setStackLimit(*inventory.stackLimits[index])
 
-        for index in xrange(len(inventory.stacks)):
+        for index in range(len(inventory.stacks)):
             inventory.d_setStack(*inventory.stacks[index])
 
         inventory.d_requestInventoryComplete()

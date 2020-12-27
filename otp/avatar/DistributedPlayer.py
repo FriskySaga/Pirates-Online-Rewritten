@@ -108,10 +108,10 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar, PlayerBase.PlayerBa
         self.displayWhisper(aboutId, chatString, whisperType)
 
     def displayWhisper(self, fromId, chatString, whisperType):
-        print 'Whisper type %s from %s: %s' % (whisperType, fromId, chatString)
+        print('Whisper type %s from %s: %s' % (whisperType, fromId, chatString))
 
     def displayWhisperPlayer(self, playerId, chatString, whisperType):
-        print 'WhisperPlayer type %s from %s: %s' % (whisperType, playerId, chatString)
+        print('WhisperPlayer type %s from %s: %s' % (whisperType, playerId, chatString))
 
     def whisperSCTo(self, msgIndex, sendToId, toPlayer):
         if toPlayer:
@@ -168,7 +168,7 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar, PlayerBase.PlayerBa
         return
 
     def whisperSCEmoteTo(self, emoteId, sendToId, toPlayer):
-        print 'whisperSCEmoteTo %s %s %s' % (emoteId, sendToId, toPlayer)
+        print('whisperSCEmoteTo %s %s %s' % (emoteId, sendToId, toPlayer))
         if toPlayer:
             base.cr.playerFriendsManager.sendSCEmoteWhisper(sendToId, emoteId)
             return
@@ -223,7 +223,7 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar, PlayerBase.PlayerBa
         base.talkAssistant.receiveWhisperTalk(fromAV, avatarName, fromAC, None, self.doId, self.getName(), newText, scrubbed)
 
     def displayTalkWhisper(self, fromId, avatarName, chatString, mods):
-        print 'TalkWhisper from %s: %s' % (fromId, chatString)
+        print('TalkWhisper from %s: %s' % (fromId, chatString))
 
     def scrubTalk(self, chat, mods):
         return chat

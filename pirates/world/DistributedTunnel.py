@@ -63,12 +63,12 @@ class DistributedTunnel(DistributedNode, StagedObject):
         self.cr.relatedObjectMgr.abortRequest(self.pendingArea)
         self.pendingArea = None
         self.setLoadedArea(None)
-        for node in self.visNodes.values():
+        for node in list(self.visNodes.values()):
             node.detachNode()
 
         self.visNodes = {}
         if self.fakeZoneId != None:
-            for node in self.GridLOD.values():
+            for node in list(self.GridLOD.values()):
                 node.cleanup()
 
             del self.GridLOD
@@ -246,7 +246,7 @@ class DistributedTunnel(DistributedNode, StagedObject):
         return (Point3(0), Vec3(0))
 
     def getAreaNodeNameFromAreaUid(self, areaUid):
-        for link in self._links.itervalues():
+        for link in self._links.values():
             if areaUid == link[self.L_AREA_UID]:
                 return link[self.L_AREA_NODE]
 

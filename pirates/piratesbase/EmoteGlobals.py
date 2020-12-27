@@ -128,61 +128,61 @@ EMOTE_NO = 65001
 emotes = {EMOTE_RECEIVE_DOLL: {'anim': 'doll_receive','prop': 'models/handheld/voodoo_doll_high'},EMOTE_RECEIVE_STAFF: {'anim': 'staff_receive','prop': 'models/handheld/voodoo_staff_high'},EMOTE_RECEIVE_DAGGER: {'anim': 'dagger_receive','prop': 'models/handheld/dagger_high'},EMOTE_RECEIVE_GRENADE: {'anim': 'bomb_receive','prop': 'models/ammunition/grenade'},EMOTE_DANCE_JIG: {'anim': 'emote_dance_jig_loop','loop': 1,'group': OL.Emotes_General},EMOTE_FLEX: {'anim': 'emote_flex','group': OL.Emotes_General},EMOTE_PRIMP: {'anim': 'primp_idle','loop': 1,'group': OL.Emotes_General,'gender': 'f'},EMOTE_ANGRY: {'anim': 'emote_anger','group': OL.Emotes_Expressions},EMOTE_CELEBRATE: {'anim': 'emote_celebrate','group': OL.Emotes_General},EMOTE_CLAP: {'anim': 'emote_clap','group': OL.Emotes_General,'sfx': loadSfxString(SoundGlobals.SFX_AVATAR_CLAP)},EMOTE_FEAR: {'anim': 'emote_fear','group': OL.Emotes_Expressions},EMOTE_LAUGH: {'anim': 'emote_laugh','group': OL.Emotes_Expressions},EMOTE_NO: {'anim': 'emote_no','group': OL.Emotes_General},EMOTE_SAD: {'anim': 'emote_sad','group': OL.Emotes_Expressions},EMOTE_SMILE: {'anim': 'emote_smile','group': OL.Emotes_Expressions},EMOTE_WAVE: {'anim': 'emote_wave','group': OL.Emotes_General},EMOTE_WINK: {'anim': 'emote_wink','group': OL.Emotes_General},EMOTE_YAWN: {'anim': 'emote_yawn','group': OL.Emotes_Expressions},EMOTE_YES: {'anim': 'emote_yes','group': OL.Emotes_General},EMOTE_SLEEP: {'anim': 'sleep_idle','loop': 1,'group': OL.Emotes_General},EMOTE_VALENTINES: {'prereqs': [IsHoliday(HolidayGlobals.VALENTINESDAY)],'anim': 'emote_wink','group': OL.Emotes_General},EMOTE_NOISEMAKER: {'prereqs': [IsHoliday(HolidayGlobals.WINTERFESTIVAL)],'anim': 'emote_newyears','prop': 'models/handheld/pir_m_hnd_hol_noisemaker08','group': OL.Emotes_General,'sfx': loadSfxString(SoundGlobals.SFX_AVATAR_NOISEMAKER)},EMOTE_HALLOWEEN: {'prereqs': [IsHoliday(HolidayGlobals.ZOMBIEEMOTE)],'anim': 'emote_thriller','group': OL.Emotes_General},EMOTE_CHEER: {'anim': 'emote_celebrate'},EMOTE_TIRED: {'anim': 'sleep_idle_loop','loop': 1},EMOTE_NOD: {'anim': 'emote_yes'},EMOTE_GREET: {'anim': 'emote_wave'},EMOTE_LOL: {'anim': 'emote_laugh'},EMOTE_SCARED: {'anim': 'emote_fear'},EMOTE_GRIN: {'anim': 'emote_smile'},EMOTE_HAPPY: {'anim': 'emote_smile'},EMOTE_DANCE: {'anim': 'emote_dance_jig','loop': 1},EMOTE_BORED: {'anim': 'idle_B_shiftWeight','loop': 1},EMOTE_CACKLE: {'anim': 'emote_laugh'},EMOTE_HAIL: {'anim': 'emote_wave'},EMOTE_SORRY: {'anim': 'sleep_idle','loop': 1},EMOTE_HISS: {'anim': 'emote_anger'},EMOTE_IMPATIENT: {'anim': 'idle_B_shiftWeight','loop': 1},EMOTE_CONFUSED: {'anim': 'idle_head_scratch'},EMOTE_WAIT: {'anim': 'emote_no'},EMOTE_GLARE: {'anim': 'idle_handhip','loop': 1},EMOTE_COIN_HEADS: {'anim': None},EMOTE_COIN_TAILS: {'anim': None},EMOTE_DUHHH: {'anim': 'emote_duhhh'},EMOTE_BLOWKISS: {'anim': 'emote_blow_kiss'},EMOTE_FLIRT: {'anim': 'emote_flirt'},EMOTE_SASSY: {'anim': 'emote_sassy'},EMOTE_TALKTOHAND: {'anim': 'emote_talk_to_the_hand'},EMOTE_INSANE: {'anim': 'emote_crazy'},EMOTE_CUTTHROAT: {'anim': 'emote_cut_throat'},EMOTE_EMBARRASSED: {'anim': 'emote_embarrassed'},EMOTE_FACESMACK: {'anim': 'emote_face_smack'},EMOTE_HANDITOVER: {'anim': 'emote_hand_it_over'},EMOTE_HEADSCRATCH: {'anim': 'emote_head_scratch'},EMOTE_NERVOUS: {'anim': 'emote_nervous'},EMOTE_PETRIFIED: {'anim': 'emote_scared'},EMOTE_SHOWMEMONEY: {'anim': 'emote_show_me_the_money'},EMOTE_SHRUG: {'anim': 'emote_shrug'},EMOTE_SINCERETHANKS: {'anim': 'emote_sincere_thanks'},EMOTE_SNARL: {'anim': 'emote_snarl'},EMOTE_GUN_DRAW: {'anim': 'gun_draw','prop': 'models/handheld/pir_m_hnd_gun_pistol_a'},EMOTE_GUN_AIM: {'anim': 'gun_aim_idle','loop': 1,'prop': 'models/handheld/pir_m_hnd_gun_pistol_a'},EMOTE_GUN_PUTAWAY: {'anim': 'gun_putaway','prop': 'models/handheld/pir_m_hnd_gun_pistol_a'},EMOTE_FART: {'anim': 'fart','sfx': loadSfxString(SoundGlobals.SFX_MINIGAME_POTION_FX_FART_1)},EMOTE_DRINKPOTION: {'anim': 'drink_potion','prop': 'models/handheld/bottle_high','sfx': loadSfxString(SoundGlobals.SFX_CONSUMABLE_DRINK)},EMOTE_NED_CRAZY: {'anim': 'crazy_ned_day_interact'},EMOTE_BLACKHAND_SWORD_A: {'anim': 'hand_curse_get_sword','prop': 'models/handheld/pir_m_hnd_swd_davyJones_g','waitProp': 0.5,'durProp': 17.0,'vfx': BlackhandCurseSword},EMOTE_BLACKHAND_SWORD_B: {'anim': 'hand_curse_get_sword','prop': 'models/handheld/pir_m_hnd_swd_davyJones_a','waitProp': 0.5,'durProp': 17.0,'vfx': BlackhandCurseSword},EMOTE_BLACKHAND_SWORD_C: {'anim': 'hand_curse_get_sword','prop': 'models/handheld/pir_m_hnd_swd_davyJones_e','waitProp': 0.5,'durProp': 17.0,'vfx': BlackhandCurseSword},EMOTE_BLACKHAND: {'prereqs': [DidQuest('rc.le.10lootTreasure')],'anim': 'hand_curse_check','group': OL.Emotes_General}}
 
 def getEmotePrereqs(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('prereqs', [])
     return []
 
 
 def getEmoteAnim(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('anim')
     return None
 
 
 def getEmoteLoop(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('loop', 0)
     return 0
 
 
 def getEmoteProp(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('prop', None)
     return None
 
 
 def getEmoteGroup(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('group', None)
     return None
 
 
 def getEmoteGender(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('gender', None)
     return None
 
 
 def getEmoteSfx(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('sfx', None)
     return None
 
 
 def getWaitProp(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('waitProp', 0)
     return 0
 
 
 def getDurProp(emoteId):
-    if emotes.has_key(emoteId):
+    if emoteId in emotes:
         return emotes[emoteId].get('durProp', 0)
     return 0
 
 
 def getEmoteVfx(emoteId):
-    if emotes.has_key(emoteId) and emotes[emoteId].has_key('vfx'):
+    if emoteId in emotes and 'vfx' in emotes[emoteId]:
         effect = emotes[emoteId].get('vfx').getEffect(1)
         return effect
     return None
@@ -190,7 +190,7 @@ def getEmoteVfx(emoteId):
 
 def getAllEmoteAnimations():
     animList = []
-    for emoteId in emotes.keys():
+    for emoteId in list(emotes.keys()):
         if getEmoteAnim(emoteId) not in animList:
             emoteAnim = getEmoteAnim(emoteId)
             if emoteAnim:

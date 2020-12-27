@@ -80,7 +80,7 @@ Sawing.newBoardAnimTime = 0.25
 Sawing.splitBoardAnimTime = 0.5
 Sawing.activeBoardPosition = (0.0, 0.0, 0.1)
 Sawing.boardYDist = 1.3
-from RepairGridPiece import GOAL_HORIZ_1, GOAL_HORIZ_2, GOAL_VERT_1
+from .RepairGridPiece import GOAL_HORIZ_1, GOAL_HORIZ_2, GOAL_VERT_1
 Bracing = VariableContainer()
 Bracing.difficultyLevels = ((8, (GOAL_HORIZ_1,)), (7, (GOAL_HORIZ_1,)), (6, (GOAL_HORIZ_1,)), (7, (GOAL_HORIZ_1, GOAL_VERT_1)), (6, (GOAL_HORIZ_1, GOAL_VERT_1)), (5, (GOAL_HORIZ_1, GOAL_VERT_1)), (4, (GOAL_HORIZ_1, GOAL_VERT_1)), (5, (GOAL_HORIZ_1, GOAL_HORIZ_2)), (4, (GOAL_HORIZ_1, GOAL_HORIZ_2)), (3, (GOAL_HORIZ_1, GOAL_HORIZ_2)))
 Bracing.moveTime = 0.08

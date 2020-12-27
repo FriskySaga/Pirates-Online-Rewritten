@@ -71,7 +71,7 @@ class SeaPatch(Water):
 
         self.seamodel.setScale(2, 1, 1)
         self.seamodel.flattenMedium()
-        mask = 4294967295L
+        mask = 4294967295
         if self.use_water_bin:
             self.seamodel.setBin('water', 0)
             stencil = StencilAttrib.makeWithClear(1, StencilAttrib.SCFAlways, StencilAttrib.SOKeep, StencilAttrib.SOKeep, StencilAttrib.SOReplace, 1, mask, mask, 1, 0)
@@ -387,7 +387,7 @@ class SeaPatch(Water):
         return
 
     def removeFloatable(self, name):
-        if self.floats.has_key(name):
+        if name in self.floats:
             del self.floats[name]
             del self.floatmasses[name]
 
@@ -405,7 +405,7 @@ class SeaPatch(Water):
         mass = -6.0
         area = 1
         k = self.damper
-        for name, floater in self.floats.items():
+        for name, floater in list(self.floats.items()):
             transNode = floater[0]
             rotNode = floater[1]
             height, normal = self.calcHeightAndNormalForMass(node=transNode, mass=mass, area=area)
@@ -510,11 +510,11 @@ class SeaPatch(Water):
         searchPath.appendDirectory(Filename('.'))
         found = vfs.resolveFilename(filename, searchPath)
         if not found:
-            print 'seapatch file not found: %s' % filename
+            print('seapatch file not found: %s' % filename)
         else:
             data = vfs.readFile(filename, 1)
             data = data.replace('\r', '')
-            exec data
+            exec(data)
         return patch
 
     def loadSeaPatchFile(self, filename):
@@ -731,7 +731,7 @@ class SeaPatch(Water):
             motion_trail.end_motion_trail()
             self.motion_trail = motion_trail
             if not False:
-                print 'ADD MOTION TRAIL'
+                print('ADD MOTION TRAIL')
                 axis = Vec3(0.0, 0.0, 1.0)
                 time = 0.0
                 angle = (1.0 - time) * 90.0

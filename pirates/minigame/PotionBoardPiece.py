@@ -9,10 +9,10 @@ from pandac.PandaModules import CardMaker
 from direct.gui.OnscreenText import OnscreenText
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import PiratesGuiGlobals
-from PotionRecipeData import PotionColorSets
+from .PotionRecipeData import PotionColorSets
 from pirates.battle.WeaponConstants import *
 import random
-import PotionGlobals
+from . import PotionGlobals
 LowLevelRecipes = [
  C_PISTOL_DAMAGE_LVL1, C_CUTLASS_DAMAGE_LVL1, C_DOLL_DAMAGE_LVL1, C_HASTEN_LVL1, C_CANNON_DAMAGE_LVL1]
 

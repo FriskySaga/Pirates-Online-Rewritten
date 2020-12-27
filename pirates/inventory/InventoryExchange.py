@@ -23,65 +23,65 @@ def findDyeColorFromDNAColor(gender, clothingType, colorIndex):
         if dyeColor == colorValue:
             return dyeColorIndex
 
-    print 'Not found %s' % colorIndex
+    print('Not found %s' % colorIndex)
     import pdb
     pdb.set_trace()
     return -1
 
 
 def printDyeTable():
-    print 'DYE_TRANSLATION_DICT = {'
+    print('DYE_TRANSLATION_DICT = {')
     for typeKey in DYE_TRANSLATE_DICT:
-        print '\n    ClothingGlobals.%s : {' % ClothingGlobals.CLOTHING_STRING[typeKey]
-        print "        'm' : {"
+        print('\n    ClothingGlobals.%s : {' % ClothingGlobals.CLOTHING_STRING[typeKey])
+        print("        'm' : {")
         table = DYE_TRANSLATE_DICT[typeKey]
         for entryIndex in range(len(table[0])):
             newIndex = findDyeColorFromDNAColor('m', typeKey, entryIndex)
-            print '            %s : %s,' % (entryIndex, newIndex)
+            print('            %s : %s,' % (entryIndex, newIndex))
 
-        print '            },'
-        print "        'f' : {"
+        print('            },')
+        print("        'f' : {")
         table = DYE_TRANSLATE_DICT[typeKey]
         for entryIndex in range(len(table[1])):
             newIndex = findDyeColorFromDNAColor('f', typeKey, entryIndex)
-            print '            %s : %s,' % (entryIndex, newIndex)
+            print('            %s : %s,' % (entryIndex, newIndex))
 
-        print '            },'
-        print '    },'
+        print('            },')
+        print('    },')
 
-    print '}'
+    print('}')
 
 
 DYE_TRANSLATION_DICT = {ClothingGlobals.HAT: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 7,8: 8,9: 9,10: 10,11: 11,12: 12,13: 13,14: 14,15: 15,16: 16,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.SHIRT: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 7,8: 8,9: 9,10: 10,11: 11,12: 12,13: 13,14: 14,15: 15,16: 16,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.VEST: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 7,8: 8,9: 9,10: 10,11: 11,12: 12,13: 13,14: 14,15: 15,16: 16,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.COAT: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 7,8: 8,9: 9,10: 10,11: 11,12: 12,13: 13,14: 14,15: 15,16: 16,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.PANT: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 8,8: 42,9: 35,10: 10,11: 11,12: 12,13: 13,14: 15,15: 43,16: 44,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.BELT: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 8,8: 42,9: 35,10: 10,11: 11,12: 12,13: 13,14: 15,15: 43,16: 44,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}},ClothingGlobals.SHOE: {'m': {0: 0,1: 1,2: 2,3: 3,4: 4,5: 5,6: 6,7: 8,8: 42,9: 35,10: 10,11: 11,12: 12,13: 13,14: 15,15: 43,16: 44,17: 17,18: 18,19: 19,20: 20,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30},'f': {0: 0,1: 1,2: 2,3: 31,4: 32,5: 5,6: 33,7: 7,8: 34,9: 35,10: 36,11: 37,12: 12,13: 38,14: 14,15: 39,16: 18,17: 17,18: 40,19: 19,20: 41,21: 21,22: 22,23: 23,24: 24,25: 25,26: 26,27: 27,28: 28,29: 29,30: 30}}}
 
 def printMaleJewelryDNAHashToOldIdTable():
-    print '// InventoryExchange.printMaleJewelryDNAHashToOldIdTable()'
-    print '// Hash: locationId*10000 + modelId * 100 + pColor*10 + sColor'
-    print 'UINT32 MALE_JEWELRY_HASH_TABLE[] = {'
+    print('// InventoryExchange.printMaleJewelryDNAHashToOldIdTable()')
+    print('// Hash: locationId*10000 + modelId * 100 + pColor*10 + sColor')
+    print('UINT32 MALE_JEWELRY_HASH_TABLE[] = {')
     count = 0
-    for uniqueId, (modelId, location, desc, cost, pColor, sColor, restriction) in JewelryGlobals.jewelry_id.iteritems():
+    for uniqueId, (modelId, location, desc, cost, pColor, sColor, restriction) in JewelryGlobals.jewelry_id.items():
         if uniqueId < 80000:
             count += 1
             hash = getJewelryDNAHash(location, modelId, pColor, sColor)
-            print '    %d, %d,' % (hash, uniqueId)
+            print('    %d, %d,' % (hash, uniqueId))
 
-    print '};'
-    print '//', count
+    print('};')
+    print('//', count)
 
 
 def printFemaleJewelryDNAHashToOldIdTable():
-    print '// InventoryExchange.printFemaleJewelryDNAHashToOldIdTable()'
-    print '// Hash: locationId*10000 + modelId * 100 + pColor*10 + sColor'
-    print 'UINT32 FEMALE_JEWELRY_HASH_TABLE[] = {'
+    print('// InventoryExchange.printFemaleJewelryDNAHashToOldIdTable()')
+    print('// Hash: locationId*10000 + modelId * 100 + pColor*10 + sColor')
+    print('UINT32 FEMALE_JEWELRY_HASH_TABLE[] = {')
     count = 0
-    for uniqueId, (modelId, location, desc, cost, pColor, sColor, restriction) in JewelryGlobals.jewelry_id.iteritems():
+    for uniqueId, (modelId, location, desc, cost, pColor, sColor, restriction) in JewelryGlobals.jewelry_id.items():
         if uniqueId >= 80000:
             count += 1
             hash = getJewelryDNAHash(location, modelId, pColor, sColor)
-            print '    %d, %d,' % (hash, uniqueId)
+            print('    %d, %d,' % (hash, uniqueId))
 
-    print '};'
-    print '//', count
+    print('};')
+    print('//', count)
 
 
 def getJewelryDNAHash(location, modelId, pColor, sColor):
@@ -89,51 +89,51 @@ def getJewelryDNAHash(location, modelId, pColor, sColor):
 
 
 def printJewelryTranslateTable():
-    print '// InventoryExchange.printJewelryTranslateTable()'
-    print 'UINT32 TRANSLATE_JEWELRY[] = {'
-    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeJewelry].iteritems():
-        print '    %d, %d,' % (old, new)
+    print('// InventoryExchange.printJewelryTranslateTable()')
+    print('UINT32 TRANSLATE_JEWELRY[] = {')
+    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeJewelry].items():
+        print('    %d, %d,' % (old, new))
 
-    print '};'
+    print('};')
 
 
 def printJewelryEquipLocations():
-    print '// InventoryExchange.printJewelryEquipLocations()'
-    print 'UINT8 JEWELRY_BODY_LOCATION_TO_EQUIP_LOCATION[] = {'
-    for e, l in InventoryGlobals.Locations.JEWELRY_RANGE_TO_LOCATION.iteritems():
-        print '    %d, %d,' % (l, e[0])
+    print('// InventoryExchange.printJewelryEquipLocations()')
+    print('UINT8 JEWELRY_BODY_LOCATION_TO_EQUIP_LOCATION[] = {')
+    for e, l in InventoryGlobals.Locations.JEWELRY_RANGE_TO_LOCATION.items():
+        print('    %d, %d,' % (l, e[0]))
 
-    print '};'
+    print('};')
 
 
 def printStackTranslationTable():
-    print '// InventoryExchange.printStackTranslationTable()'
-    print 'UINT16 TRANSLATE_STACKS[] = {'
-    print '\n    // Weapons'
-    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeWeapon].iteritems():
-        print '    %d, %d,' % (old, new)
+    print('// InventoryExchange.printStackTranslationTable()')
+    print('UINT16 TRANSLATE_STACKS[] = {')
+    print('\n    // Weapons')
+    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeWeapon].items():
+        print('    %d, %d,' % (old, new))
 
-    print '\n    // Consumables'
-    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeConsumable].iteritems():
-        print '    %d, %d,' % (old, new)
+    print('\n    // Consumables')
+    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeConsumable].items():
+        print('    %d, %d,' % (old, new))
 
-    print '};'
+    print('};')
 
 
 def printTattooDNAHashtoOldIdTable():
-    print '// InventoryExchange.printTattooDNAHashtoOldIdTable()'
-    print '// Hash: textureId*10 + zoneId'
-    print 'UINT16 TATTOO_HASH_TABLE[] = {'
+    print('// InventoryExchange.printTattooDNAHashtoOldIdTable()')
+    print('// Hash: textureId*10 + zoneId')
+    print('UINT16 TATTOO_HASH_TABLE[] = {')
     count = 0
     hashes = set()
-    for uniqueId, (zoneId, textureId, type, desc, cost, maleOffsets, femaleOffsets, restriction) in TattooGlobals.tattoos.iteritems():
+    for uniqueId, (zoneId, textureId, type, desc, cost, maleOffsets, femaleOffsets, restriction) in TattooGlobals.tattoos.items():
         count += 1
         hash = getTattooDNAHash(zoneId, textureId)
         hashes.add(hash)
-        print '    %d, %d,' % (hash, uniqueId)
+        print('    %d, %d,' % (hash, uniqueId))
 
-    print '};'
-    print '//', count, len(hashes)
+    print('};')
+    print('//', count, len(hashes))
 
 
 def getTattooDNAHash(zoneId, textureId):
@@ -141,33 +141,33 @@ def getTattooDNAHash(zoneId, textureId):
 
 
 def printMaleTattooTranslateTable():
-    print '// InventoryExchange.printMaleTattooTranslateTable()'
-    print 'UINT32 TRANSLATE_MALE_TATTOOS[] = {'
-    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].iteritems():
+    print('// InventoryExchange.printMaleTattooTranslateTable()')
+    print('UINT32 TRANSLATE_MALE_TATTOOS[] = {')
+    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].items():
         if isinstance(new, int):
-            print '    %d, %d,' % (old, new)
+            print('    %d, %d,' % (old, new))
         else:
-            print '    %d, %d,' % (old, new['m'])
+            print('    %d, %d,' % (old, new['m']))
 
-    print '};'
+    print('};')
 
 
 def printFemaleTattooTranslateTable():
-    print '// InventoryExchange.printFemaleTattooTranslateTable()'
-    print 'UINT32 TRANSLATE_FEMALE_TATTOOS[] = {'
-    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].iteritems():
+    print('// InventoryExchange.printFemaleTattooTranslateTable()')
+    print('UINT32 TRANSLATE_FEMALE_TATTOOS[] = {')
+    for old, new in ITEM_EXCHANGE_DICT[InventoryType.ItemTypeTattoo].items():
         if isinstance(new, int):
-            print '    %d, %d,' % (old, new)
+            print('    %d, %d,' % (old, new))
         else:
-            print '    %d, %d,' % (old, new['f'])
+            print('    %d, %d,' % (old, new['f']))
 
-    print '};'
+    print('};')
 
 
 def printTattooEquipLocations():
-    print '// InventoryExchange.printTattooEquipLocations()'
-    print 'UINT16 TATTOO_ZONE_TO_EQUIP_LOCATION[] = {'
-    for equip, zone in InventoryGlobals.Locations.TATTOO_RANGE_TO_LOCATION.iteritems():
-        print '    %d, %d,' % (zone, equip[0])
+    print('// InventoryExchange.printTattooEquipLocations()')
+    print('UINT16 TATTOO_ZONE_TO_EQUIP_LOCATION[] = {')
+    for equip, zone in InventoryGlobals.Locations.TATTOO_RANGE_TO_LOCATION.items():
+        print('    %d, %d,' % (zone, equip[0]))
 
-    print '};'
+    print('};')

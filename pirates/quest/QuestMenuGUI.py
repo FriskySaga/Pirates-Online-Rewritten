@@ -8,8 +8,8 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.quest import QuestConstants
 from pirates.quest import QuestLadderDB
 from pirates.quest import QuestOffer
-import QuestDetailGUI
-import QuestDB
+from . import QuestDetailGUI
+from . import QuestDB
 
 class QuestMenuGUI(DirectFrame):
 
@@ -43,7 +43,7 @@ class QuestMenuGUI(DirectFrame):
         middlePanelOver = gui.find('**/avatar_c_A_middle_over')
         bottomPanel = gui.find('**/avatar_c_A_bottom')
         bottomPanelOver = gui.find('**/avatar_c_A_bottom_over')
-        for i, offer in zip(range(len(offers)), offers):
+        for i, offer in zip(list(range(len(offers))), offers):
             if i == 0:
                 image = (
                  topPanel, topPanel, topPanelOver, topPanel)
@@ -59,9 +59,9 @@ class QuestMenuGUI(DirectFrame):
                     z -= 0.105
                 questLadder = QuestLadderDB.getLadder(offer.questId)
                 questLadderName = questLadder.getName()
-                if questLadderName and PLocalizer.QuestStrings.has_key(questLadderName) and 'title' in PLocalizer.QuestStrings[questLadderName].keys():
+                if questLadderName and questLadderName in PLocalizer.QuestStrings and 'title' in list(PLocalizer.QuestStrings[questLadderName].keys()):
                     questTitle = PLocalizer.QuestStrings[questLadderName]['title']
-                elif PLocalizer.QuestStrings.has_key(offer.questId) and 'title' in PLocalizer.QuestStrings[offer.questId].keys():
+                elif offer.questId in PLocalizer.QuestStrings and 'title' in list(PLocalizer.QuestStrings[offer.questId].keys()):
                     questTitle = PLocalizer.QuestStrings[offer.questId]['title']
                 else:
                     questTitle = offer.getTitle()

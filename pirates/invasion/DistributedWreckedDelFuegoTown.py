@@ -1,5 +1,5 @@
 from pandac.PandaModules import *
-import DistributedPostInvasionObject
+from . import DistributedPostInvasionObject
 from pirates.effects.Fire import Fire
 from pirates.effects.MansionSmoke import MansionSmoke
 OBJ_EFFECT_PARAMS = {0: ('1233963904.0akelts', Point3(8, -6, 2.5), 1.0, Point3(8, -6, 7.5), 0.6),1: ('1233964160.0akelts0', Point3(10, -7, 5), 0.75, Point3(10, -10, 6), 0.35),2: ('1234209408.0akelts', Point3(4, -8, 1), 1.1, Point3(4, -8, 4), 0.4),3: ('1233696000.0akelts0', Point3(4, 2, 13), 0.8, Point3(4, 2, 14), 0.4)}
@@ -49,7 +49,7 @@ class DistributedWreckedDelFuegoTown(DistributedPostInvasionObject.DistributedPo
             parent = self.getParentWithId(OBJ_EFFECT_PARAMS[id][0])
             uid = parent.getNetTag('uid')
             visZone = parent.getNetTag('visZone')
-            if not self.fireEffects.has_key(id):
+            if id not in self.fireEffects:
                 self.fireEffects[id] = Fire.getEffect(1)
             if self.fireEffects[id]:
                 fireEffect = self.fireEffects[id]
@@ -60,7 +60,7 @@ class DistributedWreckedDelFuegoTown(DistributedPostInvasionObject.DistributedPo
                 fireEffect.setTag('visZone', visZone)
                 builder.registerEffect(fireEffect)
                 effectList.append(fireEffect)
-            if not self.smokeEffects.has_key(id):
+            if id not in self.smokeEffects:
                 self.smokeEffects[id] = MansionSmoke.getEffect(1)
             if self.smokeEffects[id]:
                 smokeEffect = self.smokeEffects[id]

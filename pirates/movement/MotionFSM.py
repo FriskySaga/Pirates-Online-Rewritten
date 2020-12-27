@@ -93,7 +93,7 @@ class MotionAnimFSM(FSM):
                 if scale:
                     newScale = moveSpeed * scale
                 else:
-                    if type(style) is not types.StringType:
+                    if type(style) is not bytes:
                         style = style.getBodyShape()
                     animFileName = self.av.getAnimFilename(self.av.getCurrentAnim())
                     animSpeedScale = PiratesGlobals.GetAnimScale(animFileName)

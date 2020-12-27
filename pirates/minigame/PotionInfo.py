@@ -3,8 +3,8 @@ from pandac.PandaModules import *
 from pirates.piratesgui.GuiButton import GuiButton
 from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import PiratesGuiGlobals
-from PotionBoardPiece import PotionBoardPiece
-import PotionGlobals
+from .PotionBoardPiece import PotionBoardPiece
+from . import PotionGlobals
 
 class PotionInfo(DirectFrame):
 

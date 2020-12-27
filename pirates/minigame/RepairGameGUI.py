@@ -10,8 +10,8 @@ from pirates.piratesbase import PLocalizer
 from pirates.piratesgui import GUIFactory
 from pirates.minigame.DistributedRepairGameBase import AT_SEA, ON_LAND
 from pirates.piratesbase import PiratesGlobals
-from RepairGamePickerGUI import RepairGamePickerGUI
-import RepairGlobals
+from .RepairGamePickerGUI import RepairGamePickerGUI
+from . import RepairGlobals
 
 class RepairGameGUI(DirectFrame):
     completeSound = None

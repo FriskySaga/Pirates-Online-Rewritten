@@ -4,7 +4,7 @@ from direct.interval.IntervalGlobal import *
 from direct.showbase import DirectObject
 from direct.task import Task
 from pirates.piratesbase import PiratesGlobals
-import InteractiveBase
+from . import InteractiveBase
 
 class InteractionManager(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('InteractionManager')

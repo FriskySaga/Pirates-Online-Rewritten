@@ -3,7 +3,7 @@ from direct.interval.IntervalGlobal import *
 from direct.particles import ParticleEffect
 from direct.particles import Particles
 from direct.particles import ForceGroup
-from EffectController import EffectController
+from .EffectController import EffectController
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
 

@@ -5,13 +5,13 @@ from direct.interval.IntervalGlobal import Sequence, Parallel, Wait, Func
 from direct.interval.LerpInterval import LerpFunc
 from direct.task import Task
 from panda3d.core import TextNode
-import FishingGlobals
-from FishFSM import FishFSM
-from BlendActor import BlendActor
+from . import FishingGlobals
+from .FishFSM import FishFSM
+from .BlendActor import BlendActor
 from pirates.effects.FishIdleBubbleEffect import FishIdleBubbleEffect
 from pirates.effects.FishBitingBubbleEffect import FishBitingBubbleEffect
 from pirates.effects.FishFightingHookedBubbleEffect import FishFightingHookedBubbleEffect
-import MinigameUtils
+from . import MinigameUtils
 from pirates.uberdog.UberDogGlobals import InventoryType
 
 class Fish(NodePath):

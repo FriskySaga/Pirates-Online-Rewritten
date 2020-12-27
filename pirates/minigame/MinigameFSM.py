@@ -11,7 +11,7 @@ class MinigameFSM(FSM.FSM):
         del self.gameFSM
 
     def enterInit(self):
-        print 'minigameFSM init'
+        print('minigameFSM init')
 
     def exitInit(self):
         pass

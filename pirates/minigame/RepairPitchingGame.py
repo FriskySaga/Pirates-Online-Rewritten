@@ -5,12 +5,12 @@ from pandac.PandaModules import Point3
 from pandac.PandaModules import AudioSound
 from direct.task import Task
 from direct.interval.IntervalGlobal import *
-from RepairMincroGame import RepairMincroGame
-from RepairLeak import RepairLeak
+from .RepairMincroGame import RepairMincroGame
+from .RepairLeak import RepairLeak
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-import RepairGlobals
+from . import RepairGlobals
 
 class RepairPitchingGame(RepairMincroGame):
 

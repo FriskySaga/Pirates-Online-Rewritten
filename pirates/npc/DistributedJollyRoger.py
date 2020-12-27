@@ -10,7 +10,7 @@ from pirates.audio.SoundGlobals import loadSfx
 from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import PiratesGlobals
 from pirates.effects.JRTeleportEffect import JRTeleportEffect
-import NPCSkeletonGameFSM
+from . import NPCSkeletonGameFSM
 import random
 
 class DistributedJollyRoger(DistributedBattleNPC.DistributedBattleNPC, JollyRoger.JollyRoger, Boss):

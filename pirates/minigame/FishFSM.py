@@ -8,8 +8,8 @@ from direct.interval.LerpInterval import LerpFunc, LerpPosInterval
 from direct.task import Task
 from pandac.PandaModules import MouseButton
 from pirates.uberdog.UberDogGlobals import InventoryType
-import FishingGlobals
-import MinigameUtils
+from . import FishingGlobals
+from . import MinigameUtils
 
 class FishFSM(FSM.FSM):
 

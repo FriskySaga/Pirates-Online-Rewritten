@@ -9,7 +9,7 @@ class NPCManager(DirectObject.DirectObject):
         self.npcData = {}
 
     def addNpcData(self, data):
-        for currKey in data.keys():
+        for currKey in list(data.keys()):
             self.npcData.setdefault(currKey, {}).update(data[currKey])
 
     def getNpcData(self, uid):

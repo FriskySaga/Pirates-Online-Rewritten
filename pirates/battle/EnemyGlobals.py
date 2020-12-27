@@ -39,7 +39,7 @@ def listThreats():
     for level in range(1, 51):
         threatThreshold = float(level - ENEMY_GANGUP_LEVEL_OFFSET)
         threatCapcity = max(1, level * ENEMY_THREAT_AMOUNT + THREAT_BASE_CAPCITY)
-        print 'Level: %s Threat Threshold %s Capcity %s' % (level, threatThreshold, threatCapcity)
+        print('Level: %s Threat Threshold %s Capcity %s' % (level, threatThreshold, threatCapcity))
         lowerBound = 1
         upperBound = 55
         for monsterLevel in range(lowerBound, upperBound):
@@ -55,7 +55,7 @@ def listThreats():
                         attackers += 1
 
             if attackers < MAX_ATTACKERS and attackers > 0:
-                print '    Max Level %s mobs against player: %s' % (monsterLevel, attackers)
+                print('    Max Level %s mobs against player: %s' % (monsterLevel, attackers))
 
 
 BASE_GANGUP_CHANCE = 25
@@ -333,7 +333,7 @@ def getRandomEncounter(level):
     else:
         encounterType = None
         while not encounterType:
-            enemyType = random.choice(__baseAvatarStats.keys())
+            enemyType = random.choice(list(__baseAvatarStats.keys()))
             if __baseAvatarStats[enemyType][ENABLED_INDEX]:
                 encounterType = enemyType
 

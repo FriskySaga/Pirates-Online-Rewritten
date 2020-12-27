@@ -73,7 +73,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
         if self.geom:
             self.geom.removeNode()
         self.unloadConnectors()
-        for request in self.pendingSetupConnector.itervalues():
+        for request in self.pendingSetupConnector.values():
             self.cr.relatedObjectMgr.abortRequest(request)
 
         self.pendingSetupConnector = {}
@@ -214,7 +214,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
         for link in self.links:
             if link:
                 connectorId = link[0]
-                if connectorId not in self.connectorInterests or not self.cr.doId2do.has_key(connectorId):
+                if connectorId not in self.connectorInterests or connectorId not in self.cr.doId2do:
                     if connectorId not in self.connectorInterests:
                         self.connectorInterests.add(connectorId)
                     parentId = link[1]
@@ -235,7 +235,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
 
     @report(types=['args', 'deltaStamp'], dConfigParam=['jail', 'teleport'])
     def unloadConnectors(self):
-        for connectorId, connector in self.connectors.iteritems():
+        for connectorId, connector in self.connectors.items():
             if connector:
                 connector.setLoadedArea(None)
                 connector.goOffStage()
@@ -501,7 +501,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
     @report(types=['frameCount'], dConfigParam='connector')
     def handleOnStage(self):
         StagedObject.handleOnStage(self)
-        for id, connector in self.connectors.iteritems():
+        for id, connector in self.connectors.items():
             if connector:
                 connector.goOnStage()
 
@@ -509,7 +509,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
 
     @report(types=['frameCount'], dConfigParam='connector')
     def handleOffStage(self):
-        for id, connector in self.connectors.iteritems():
+        for id, connector in self.connectors.items():
             if connector:
                 connector.goOffStage()
 
@@ -537,13 +537,13 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
         world_y_offset = world_position[1]
         world_z_offset = world_position[2]
         if debug:
-            print self, '=', self.getName()
-            print 'GAME AREA X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset
+            print(self, '=', self.getName())
+            print('GAME AREA X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset)
         self.swampAreaNode = reference.find('**/ocean')
         model = reference.find('**/water_color')
         if model:
             if debug:
-                print 'WATER COLOR X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset
+                print('WATER COLOR X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset)
             model.hide()
             min_point = Point3(0)
             max_point = Point3(0)
@@ -564,18 +564,18 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
             island_water_parameters.map_x_scale = x_size
             island_water_parameters.map_y_scale = y_size
             if debug:
-                print 'X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size
+                print('X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size)
             texture = model.findTexture('*')
             if texture:
                 island_water_parameters.water_color_texture = texture
                 if debug:
-                    print 'WATER COLOR TEXTURE', texture
+                    print('WATER COLOR TEXTURE', texture)
         elif debug:
-            print '*** water_color NODE NOT FOUND'
+            print('*** water_color NODE NOT FOUND')
         model = reference.find('**/water_alpha')
         if model:
             if debug:
-                print 'WATER ALPHA X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset
+                print('WATER ALPHA X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset)
             model.hide()
             min_point = Point3(0)
             max_point = Point3(0)
@@ -596,14 +596,14 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
             island_water_parameters.alpha_map_x_scale = x_size
             island_water_parameters.alpha_map_y_scale = y_size
             if debug:
-                print 'ALPHA X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size
+                print('ALPHA X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size)
             texture = model.findTexture('*')
             if texture:
                 island_water_parameters.water_alpha_texture = texture
                 if debug:
-                    print 'WATER ALPHA TEXTURE', texture
+                    print('WATER ALPHA TEXTURE', texture)
         elif debug:
-            print '*** water_alpha NODE NOT FOUND'
+            print('*** water_alpha NODE NOT FOUND')
         use_shader = False
         if base.config.GetBool('want-shaders', 1) and base.win and base.win.getGsg() and base.win.getGsg().getShaderModel() >= GraphicsStateGuardian.SM20:
             use_shader = True
@@ -620,7 +620,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
                 stencil_one_node_path = NodePath('stencil_one')
                 stencil_one_node_path.reparentTo(parent)
                 model.instanceTo(stencil_one_node_path)
-                mask = 4294967295L
+                mask = 4294967295
                 stencil_one = StencilAttrib.make(1, StencilAttrib.SCFEqual, StencilAttrib.SOKeep, StencilAttrib.SOKeep, StencilAttrib.SOKeep, 1, mask, mask)
                 stencil_one_node_path.setAttrib(stencil_one, 100)
                 stencil_one_node_path.setDepthTest(0)
@@ -632,7 +632,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
             model_alpha_texture = model_alpha.findTexture('*')
             model_alpha.hide()
             if debug:
-                print 'model_alpha_texture', model_alpha_texture
+                print('model_alpha_texture', model_alpha_texture)
             if False:
                 texture = model_alpha_texture
                 card_x_size = 0.5
@@ -652,13 +652,13 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
                 model.show()
                 model_texture = model.findTexture('*')
                 if debug:
-                    print 'WATER COLOR SWAMP X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset
+                    print('WATER COLOR SWAMP X OFF, Y OFF, Z OFF = ', world_x_offset, world_y_offset, world_z_offset)
                 parent = model.getParent()
                 model.detachNode()
                 stencil_one_node_path = NodePath('stencil_one')
                 stencil_one_node_path.reparentTo(parent)
                 model.instanceTo(stencil_one_node_path)
-                mask = 4294967295L
+                mask = 4294967295
                 stencil_one = StencilAttrib.make(1, StencilAttrib.SCFEqual, StencilAttrib.SOKeep, StencilAttrib.SOKeep, StencilAttrib.SOKeep, 1, mask, mask)
                 stencil_one_node_path.setAttrib(stencil_one, 100)
                 stencil_one_node_path.setDepthTest(0)
@@ -679,21 +679,21 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
                     x_size = size[0]
                     y_size = size[1]
                 if debug:
-                    print 'min_point', min_point
-                    print 'max_point', max_point
-                    print 'size', size
-                    print 'x y', x, y
+                    print('min_point', min_point)
+                    print('max_point', max_point)
+                    print('size', size)
+                    print('x y', x, y)
                 island_water_parameters.swamp_map_x_origin = x
                 island_water_parameters.swamp_map_y_origin = y
                 island_water_parameters.swamp_map_x_scale = x_size
                 island_water_parameters.swamp_map_y_scale = y_size
                 if debug:
-                    print 'X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size
+                    print('X, Y, X SIZE, Y SIZE = ', min_point[0], min_point[1], x_size, y_size)
                 texture = model.findTexture('*')
                 if texture:
                     island_water_parameters.swamp_water_color_texture = texture
                     if debug:
-                        print 'SWAMP WATER COLOR TEXTURE', texture
+                        print('SWAMP WATER COLOR TEXTURE', texture)
                 water_color_file_path = island_water_parameters.default_water_color_file_path
                 alpha_texture_file_path = island_water_parameters.default_water_alpha_file_path
                 opacity_texture_file_path = None
@@ -724,7 +724,7 @@ class DistributedGameArea(DistributedNode, MappableArea, StagedObject):
             else:
                 model.hide()
         elif debug:
-            print '*** water_color_swamp NODE NOT FOUND'
+            print('*** water_color_swamp NODE NOT FOUND')
         self.islandWaterParameters = island_water_parameters
         return
 

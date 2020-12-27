@@ -77,7 +77,7 @@ class SkillPage(InventoryPage.InventoryPage):
         return
 
     def destroy(self):
-        for spot in self.skillFrames.keys():
+        for spot in list(self.skillFrames.keys()):
             self.skillFrames[spot].destroy()
 
         if self.tabBar:
@@ -236,7 +236,7 @@ class SkillPage(InventoryPage.InventoryPage):
                     activeSkills.remove(skillId)
                     totalActiveSkills.remove(skillId)
 
-        for spot in self.skillFrames.keys():
+        for spot in list(self.skillFrames.keys()):
             if spot not in totalComboSkills:
                 self.skillFrames[spot].hide()
 
@@ -250,8 +250,8 @@ class SkillPage(InventoryPage.InventoryPage):
             if not Freebooter.getPaidStatus(base.localAvatar.getDoId()):
                 if not WeaponGlobals.canFreeUse(skill):
                     freeLock = True
-            if self.linkedSkillIds.has_key(skill):
-                if self.skillFrames.has_key(skill):
+            if skill in self.linkedSkillIds:
+                if skill in self.skillFrames:
                     self.skillFrames[skill].hide()
                 skill = self.linkedSkillIds[skill]
             self.createFrame(skill, skillPts, amt, freeLock, showIcon)
@@ -279,8 +279,8 @@ class SkillPage(InventoryPage.InventoryPage):
             if not Freebooter.getPaidStatus(base.localAvatar.getDoId()):
                 if not WeaponGlobals.canFreeUse(skill):
                     freeLock = True
-            if self.linkedSkillIds.has_key(skill):
-                if self.skillFrames.has_key(skill):
+            if skill in self.linkedSkillIds:
+                if skill in self.skillFrames:
                     self.skillFrames[skill].hide()
                 skill = self.linkedSkillIds[skill]
             self.createFrame(skill, skillPts, amt, freeLock, showIcon)
@@ -309,8 +309,8 @@ class SkillPage(InventoryPage.InventoryPage):
             if not Freebooter.getPaidStatus(base.localAvatar.getDoId()):
                 if not WeaponGlobals.canFreeUse(skill):
                     freeLock = True
-            if self.linkedSkillIds.has_key(skill):
-                if self.skillFrames.has_key(skill):
+            if skill in self.linkedSkillIds:
+                if skill in self.skillFrames:
                     self.skillFrames[skill].hide()
                 skill = self.linkedSkillIds[skill]
             self.createFrame(skill, skillPts, amt, freeLock, showIcon)
@@ -587,7 +587,7 @@ class SkillPage(InventoryPage.InventoryPage):
                                 self.makeBoostDisplay(skillId, resetAmt - 1)
                             else:
                                 self.removeBoostDisplay(skillId)
-                        for linkedSkills in ItemGlobals.LinkedSkills.values():
+                        for linkedSkills in list(ItemGlobals.LinkedSkills.values()):
                             for linkedSkillId in linkedSkills:
                                 if skillId == WeaponGlobals.getLinkedSkillId(linkedSkillId):
                                     if self.tabBar and linkedSkillId in self.skillFrames:

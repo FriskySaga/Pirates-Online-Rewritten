@@ -28,7 +28,7 @@ class PiratesQuickLauncher(LauncherBase):
     PatchExt = 'pch'
 
     def __init__(self):
-        print 'Running: PiratesQuickLauncher'
+        print('Running: PiratesQuickLauncher')
         self.heavyDownloadServerList = []
         self.heavyDownloadServer = None
         self.launcherFileDbFilename = '%s?%s' % (self.getValue('GAME_PATCHER_FILE_OPTIONS', 'patcher.ver'), random.randint(1, 1000000000))
@@ -164,7 +164,7 @@ class PiratesQuickLauncher(LauncherBase):
             messenger.send('launcherAllPhasesComplete')
             self.cleanup()
             return
-        raise StandardError, 'Some phases not listed in LauncherPhases: %s' % self.requiredInstallFiles
+        raise Exception('Some phases not listed in LauncherPhases: %s' % self.requiredInstallFiles)
 
     def getDecompressMultifile(self, mfname):
         if not self.DecompressMultifiles:

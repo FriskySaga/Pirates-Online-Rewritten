@@ -86,13 +86,13 @@ class ShipAI(DirectObject.DirectObject):
         self._eventRadius = radius
 
     def dropMast(self, index):
-        if self.mastCollisions.has_key(index):
+        if index in self.mastCollisions:
             self.mastCollisions[index].stash()
             return True
         return False
 
     def restoreMast(self, index):
-        if self.mastCollisions.has_key(index):
+        if index in self.mastCollisions:
             self.mastCollisions[index].unstash()
             return True
         return False

@@ -1,5 +1,5 @@
 from direct.distributed.DistributedObject import DistributedObject
-from GameStatManagerBase import GameStatManagerBase
+from .GameStatManagerBase import GameStatManagerBase
 
 class DistributedGameStatManager(DistributedObject, GameStatManagerBase):
     from direct.directnotify import DirectNotifyGlobal
@@ -59,7 +59,7 @@ class DistributedGameStatManager(DistributedObject, GameStatManagerBase):
     def saveSoundList(self):
         soundFile = open('SoundList.txt', 'w')
         soundDict = loader.getSoundListDict()
-        soundNameList = soundDict.keys()
+        soundNameList = list(soundDict.keys())
         soundNameList.sort()
         for soundName in soundNameList:
             outString = '%s %s\n' % (soundName, soundDict[soundName])

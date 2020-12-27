@@ -178,7 +178,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                     createDefSword = False
                     if allProps:
                         propInfo = random.choice(allProps)
-                        if type(propInfo) == types.ListType:
+                        if type(propInfo) == list:
                             propInfo = propInfo[0]
                         prop = loader.loadModel(propInfo)
                         prop.reparentTo(propAv.rightHandNode)
@@ -234,14 +234,14 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 propAv.loop('idle')
                 __builtins__['propAv'] = propAv
             createDefaultProp = False
-            if object.has_key('Effect Type') and object['Effect Type'] != None and ObjectEffects.OBJECT_EFFECTS.has_key(object['Effect Type']):
+            if 'Effect Type' in object and object['Effect Type'] != None and object['Effect Type'] in ObjectEffects.OBJECT_EFFECTS:
                 ObjectEffects.OBJECT_EFFECTS[object['Effect Type']](propAv)
         if propAv:
             propAv.swordIvals = []
             propAv.moveIvals = []
             propAv.reparentTo(root)
             playPropAvAnim(None, propAv, object, createDefaultProp)
-            if object.has_key('Visual') and object['Visual'].has_key('Color'):
+            if 'Visual' in object and 'Color' in object['Visual']:
                 propAv.setColorScale(*object['Visual']['Color'])
             if object['Animation Track'] == 'walk' or object['Animation Track'] == 'run':
                 self.createPropAvatarMovement(uid, propAv, object['Animation Track'])
@@ -250,7 +250,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
 
     def createPropAvatarMovement(self, uid, propAv, anim):
         for currData in base.worldCreator.fileDicts:
-            if currData['Objects'].has_key(self.uniqueId):
+            if self.uniqueId in currData['Objects']:
                 for currLink in currData['Node Links']:
                     amNode1 = currLink[0] == uid
                     amNode2 = currLink[1] == uid
@@ -260,7 +260,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                         else:
                             path = currData['ObjectIds'][currLink[0]]
                         getDstPos = 'dstPos = currData' + path + '["Pos"]'
-                        exec getDstPos
+                        exec(getDstPos)
                         h0 = propAv.getH()
                         h1 = propAv.getH() + 180
                         p = propAv.getP()
@@ -347,7 +347,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 geom.reparentTo(footprintNode, sort=sort)
 
         self.footprintObjects.get_children().detach()
-        for node in footprintNodes.values():
+        for node in list(footprintNodes.values()):
             node.flattenStrong()
 
         return footprintRoot
@@ -480,21 +480,21 @@ class AreaBuilderBase(DirectObject.DirectObject):
         else:
             self.loadSubModelLODs(obj, modelName, animName, name)
         subObjs = obj.findAllMatches('**/*' + name + '*')
-        if propData['Visual'].has_key('Scale'):
+        if 'Scale' in propData['Visual']:
             for i in range(len(subObjs)):
                 currSubObj = subObjs[i]
                 currSubObj.setScale(propData['Visual']['Scale'])
 
-        if propData['Visual'].has_key('Color'):
+        if 'Color' in propData['Visual']:
             for i in range(len(subObjs)):
                 currSubObj = subObjs[i]
                 currSubObj.setColorScale(*propData['Visual']['Color'])
 
         animRateRange = [
          1.0, 1.0]
-        if propData.has_key('SubObjs'):
-            if type(propData['SubObjs']) == types.DictType:
-                subObjsInfo = propData['SubObjs'].values()
+        if 'SubObjs' in propData:
+            if type(propData['SubObjs']) == dict:
+                subObjsInfo = list(propData['SubObjs'].values())
             else:
                 subObjsInfo = propData['SubObjs']
             for currSubObj in subObjsInfo:
@@ -507,7 +507,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                 else:
                     self.loadSubModelLODs(obj, modelName, animName, name)
                 subObjs = obj.findAllMatches('**/*' + name + '*')
-                if currSubObj['Visual'].has_key('Scale'):
+                if 'Scale' in currSubObj['Visual']:
                     if bAnimatedTree:
                         transform = TransformState.makeMat(Mat4(obj.getJointTransform('modelRoot', attachInfo[1], '1')))
                         obj.freezeJoint('modelRoot', attachInfo[1], pos=Vec3(transform.getPos()), hpr=Vec3(transform.getHpr()), scale=currSubObj['Visual']['Scale'])
@@ -516,7 +516,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
                             currLOD = subObjs[i]
                             currLOD.setScale(currSubObj['Visual']['Scale'])
 
-                if currSubObj['Visual'].has_key('Color'):
+                if 'Color' in currSubObj['Visual']:
                     for i in range(len(subObjs)):
                         currLOD = subObjs[i]
                         currLOD.setColorScale(*currSubObj['Visual']['Color'])
@@ -567,9 +567,9 @@ class AreaBuilderBase(DirectObject.DirectObject):
         propAv.reparentTo(self.areaGeometry)
         propAv.setPos(propData['Pos'])
         propAv.setHpr(propData['Hpr'])
-        if propData.has_key('Scale'):
+        if 'Scale' in propData:
             propAv.setScale(propData['Scale'])
-        if propData.has_key('Visual') and propData['Visual'].has_key('Color'):
+        if 'Visual' in propData and 'Color' in propData['Visual']:
             propAv.setColorScale(*propData['Visual']['Color'])
         self.smallObjects.append(propAv)
         propAv.wrtReparentTo(self.areaGeometry)
@@ -925,7 +925,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
             self.animControls = AnimControlCollection()
             autoBind(self.master.node(), self.animControls, 3)
             self.bound = True
-            for i in xrange(self.animControls.getNumAnims()):
+            for i in range(self.animControls.getNumAnims()):
                 self.animControls.getAnim(i).setPlayRate(random.uniform(0.8, 1))
 
         self.animControls.loopAll(1)
@@ -1054,7 +1054,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
         modelDef.root.node().setPreserveTransform(True)
         switchRoot = modelDef.root.attachNewNode(SwitchNode('Switch Prop'))
         switchRoot.setTag('Switch Class', objData['Switch Class'])
-        subDefs = [ (key, self.makeModelDef(loader.loadModel(visualData['Model']))) for key, visualData in objData['Visual'].iteritems() ]
+        subDefs = [ (key, self.makeModelDef(loader.loadModel(visualData['Model']))) for key, visualData in objData['Visual'].items() ]
         subDefs.sort()
         for key, subDef in subDefs:
             x = switchRoot.getNumChildren()
@@ -1103,7 +1103,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
 
         model.collisions = model.root.attachNewNode('collisions')
         cols = data.findAllMatches('**/+CollisionNode')
-        for i in xrange(cols.getNumPaths()):
+        for i in range(cols.getNumPaths()):
             cols[i].wrtReparentTo(model.collisions)
 
         model.geomRoot.findAllMatches('**/collisions').detach()
@@ -1203,7 +1203,7 @@ class AreaBuilderBase(DirectObject.DirectObject):
 
                 lodNode.addSwitch(1000000, staticLODs[numChildren - 1])
             else:
-                for i in xrange(numChildren - 1):
+                for i in range(numChildren - 1):
                     lodNode.addSwitch(radius * self.LOD_RADIUS_FACTOR_MOST[i + 1], radius * self.LOD_RADIUS_FACTOR_MOST[i])
 
             lodNode.addSwitch(100000, radius * self.LOD_RADIUS_FACTOR_MOST[numChildren - 1])

@@ -43,9 +43,9 @@ class LockGUI(DirectFrame):
         self.missSound = loadSfx(SoundGlobals.SFX_LOCKPICK_FAIL)
         self.trySound = loadSfx(SoundGlobals.SFX_LOCKPICK_TRY)
         self.layerModel = loader.loadModel('models/props/Keys')
-        print 'Found ', self.layerModel
+        print('Found ', self.layerModel)
         self.layerImage = self.layerModel.find('**/Lock_L')
-        print 'Found ', self.layerImage
+        print('Found ', self.layerImage)
         self.layerImage.reparentTo(self)
         self.layerImage.setPos(0, 50, 0)
         self.layerImage.setScale(1.0)
@@ -114,7 +114,7 @@ class LockGUI(DirectFrame):
             self.mechTool.setImage()
 
     def gameTimerExpired(self):
-        print 'LockGUI:gameTimerExpired'
+        print('LockGUI:gameTimerExpired')
         if self.toolState != LockGlobals.LSTATE_OPEN:
             self.toolState = LockGlobals.LSTATE_DONE
             self.solveLabel = DirectLabel(parent=self, relief=None, text=PLocalizer.LockpickFailed, text_align=TextNode.ACenter, text_scale=0.2, pos=(0,
@@ -130,7 +130,7 @@ class LockGUI(DirectFrame):
         return
 
     def tryLock(self):
-        print 'LockGUI:tryLock'
+        print('LockGUI:tryLock')
         if self.toolState == LockGlobals.LSTATE_ACTIVE:
             self.toolState = LockGlobals.LSTATE_TRY
             base.playSfx(self.trySound)
@@ -183,7 +183,7 @@ class LockGUI(DirectFrame):
         self.mechTool.setPos(self.mechXPos, 0, self.mechZPos)
 
     def lockOpen(self, name):
-        print 'LockGUI:lockOpen'
+        print('LockGUI:lockOpen')
         self.timer.stop()
         self.solveLabel = DirectLabel(parent=self, relief=None, text=PLocalizer.UnlockedBy, text_align=TextNode.ACenter, text_scale=0.2, pos=(0,
                                                                                                                                               0,

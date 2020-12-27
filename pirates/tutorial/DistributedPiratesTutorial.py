@@ -7,7 +7,7 @@ from direct.actor import Actor
 from direct.task import Task
 from direct.distributed import DistributedObject
 from direct.showbase.PythonUtil import DelayedCall
-import ShipWreck
+from . import ShipWreck
 from pirates.audio import SoundGlobals
 from pirates.npc import Skeleton
 from pirates.pirate import Pirate
@@ -592,7 +592,7 @@ class DistributedPiratesTutorial(DistributedObject.DistributedObject, FSM.FSM):
         self.sendUpdate('teleportToShip')
         self.stageStumpyPositionOnBoat()
         self.acceptOnce('usedCannon', self.startShipMovement)
-        stumpyBoat.cannons.values()[0][1].setIgnoreProximity(False)
+        list(stumpyBoat.cannons.values())[0][1].setIgnoreProximity(False)
         dialogue = loadSfx(SoundGlobals.BBD_TELL_SHOOT)
         localAvatar.guiMgr.subtitler.showText(PLocalizer.QuestScriptTutorialStumpy_1, sfx=dialogue, timeout=dialogue.length() + 1.0)
         localAvatar.guiMgr.subtitler.clearTextOverride = True

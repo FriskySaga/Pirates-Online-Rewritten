@@ -3,8 +3,8 @@ from direct.interval.IntervalGlobal import *
 from direct.particles import ParticleEffect
 from direct.particles import Particles
 from pirates.piratesgui.GameOptions import Options
-from PooledEffect import PooledEffect
-from EffectController import EffectController
+from .PooledEffect import PooledEffect
+from .EffectController import EffectController
 
 class PotionTableSmoke(PooledEffect, EffectController):
     cardScale = 64.0

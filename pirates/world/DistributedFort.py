@@ -129,7 +129,7 @@ class DistributedFort(DistributedBattleAvatar.DistributedBattleAvatar):
         oldBitMask = allColls.getCollideMask()
         newBitMask = oldBitMask | PiratesGlobals.TargetBitmask
         allColls.setCollideMask(newBitMask)
-        for index in xrange(allColls.getNumPaths()):
+        for index in range(allColls.getNumPaths()):
             nodePath = allColls[index]
             nodePath.setTag('objType', str(PiratesGlobals.COLL_FORT))
             nodePath.setTag('fortId', str(self.doId))
@@ -252,7 +252,7 @@ class DistributedFort(DistributedBattleAvatar.DistributedBattleAvatar):
                 curNodePath.setTag('fortId', str(self.doId))
 
     def setupDrawbridges(self):
-        if TreasureMapBlackPearlGlobals.DrawbridgeDict.has_key(self.objKey):
+        if self.objKey in TreasureMapBlackPearlGlobals.DrawbridgeDict:
             dbTuple = TreasureMapBlackPearlGlobals.DrawbridgeDict[self.objKey]
             for dbName in dbTuple:
                 drawbridge = render.find('**/%s' % dbName)
@@ -264,7 +264,7 @@ class DistributedFort(DistributedBattleAvatar.DistributedBattleAvatar):
 
     def areDrawbridgesLoaded(self):
         retval = True
-        if TreasureMapBlackPearlGlobals.DrawbridgeDict.has_key(self.objKey):
+        if self.objKey in TreasureMapBlackPearlGlobals.DrawbridgeDict:
             dbTuple = TreasureMapBlackPearlGlobals.DrawbridgeDict[self.objKey]
             for dbName in dbTuple:
                 drawbridge = render.find('**/%s' % dbName)
@@ -289,10 +289,10 @@ class DistributedFort(DistributedBattleAvatar.DistributedBattleAvatar):
     def debugMissing(self):
         wi = render.find('**/whole_island')
         allChildren = wi.getChildren()
-        for index in xrange(allChildren.getNumPaths()):
+        for index in range(allChildren.getNumPaths()):
             np = allChildren.getPath(index)
             if not np.isHidden():
-                print np
+                print(np)
                 np.hide()
                 break
 

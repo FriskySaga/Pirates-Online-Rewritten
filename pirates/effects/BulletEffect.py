@@ -3,8 +3,8 @@ from direct.showbase.DirectObject import *
 from direct.interval.IntervalGlobal import *
 from pirates.piratesbase import PiratesGlobals
 from direct.distributed import DistributedObject
-from EffectController import EffectController
-from PooledEffect import PooledEffect
+from .EffectController import EffectController
+from .PooledEffect import PooledEffect
 import random
 ObjectDict = {'0': 'models/props/testBoard','1': 'models/props/testBoard'}
 

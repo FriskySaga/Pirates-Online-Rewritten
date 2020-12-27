@@ -82,7 +82,7 @@ class ChatInputTyped(DirectObject.DirectObject):
         self.typedChatButton.hide()
         self.typedChatBar.hide()
         if self.whisperId:
-            print 'have id'
+            print('have id')
             if self.toPlayer:
                 if not base.talkAssistant.checkWhisperTypedChatPlayer(self.whisperId):
                     messenger.send('Chat-Failed player typed chat test')
@@ -127,13 +127,13 @@ class ChatInputTyped(DirectObject.DirectObject):
     def __execMessage(self, message):
         if not ChatInputTyped.ExecNamespace:
             ChatInputTyped.ExecNamespace = {}
-            exec 'from pandac.PandaModules import *' in globals(), self.ExecNamespace
+            exec('from pandac.PandaModules import *', globals(), self.ExecNamespace)
             self.importExecNamespace()
         try:
             return str(eval(message, globals(), ChatInputTyped.ExecNamespace))
         except SyntaxError:
             try:
-                exec message in globals(), ChatInputTyped.ExecNamespace
+                exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except:
                 exception = sys.exc_info()[0]

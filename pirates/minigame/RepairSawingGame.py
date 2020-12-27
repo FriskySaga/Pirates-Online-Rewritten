@@ -9,12 +9,12 @@ from direct.task import Task
 from pirates.piratesbase import PLocalizer
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-from RepairMincroGame import RepairMincroGame
-from MinigameUtils import getAcuteAngle
-from RepairSawingLine import RepairSawingLine
-from RepairSaw import RepairSaw
+from .RepairMincroGame import RepairMincroGame
+from .MinigameUtils import getAcuteAngle
+from .RepairSawingLine import RepairSawingLine
+from .RepairSaw import RepairSaw
 from pirates.piratesbase import PiratesGlobals
-import RepairGlobals
+from . import RepairGlobals
 SAW_COLLIDE_MASK = 16
 
 class SawWaypoint(NodePath):
@@ -164,7 +164,7 @@ class RepairSawingGame(RepairMincroGame):
         return board
 
     def reset(self):
-        for key in self.boardsPool.keys():
+        for key in list(self.boardsPool.keys()):
             board = self.boardsPool[key]
             board.removeNode()
 
@@ -218,7 +218,7 @@ class RepairSawingGame(RepairMincroGame):
         self.progressLabel = None
         self.boardDestroyedLabel.destroy()
         self.boardDestroyedLabel = None
-        for key in self.boardsPool.keys():
+        for key in list(self.boardsPool.keys()):
             board = self.boardsPool[key]
             if not board.isEmpty():
                 board.removeNode()

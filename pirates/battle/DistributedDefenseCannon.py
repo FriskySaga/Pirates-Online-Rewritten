@@ -14,7 +14,7 @@ from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import PiratesGlobals
 from pirates.ship import ShipGlobals
 from pirates.uberdog.UberDogGlobals import InventoryType
-import WeaponGlobals
+from . import WeaponGlobals
 
 class DistributedDefenseCannon(DistributedIslandCannon):
     ignoreGround = True

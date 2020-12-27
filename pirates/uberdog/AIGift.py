@@ -1,4 +1,4 @@
-from AITradeBase import AITradeBase
+from .AITradeBase import AITradeBase
 from pirates.uberdog.UberDogGlobals import *
 from pirates.reputation import ReputationGlobals
 from direct.directnotify.DirectNotifyGlobal import directNotify

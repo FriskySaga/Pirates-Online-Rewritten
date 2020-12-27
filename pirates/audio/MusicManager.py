@@ -51,7 +51,7 @@ class MusicManager(AmbientManagerBase.AmbientManagerBase):
         return
 
     def request(self, name, priority=0, looping=True, volume=0.8):
-        if not self.ambientDict.has_key(name):
+        if name not in self.ambientDict:
             if not self.load(name, looping):
                 return
         found = 0

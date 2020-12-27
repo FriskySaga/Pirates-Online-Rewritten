@@ -21,7 +21,7 @@ class DialogProcessMaster(DirectObject):
         for dialogId in self.dialogIds:
             self.dialogs[dialogId] = DialogDict.get(self.npcId).get(dialogId)
 
-        if len(self.dialogs.keys()) > 1:
+        if len(list(self.dialogs.keys())) > 1:
             self.presentAvailableDialogs()
         else:
             self.beginDialog(dialogId)

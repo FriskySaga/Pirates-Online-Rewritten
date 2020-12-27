@@ -8,8 +8,8 @@ from pirates.piratesbase import PiratesGlobals
 from pirates.quest import QuestConstants
 from pirates.quest import QuestLadderDB
 from pirates.quest import QuestOffer
-import QuestDetailGUI
-import QuestDB
+from . import QuestDetailGUI
+from . import QuestDB
 
 class BranchMenuGUI(DirectFrame):
 
@@ -44,7 +44,7 @@ class BranchMenuGUI(DirectFrame):
         middlePanelOver = gui.find('**/avatar_c_A_middle_over')
         bottomPanel = gui.find('**/avatar_c_A_bottom')
         bottomPanelOver = gui.find('**/avatar_c_A_bottom_over')
-        for i, offer in zip(range(len(offers)), offers):
+        for i, offer in zip(list(range(len(offers))), offers):
             if i == 0:
                 image = (
                  topPanel, topPanel, topPanelOver, topPanel)
@@ -59,9 +59,9 @@ class BranchMenuGUI(DirectFrame):
                 else:
                     z -= 0.105
             offerName = offer.getName()
-            if PLocalizer.QuestStrings.has_key(offerName) and 'title' in PLocalizer.QuestStrings[offerName].keys():
+            if offerName in PLocalizer.QuestStrings and 'title' in list(PLocalizer.QuestStrings[offerName].keys()):
                 questTitle = PLocalizer.QuestStrings[offerName]['title']
-            elif PLocalizer.QuestStrings.has_key(offer.questId) and 'title' in PLocalizer.QuestStrings[offer.questId].keys():
+            elif offer.questId in PLocalizer.QuestStrings and 'title' in list(PLocalizer.QuestStrings[offer.questId].keys()):
                 questTitle = PLocalizer.QuestStrings[offer.questId]['title']
             else:
                 questTitle = offer.getTitle()

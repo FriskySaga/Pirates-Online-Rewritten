@@ -10,9 +10,9 @@ class MixerType(type):
 
     def __init__(cls, name, bases, dct):
         super(MixerType, cls).__init__(name, bases, dct)
-        cls.sectionNameIds = dict(zip(cls.sectionNames, range(len(cls.sectionNames))))
+        cls.sectionNameIds = dict(list(zip(cls.sectionNames, list(range(len(cls.sectionNames))))))
         if set(cls.partNameLists.keys()) != set(cls.sectionNames):
-            cls.partNameLists = dict(zip(cls.sectionNames, [ [section] for section in cls.sectionNames ]))
+            cls.partNameLists = dict(list(zip(cls.sectionNames, [ [section] for section in cls.sectionNames ])))
 
 class AnimationChannel():
     notify = DirectNotifyGlobal.directNotify.newCategory('AnimationChannel')
@@ -153,7 +153,7 @@ class AnimationChannel():
         if self.animSpanId == animSpanId and self.checkInFunc:
             try:
                 self.checkInFunc()
-            except TypeError, e:
+            except TypeError as e:
                 self.notify.warning(str(e))
                 if self.actor:
                     self.notify.warning(self.actor.getName() + ' invalid AnimationChannel state with animSpanId = ' + str(animSpanId))
@@ -215,10 +215,10 @@ class PartMixer():
     def __init__(self, mixer, channelCount, actor, partNameList):
         self.actor = actor
         self.partNameList = partNameList
-        self.channels = [ AnimationChannel(x, x in mixer.LOOP.values(), actor, partNameList, self.distributeWeight) for x in range(channelCount) ]
+        self.channels = [ AnimationChannel(x, x in list(mixer.LOOP.values()), actor, partNameList, self.distributeWeight) for x in range(channelCount) ]
 
     def __str__(self):
-        outStr = '(PartMixer: parts = %s)\n' % `(self.partNameList)`
+        outStr = '(PartMixer: parts = %s)\n' % repr((self.partNameList))
         for chanNum in range(len(self.channels) - 1, -1, -1):
             outStr += '%s\n' % str(self.channels[chanNum])
 
@@ -263,8 +263,7 @@ class PartMixer():
         return
 
 
-class AnimationMixer():
-    __metaclass__ = MixerType
+class AnimationMixer(metaclass=MixerType):
     notify = DirectNotifyGlobal.directNotify.newCategory('AnimationMixer')
     NA_INDEX = -1
     LOOP_INDEX = 0
@@ -279,19 +278,19 @@ class AnimationMixer():
 
     def __init__(self, actor):
         self.actor = actor
-        channelCount = len([ x for x in self.LOOP.values() + self.ACTION.values() if x is not self.NA_INDEX ])
-        self.partMixers = dict(zip(self.sectionNames, [ PartMixer(self, channelCount, actor, self.getPartsNameList(part))
-         for part in self.sectionNames ]))
+        channelCount = len([ x for x in list(self.LOOP.values()) + list(self.ACTION.values()) if x is not self.NA_INDEX ])
+        self.partMixers = dict(list(zip(self.sectionNames, [ PartMixer(self, channelCount, actor, self.getPartsNameList(part))
+         for part in self.sectionNames ])))
         self.ownedIvals = []
 
     def __str__(self):
-        outStr = '(%s: %s)\n' % (self.__class__.__name__, `(self.actor)`)
+        outStr = '(%s: %s)\n' % (self.__class__.__name__, repr((self.actor)))
         for sectionName in self.partMixers:
             outStr += '%s\n' % str(self.partMixers[sectionName])
 
         outStr += '\nOwned Intervals\n-------------------------------\n'
         for ival in self.ownedIvals:
-            outStr += `ival` + ': isPlaying = ' + `(ival.isPlaying())` + '\n'
+            outStr += repr(ival) + ': isPlaying = ' + repr((ival.isPlaying())) + '\n'
 
         return outStr
 
@@ -300,10 +299,10 @@ class AnimationMixer():
         if sectionName is None or set(sectionName) == set(self.sectionNames):
             return
         else:
-            if isinstance(sectionName, types.StringType):
+            if isinstance(sectionName, bytes):
                 sectionNames = [
                  sectionName]
-            elif isinstance(sectionName, types.ListType):
+            elif isinstance(sectionName, list):
                 sectionNames = sectionName
             else:
                 sectionNames = []
@@ -317,9 +316,9 @@ class AnimationMixer():
     def getSectionList(self, sectionName):
         if not sectionName:
             return self.sectionNames
-        elif isinstance(sectionName, types.StringType):
+        elif isinstance(sectionName, bytes):
             return [sectionName]
-        elif isinstance(sectionName, types.ListType):
+        elif isinstance(sectionName, list):
             return sectionName
         else:
             return []
@@ -333,7 +332,7 @@ class AnimationMixer():
         sectionNames = self.getSectionList(partName)
         rankings = self.AnimRankings.get(newAnim)
         if rankings:
-            loopRanks = self.LOOP.values()
+            loopRanks = list(self.LOOP.values())
             ival = Parallel()
             for section in sectionNames:
                 rank = rankings[self.sectionNameIds[section]]
@@ -365,7 +364,7 @@ class AnimationMixer():
         sectionNames = self.getSectionList(partName)
         rankings = self.AnimRankings.get(newAnim)
         if rankings:
-            loopRanks = self.LOOP.values()
+            loopRanks = list(self.LOOP.values())
             loopRanks.sort(reverse=True)
             ival = Parallel()
             for section in sectionNames:
@@ -390,7 +389,7 @@ class AnimationMixer():
         sectionNames = self.getSectionList(partName)
         rankings = self.AnimRankings.get(newAnim)
         if rankings:
-            loopIndices = self.LOOP.values()
+            loopIndices = list(self.LOOP.values())
             loopIndices.sort()
             ival = Parallel()
             for section in sectionNames:
@@ -513,7 +512,7 @@ class ReducedAnimationMixer(AnimationMixer):
         return
 
     def __str__(self):
-        outStr = '(%s: %s)\n' % (self.__class__.__name__, `(self.actor)`)
+        outStr = '(%s: %s)\n' % (self.__class__.__name__, repr((self.actor)))
         outStr += 'actionAnim: %s\n' % (self.actionAnim,)
         if self.loopOp:
             outStr += 'loopStatus: %s(%s, %s, %s)\n' % (self.loopOp.__name__, self.loopAnim, self.loopArgs, self.loopKw)
@@ -521,7 +520,7 @@ class ReducedAnimationMixer(AnimationMixer):
             outStr += 'loopStatus: None\n'
         outStr += '\nOwned Intervals\n-------------------------------\n'
         for ival in self.ownedIvals:
-            outStr += `ival` + ': isPlaying = ' + `(ival.isPlaying())` + '\n'
+            outStr += repr(ival) + ': isPlaying = ' + repr((ival.isPlaying())) + '\n'
 
         return outStr
 

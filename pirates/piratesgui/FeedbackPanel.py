@@ -160,4 +160,4 @@ class FeedbackPanel(GuiPanel.GuiPanel):
         self.feedbackInput.enterText(name)
 
     def _catSelect(self, item):
-        print 'Item Selected is %s' % item
+        print('Item Selected is %s' % item)

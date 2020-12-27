@@ -30,10 +30,10 @@ from pirates.battle.WeaponGlobals import *
 from pirates.battle.EnemySkills import EnemySkills
 from pirates.audio import SoundGlobals
 from pirates.audio.SoundGlobals import loadSfx
-from DistributedWeapon import DistributedWeapon
-import WeaponGlobals
-import CannonGlobals
-from CannonballProjectile import CannonballProjectile
+from .DistributedWeapon import DistributedWeapon
+from . import WeaponGlobals
+from . import CannonGlobals
+from .CannonballProjectile import CannonballProjectile
 localFireSfxNames = [
  loadSfx(SoundGlobals.SFX_WEAPON_CANNON_FIRE_01), loadSfx(SoundGlobals.SFX_WEAPON_CANNON_FIRE_02), loadSfx(SoundGlobals.SFX_WEAPON_CANNON_FIRE_03), loadSfx(SoundGlobals.SFX_WEAPON_CANNON_FIRE_04), loadSfx(SoundGlobals.SFX_WEAPON_CANNON_FIRE_05)]
 distFireSfxNames = [
@@ -480,7 +480,7 @@ class DistributedShipBroadside(DistributedWeapon, DistributedShippart):
         self.effectNode.reparentTo(self.ship.getTransNode())
 
     def completeCannonCheck(self):
-        for colList in self.collisionLists.values():
+        for colList in list(self.collisionLists.values()):
             colList.sort()
             ammo = colList[0][1].getFromNodePath().getPythonTag('ammo')
             if not ammo or ammo.destroyed:

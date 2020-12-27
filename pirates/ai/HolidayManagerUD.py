@@ -190,7 +190,7 @@ class HolidayManagerUD(DistributedObjectGlobalUD):
 
     def __runHolidayTimer(self, task=None):
         if len(self.activeHolidays) > 0:
-            for holiday in self.activeHolidays.keys():
+            for holiday in list(self.activeHolidays.keys()):
                 time, manual = self.activeHolidays[holiday]
                 time -= 15
 
@@ -202,7 +202,7 @@ class HolidayManagerUD(DistributedObjectGlobalUD):
             for district in self.districts:
                 districtData = self.districts[district]
 
-                for holiday in districtData['localHolidays'].keys():
+                for holiday in list(districtData['localHolidays'].keys()):
                     time, manual = districtData['localHolidays'][holiday]
                     time -= 15
 

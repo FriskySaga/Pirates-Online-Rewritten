@@ -7,7 +7,7 @@ from pirates.battle import WeaponGlobals
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.reputation import ReputationGlobals
 from pirates.ai import HolidayGlobals
-import FishingGlobals
+from . import FishingGlobals
 
 class FishingResults(NodePath):
 
@@ -69,9 +69,9 @@ class FishingResults(NodePath):
             self.gameObject.tutorialManager.showTutorial(InventoryType.FishingLevelGain)
             if newLevel == 10:
                 self.gameObject.tutorialManager.showTutorial(InventoryType.FishingLevel10)
-            if FishingGlobals.unlockLevelToSkillId.has_key(newLevel):
+            if newLevel in FishingGlobals.unlockLevelToSkillId:
                 unlock = FishingGlobals.unlockLevelToSkillId[newLevel]
-                if FishingGlobals.skillIdToTutorialId.has_key(unlock):
+                if unlock in FishingGlobals.skillIdToTutorialId:
                     tutorialContext = FishingGlobals.skillIdToTutorialId[unlock]
                     self.gameObject.tutorialManager.showTutorial(tutorialContext)
         self.levelUnlockDetails = DirectLabel(parent=self, relief=None, text=unlockText, text_scale=PiratesGuiGlobals.TextScaleTitleSmall, text_align=TextNode.ACenter, text_fg=PiratesGuiGlobals.TextFG2, text_shadow=PiratesGuiGlobals.TextShadow, text_wordwrap=16, pos=(0.64,

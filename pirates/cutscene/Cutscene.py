@@ -295,7 +295,7 @@ class Cutscene(NodePath, DirectObject):
         if self._callback is not None:
             self._ival.append(Func(self._callback))
         seqDuration = scene.getDuration()
-        print 'seqDuration = %s' % seqDuration
+        print('seqDuration = %s' % seqDuration)
         for sound in self._sounds:
             scene.append(SoundInterval(sound, duration=seqDuration))
 

@@ -1,9 +1,9 @@
 from pandac.PandaModules import *
 from direct.distributed.MsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginBase
-import TTAccount
-from TTAccount import TTAccountException
+from . import LoginBase
+from . import TTAccount
+from .TTAccount import TTAccountException
 from direct.distributed.PyDatagram import PyDatagram
 
 class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
@@ -75,7 +75,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
                     return (0, None)
                 return (
                  0, errorMsg)
-            except TTAccountException, e:
+            except TTAccountException as e:
                 return (
                  0, str(e))
 
@@ -88,7 +88,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
                     return (0, None)
                 return (
                  0, errorMsg)
-            except TTAccountException, e:
+            except TTAccountException as e:
                 return (
                  0, str(e))
 
@@ -106,7 +106,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
                     return (0, None)
                 return (
                  0, errorMsg)
-            except TTAccountException, e:
+            except TTAccountException as e:
                 return (
                  0, str(e))
 

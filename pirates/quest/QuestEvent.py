@@ -7,7 +7,7 @@ class QuestEvent(POD):
     DataSet = {'location': None,'progressResults': dict}
 
     def applyTo(self, taskState, taskDNA):
-        raise 'derived class must override applyTo()'
+        raise Exception('derived class must override applyTo()')
 
     def complete(self, taskState, taskDNA):
         taskDNA.complete(self, taskState)
@@ -172,7 +172,7 @@ class BossBattleCompleted(QuestEvent):
         if hasattr(taskDNA, 'handleBossBattleCompleted'):
             return taskDNA.handleBossBattleCompleted(self, taskState)
         else:
-            print 'BossBattleCompleted. Warnning taskDNA %s does not have method handleBossBattleCompleted' % taskDNA
+            print('BossBattleCompleted. Warnning taskDNA %s does not have method handleBossBattleCompleted' % taskDNA)
             return False
 
 

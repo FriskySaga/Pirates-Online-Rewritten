@@ -11,7 +11,7 @@ from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesbase import PiratesGlobals
 from otp.otpbase import OTPGlobals
 from otp.friends.FriendInfo import FriendInfo
-import GuiButton
+from . import GuiButton
 from pirates.piratesgui import PirateMemberList
 from direct.task import Task
 from pirates.uberdog.UberDogGlobals import InventoryType

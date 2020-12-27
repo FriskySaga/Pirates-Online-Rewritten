@@ -17,7 +17,7 @@ from pirates.makeapirate import PirateFemale
 from pirates.pirate.HumanAnimationMixer import HumanAnimationMixer
 from pirates.pirate import BodyDefs
 import random
-import cPickle
+import pickle
 TX = 0
 TY = 1
 TZ = 2
@@ -220,7 +220,7 @@ class Human(HumanBase.HumanBase, Biped.Biped):
         self.reducedAnimList = self.animTable
 
     def forceLoadAnimDict(self):
-        for anim in self.animDict.keys():
+        for anim in list(self.animDict.keys()):
             self.getAnimControls(anim)
 
     def createAnimDict(self, customList=None):

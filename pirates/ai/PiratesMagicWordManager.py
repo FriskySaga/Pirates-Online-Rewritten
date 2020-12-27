@@ -175,7 +175,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
                     localAvatar.guiMgr.combatTray.skillMapping.clear()
                     localAvatar.stash()
                 else:
-                    print 'need a target object doId to watch'
+                    print('need a target object doId to watch')
         elif __dev__ and wordIs('~ccNPC') or wordIs('~ccShip'):
             pass
         elif wordIs('~bonfire'):
@@ -183,7 +183,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
             bf.reparentTo(render)
             bf.setPos(localAvatar, 0, 0, 0)
             bf.startLoop()
-            print 'bonfire at %s, %s' % (localAvatar.getPos(), localAvatar.getHpr())
+            print('bonfire at %s, %s' % (localAvatar.getPos(), localAvatar.getHpr()))
         elif __dev__ and wordIs('~mario'):
             localAvatar.toggleMario()
         elif wordIs('~islandShips'):
@@ -656,7 +656,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
                     39.307600000000001,
                     1] }
             lodNodes = render.findAllMatches('**/+LODNode')
-            for i in xrange(0, lodNodes.getNumPaths()):
+            for i in range(0, lodNodes.getNumPaths()):
                 lodNodes[i].node().forceSwitch(lodNodes[i].node().getHighestSwitch())
 
             localAvatar.clearInterestNamed(None, [
@@ -918,7 +918,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
 
             self.configToggleBool('want-compass-task', offCode = turnOffSeapatch, onCode = turnOnSeapatch)
         elif __dev__ and wordIs('~wantShipColl'):
-            if localAvatar.ship and localAvatar.ship.controlManager.controls.has_key('ship'):
+            if localAvatar.ship and 'ship' in localAvatar.ship.controlManager.controls:
                 if localAvatar.ship.controlManager.controls['ship'].collisionsActive:
                     localAvatar.ship.controlManager.controls['ship'].setCollisionsActive(0)
                     self.setMagicWordResponse('ship collisions OFF')
@@ -1028,7 +1028,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
             if len(args) > 1:
                 force = int(args[1])
 
-            clientShips = [x for x in base.cr.doId2do.values() if isinstance(x, DistributedSimpleShip.DistributedSimpleShip)]
+            clientShips = [x for x in list(base.cr.doId2do.values()) if isinstance(x, DistributedSimpleShip.DistributedSimpleShip)]
             cleared = False
             for currShip in clientShips:
                 shipCollWall = currShip.hull[0].collisions.find('**/collision_hull')
@@ -1174,7 +1174,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
                         continue
 
                     if currEffectCat == 'listEffectCats':
-                        response = 'known effect types are: \n%s' % base.cr.effectTypes.keys()
+                        response = 'known effect types are: \n%s' % list(base.cr.effectTypes.keys())
                         self.setMagicWordResponse(response)
                         continue
 
@@ -1189,7 +1189,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
 
 
             base.cr.wantSpecialEffects = base.config.GetBool('want-special-effects', 1)
-            clientShips = [x for x in base.cr.doId2do.values() if isinstance(x, DistributedSimpleShip.DistributedSimpleShip)]
+            clientShips = [x for x in list(base.cr.doId2do.values()) if isinstance(x, DistributedSimpleShip.DistributedSimpleShip)]
             if base.cr.queryShowEffect('BlackSmoke') or base.cr.queryShowEffect('Fire'):
                 for ship in clientShips:
                     if base.cr.queryShowEffect('BlackSmoke'):
@@ -1352,7 +1352,7 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
         localAvatar.reparentTo(targetObj)
         localAvatar.setPos(newPos)
         localAvatar.isGhosting = True
-        if base.cr.doId2do.has_key(targetId):
+        if targetId in base.cr.doId2do:
             self.cameraFollowTgt(base.cr.doId2do[targetId], targetParentId)
         elif targetId:
             self.pendingCameraReparent = base.cr.relatedObjectMgr.requestObjects([
@@ -1367,10 +1367,10 @@ class PiratesMagicWordManager(MagicWordManager.MagicWordManager):
 
     def shipCreated(self, shipId):
         return None
-        print 'shipCreated(%s)' % shipId
+        print('shipCreated(%s)' % shipId)
         ship = base.cr.doId2do.get(shipId)
         if ship:
-            print 'ship created: %s' % ship
+            print('ship created: %s' % ship)
             ship.localAvatarInstantBoard()
             ship.enableOnDeckInteractions()
 

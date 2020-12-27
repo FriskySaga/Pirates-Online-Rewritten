@@ -115,7 +115,7 @@ class PotionHint(DirectFrame):
         self.hintCB = self.showHints
         self.noHintsCheck['value'] = self.hintCB
         self.hintShown = {}
-        for hintKey in PLocalizer.PotionHints.keys():
+        for hintKey in list(PLocalizer.PotionHints.keys()):
             self.hintShown[hintKey] = False
 
         topGui.removeNode()
@@ -139,7 +139,7 @@ class PotionHint(DirectFrame):
 
     def setHintsEnabled(self, hintsOn):
         self.showHints = hintsOn
-        for hintKey in PLocalizer.PotionHints.keys():
+        for hintKey in list(PLocalizer.PotionHints.keys()):
             self.hintShown[hintKey] = not hintsOn
 
         self.potionGame.dist.d_setHintsActive(hintsOn)

@@ -94,7 +94,7 @@ class InventoryUIAmmoContainer(InventoryUIStackContainer.InventoryUIStackContain
         for Z in range(self.gridZ):
             for X in range(len(self.listOfItemLists[Z])):
                 skillId = self.listOfItemLists[Z][X]
-                if self.subBagTypeToBagId.has_key(skillId) and skillId not in self.subBagTypesCreated:
+                if skillId in self.subBagTypeToBagId and skillId not in self.subBagTypesCreated:
                     if self.seperatorOn:
                         self.seperatorCount += 1
                     else:

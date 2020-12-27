@@ -15,14 +15,14 @@ class TradableInventory(TradableInventoryBase):
         if status == self.STATUS_ITEM_MODIFIED or status == self.STATUS_ITEM_MODIFIED_OVERFLOW:
             if itemFields[self.ITEM_CAT_IDX] == 0:
                 status = self.STATUS_ITEM_REMOVED
-            elif not self._locatableItems.has_key(itemLocation):
+            elif itemLocation not in self._locatableItems:
                 status = self.STATUS_ITEM_ADDED
         if status == self.STATUS_ITEM_ADDED:
             self._locatableItems[itemLocation] = itemFields
             modification = True
         else:
             if status == self.STATUS_ITEM_REMOVED:
-                if self._locatableItems.has_key(itemLocation):
+                if itemLocation in self._locatableItems:
                     del self._locatableItems[itemLocation]
                 modification = True
             elif status == self.STATUS_ITEM_MODIFIED or status == self.STATUS_ITEM_MODIFIED_OVERFLOW:

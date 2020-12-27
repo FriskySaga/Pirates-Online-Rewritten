@@ -3,7 +3,7 @@ from direct.gui.DirectGui import DirectLabel
 from direct.fsm import FSM
 from pirates.piratesbase import PLocalizer
 from pirates.piratesbase import PiratesGlobals
-import RepairGlobals
+from . import RepairGlobals
 NAIL_COLLIDE_MASK = 8
 HAMMERED_DEPTH = -0.17
 

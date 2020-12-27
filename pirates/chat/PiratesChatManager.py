@@ -16,10 +16,10 @@ from pirates.piratesgui import PiratesGuiGlobals
 from pirates.piratesgui import PDialog
 from pirates.piratesgui import GuiPanel
 from pirates.piratesgui import ChatPanel
-from PChatInputSpeedChat import PChatInputSpeedChat
-from PChatInputEmote import PChatInputEmote
-from PChatInputTyped import PChatInputTyped
-from PChatInputWhiteList import PChatInputWhiteList
+from .PChatInputSpeedChat import PChatInputSpeedChat
+from .PChatInputEmote import PChatInputEmote
+from .PChatInputTyped import PChatInputTyped
+from .PChatInputWhiteList import PChatInputWhiteList
 from pirates.uberdog.UberDogGlobals import InventoryType
 
 class PiratesChatManager(ChatManagerV2.ChatManagerV2):
@@ -204,7 +204,7 @@ class PiratesChatManager(ChatManagerV2.ChatManagerV2):
         if not self.toggleEnabled:
             return
         if not isinstance(self.preferredMode, str):
-            raise TypeError, 'preferredMode was non-string in toggleWhiteListChat'
+            raise TypeError('preferredMode was non-string in toggleWhiteListChat')
         self.whiteListActive = True
         if not self.active:
             self.activateChat()

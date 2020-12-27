@@ -1,10 +1,10 @@
-import cPickle
+import pickle
 from pandac.PandaModules import *
 from direct.showbase.PythonUtil import *
 from direct.showbase import AppRunnerGlobal
 import string
 import os
-from ItemConstants import *
+from .ItemConstants import *
 from pirates.uberdog.UberDogGlobals import InventoryType, InventoryCategory
 from pirates.battle.EnemySkills import *
 vfs = VirtualFileSystem.getGlobalPtr()
@@ -18,16 +18,16 @@ else:
 found = vfs.resolveFilename(filename, searchPath)
 if not found:
     message = 'ItemGlobals.pkl file not found on %s' % searchPath
-    raise IOError, message
+    raise IOError(message)
 data = vfs.readFile(filename, 1)
-__itemInfo = cPickle.loads(data)
+__itemInfo = pickle.loads(data)
 __columnHeadings = __itemInfo.pop('columnHeadings')
-for heading, value in __columnHeadings.items():
+for heading, value in list(__columnHeadings.items()):
     heading = string.replace(heading, '\r', '')
-    exec '%s = %s' % (heading, value) in globals()
+    exec('%s = %s' % (heading, value), globals())
 
 for item in __itemInfo:
-    exec '%s = %s' % (__itemInfo[item][CONSTANT_NAME], item) in globals()
+    exec('%s = %s' % (__itemInfo[item][CONSTANT_NAME], item), globals())
 
 del searchPath
 del __columnHeadings
@@ -41,7 +41,7 @@ BLOOD_FIRE_TIMER = 30.0
 BLOOD_FIRE_BONUS = 0.05
 
 def getAllItemIds():
-    return __itemInfo.keys()
+    return list(__itemInfo.keys())
 
 
 def getAllWeaponIds(type=None):

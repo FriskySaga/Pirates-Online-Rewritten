@@ -112,8 +112,8 @@ class BattleManagerBase():
             return ([0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [])
         attackerEffects, targetEffects = WeaponGlobals.getAttackEffects(skillId, ammoSkillId)
         if self.wantOutput:
-            print ''
-            print 'Basic Effects attacker %s target %s' % (attackerEffects, targetEffects)
+            print('')
+            print('Basic Effects attacker %s target %s' % (attackerEffects, targetEffects))
         itemEffects = []
         inPVPMode = self.isPVP(attacker, target)
         tHealth = targetEffects[0]
@@ -131,7 +131,7 @@ class BattleManagerBase():
             oldTHealth = tHealth
             tHealth = min(tHealth * (randVal * 0.01), minValue)
             if self.wantOutput:
-                print ' A - NPC Level Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                print(' A - NPC Level Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
         if tMojo < 0:
             tMojo = min(tMojo * (randVal * 0.01), minValue)
         buffId = WeaponGlobals.getSkillEffectFlag(ammoSkillId)
@@ -144,7 +144,7 @@ class BattleManagerBase():
                     tMojo *= damageMod
                     aHealth *= damageMod
                     if self.wantOutput:
-                        print ' B - PC Level Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                        print(' B - PC Level Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
             if not WeaponGlobals.isSelfUseSkill(skillId):
                 if hasattr(attacker, 'currentWeaponId'):
                     attackerBonus, targetBonus = WeaponGlobals.getWeaponStats(attacker, attacker.currentWeaponId)
@@ -158,12 +158,12 @@ class BattleManagerBase():
                                 oldTHealth = tHealth
                                 tHealth -= targetBonus[0]
                                 if self.wantOutput:
-                                    print ' C - Positive Effect -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                    print(' C - Positive Effect -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                             elif tHealth < 0:
                                 oldTHealth = tHealth
                                 tHealth += targetBonus[0]
                                 if self.wantOutput:
-                                    print ' D - Negative Effect - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                    print(' D - Negative Effect - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                             if tMojo > 0:
                                 tMojo -= targetBonus[3]
                             elif tMojo < 0:
@@ -184,27 +184,27 @@ class BattleManagerBase():
                         oldTHealth = tHealth
                         tHealth *= scaleVal
                         if self.wantOutput:
-                            print ' E - Distance Modifier - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                            print(' E - Distance Modifier - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                     if hasattr(attacker, 'isNpc'):
                         if not attacker.isNpc:
                             attackClass = WeaponGlobals.getAttackClass(skillId)
                             oldTHealth = tHealth
                             tHealth *= 1.0 - WeaponGlobals.getSubtypeDamageModifier(attacker.currentWeaponId, attackClass)
                             if self.wantOutput:
-                                print ' F - Sub Type Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' F - Sub Type Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                         if hasattr(attacker, 'currentWeaponId'):
                             weaponPow = ItemGlobals.getPower(attacker.currentWeaponId) * WeaponGlobals.WEAPON_POWER_MULT
                             aHealth += aHealth * weaponPow
                             oldTHealth = tHealth
                             tHealth += tHealth * weaponPow
                             if self.wantOutput:
-                                print ' G - Weapon Power Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' G - Weapon Power Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                         if not WeaponGlobals.isSelfUseSkill(skillId):
                             amt = attacker.getSkillRankBonus(skillId)
                             oldTHealth = tHealth
                             tHealth += tHealth * amt
                             if self.wantOutput:
-                                print ' H - Skill Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' H - Skill Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                             tMojo += tMojo * amt
                             aHealth += aHealth * amt
                         if ammoSkillId:
@@ -212,7 +212,7 @@ class BattleManagerBase():
                             oldTHealth = tHealth
                             tHealth += tHealth * amt
                             if self.wantOutput:
-                                print ' I - Ammo Skill Mod -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' I - Ammo Skill Mod -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                             tMojo += tMojo * amt
                             aHealth += aHealth * amt
                         if hasattr(attacker, 'currentWeaponId'):
@@ -235,7 +235,7 @@ class BattleManagerBase():
                             oldTHealth = tHealth
                             tHealth += tHealth * amt
                             if self.wantOutput:
-                                print ' I.1 - Barrage -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' I.1 - Barrage -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                             tMojo += tMojo * amt
                             aHealth += aHealth * amt
                         if skillId in WeaponGlobals.BackstabSkills and charge:
@@ -243,7 +243,7 @@ class BattleManagerBase():
                                 oldTHealth = tHealth
                                 tHealth *= WeaponGlobals.BACKSTAB_BONUS
                                 if self.wantOutput:
-                                    print ' I.2 - Backstab -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                    print(' I.2 - Backstab -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                         if attacker:
                             if hasattr(attacker, 'isNpc') and not attacker.isNpc:
                                 attackClass = WeaponGlobals.getAttackClass(skillId)
@@ -256,12 +256,12 @@ class BattleManagerBase():
                                     oldTHealth = tHealth
                                     tHealth -= tHealth * target.getSkillRankBonus(InventoryType.GrenadeToughness)
                                     if self.wantOutput:
-                                        print ' I.3 - Toughness Cannon -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                        print(' I.3 - Toughness Cannon -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                                 if hasattr(target, 'currentWeaponId'):
                                     oldTHealth = tHealth
                                     tHealth *= 1.0 - WeaponGlobals.getAttackClassProtection(target.currentWeaponId, attackClass)
                                     if self.wantOutput:
-                                        print ' I.4 - Toughness -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                        print(' I.4 - Toughness -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                         if skillId in (InventoryType.PistolTakeAim, EnemySkills.PISTOL_SCATTERSHOT_AIM):
                             if charge > 0:
                                 weaponType = ItemGlobals.getType(attacker.currentWeaponId)
@@ -273,7 +273,7 @@ class BattleManagerBase():
                                 oldTHealth = tHealth
                                 tHealth += tHealth * charge * 1.0
                                 if self.wantOutput:
-                                    print ' I.5 - Charging -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                    print(' I.5 - Charging -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                                 aHealth += aHealth * charge * 1.0
                         randVal = attacker.battleRandom.getRandom('getModifiedSkillEffects:crit')
                         if hasattr(attacker, 'currentWeaponId'):
@@ -287,7 +287,7 @@ class BattleManagerBase():
                                 oldTHealth = tHealth
                                 tHealth *= WeaponGlobals.CRIT_MULTIPLIER
                                 if self.wantOutput:
-                                    print ' J - Crit Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                    print(' J - Crit Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                                 itemEffects.append(ItemGlobals.CRITICAL)
                         if hasattr(attacker, 'currentWeaponId') and ItemGlobals.getSubtype(attacker.currentWeaponId) == ItemGlobals.SPIRIT and WeaponGlobals.isFriendlyFire(skillId, ammoSkillId):
                             tHealth *= WeaponGlobals.SPIRIT_BONUS
@@ -362,18 +362,18 @@ class BattleManagerBase():
                             oldTHealth = tHealth
                             tHealth = min(-1, tHealth * WeaponGlobals.RESIST_DAMAGE_PENALTY)
                             if self.wantOutput:
-                                print ' K - Resist Monster Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                                print(' K - Resist Monster Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                     elif avClass == EnemyGlobals.SKELETON and (buff == WeaponGlobals.C_MONSTER_KILLER or ammoBuff == WeaponGlobals.C_MONSTER_KILLER):
                         oldTHealth = tHealth
                         tHealth = min(-1, tHealth * WeaponGlobals.RESIST_DAMAGE_PENALTY)
                         if self.wantOutput:
-                            print ' L - resist skel mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                            print(' L - resist skel mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                 elif avClass == EnemyGlobals.HUMAN:
                     if buff == WeaponGlobals.C_MONSTER_KILLER or ammoBuff == WeaponGlobals.C_MONSTER_KILLER or buff == WeaponGlobals.C_UNDEAD_KILLER or ammoBuff == WeaponGlobals.C_UNDEAD_KILLER:
                         oldTHealth = tHealth
                         tHealth = min(-1, tHealth * WeaponGlobals.RESIST_DAMAGE_PENALTY)
                         if self.wantOutput:
-                            print ' M - resist human mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                            print(' M - resist human mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
         if buff == WeaponGlobals.C_LIFEDRAIN or ammoBuff == WeaponGlobals.C_LIFEDRAIN:
             aHealth += abs(tHealth)
         else:
@@ -403,7 +403,7 @@ class BattleManagerBase():
                     oldTHealth = tHealth
                     tHealth = min(-numHits, tHealth * damageMod)
                     if self.wantOutput:
-                        print ' N - Level Nurf Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                        print(' N - Level Nurf Mod - tHealth Modified from %s to %s' % (oldTHealth, tHealth))
                 if aHealth <= 0:
                     aHealth = min(0.0, aHealth * damageMod)
             if inPVPMode:
@@ -417,7 +417,7 @@ class BattleManagerBase():
                     tHealth *= target.getArmorScale()
                     tHealth = min(-1.0, tHealth)
                     if self.wantOutput:
-                        print ' O - Armor Mod -  tHealth Modified from %s to %s' % (oldTHealth, tHealth)
+                        print(' O - Armor Mod -  tHealth Modified from %s to %s' % (oldTHealth, tHealth))
             if target and hasattr(attacker, 'currentWeaponId'):
                 if tHealth < 0:
                     if ItemGlobals.getWeaponAttributes(attacker.currentWeaponId, ItemGlobals.DAMAGE_MANA):
@@ -435,7 +435,7 @@ class BattleManagerBase():
              tHealth, targetEffects[1], targetEffects[2], tMojo, targetEffects[4]]
             attackerEffects = [aHealth, attackerEffects[1], attackerEffects[2], aMojo, attackerEffects[4]]
             if not target:
-                for i in xrange(len(targetEffects)):
+                for i in range(len(targetEffects)):
                     targetEffects[i] = 0
 
             targetEffects[0] = max(-30000, int(targetEffects[0]))
@@ -457,8 +457,8 @@ class BattleManagerBase():
                     if simbase.config.GetBool('want-potion-game', 0):
                         taskMgr.doMethodLater(1.0, self.addPotionBuff, 'addPotionBuff%i%i' % (attacker.doId, buffId), extraArgs=[buffId, attacker])
             if self.wantOutput:
-                print 'return effects attacker %s target %s' % (attackerEffects, targetEffects)
-                print ''
+                print('return effects attacker %s target %s' % (attackerEffects, targetEffects))
+                print('')
         return (
          attackerEffects, targetEffects, itemEffects)
 

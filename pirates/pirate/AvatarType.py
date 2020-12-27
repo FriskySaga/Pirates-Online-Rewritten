@@ -148,7 +148,7 @@ class AvatarType():
         h = hash((self.faction, self.track, self.id))
         if hasattr(self, '_hash'):
             if h != self._hash:
-                print 'inconsistent AvatarType hash values  new: %s (%s %s %s) previous: %s (%s %s %s)' % (h, self.faction, self.track, self.id, self._hash, self._hashedValues[0], self._hashedValues[1], self._hashedValues[2])
+                print('inconsistent AvatarType hash values  new: %s (%s %s %s) previous: %s (%s %s %s)' % (h, self.faction, self.track, self.id, self._hash, self._hashedValues[0], self._hashedValues[1], self._hashedValues[2]))
                 raise 'inconsistent AvatarType hash values: %s, %s' % (h, self._hash)
         else:
             self._setMutable(True)

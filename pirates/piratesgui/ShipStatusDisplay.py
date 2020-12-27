@@ -523,15 +523,15 @@ class ShipStatusDisplay(GuiTray.GuiTray):
             self.lootPanel.hide()
 
     def updateStatusEffects(self, effects):
-        effectIdList = effects.keys()
+        effectIdList = list(effects.keys())
         for effectKeyId in effectIdList:
             effectId, attackerId, duration, timeLeft, ts, buffs = effects[effectKeyId]
-            if effectKeyId not in self.skillEffects.keys():
+            if effectKeyId not in list(self.skillEffects.keys()):
                 self.statusEffectsPanel.addStatusEffect(effectId, duration, timeLeft, ts, attackerId)
             else:
                 self.statusEffectsPanel.updateStatusEffect(effectId, duration, timeLeft, ts, attackerId)
 
-        for effectKeyId in self.skillEffects.keys():
+        for effectKeyId in list(self.skillEffects.keys()):
             if effectKeyId not in effectIdList:
                 buff = self.skillEffects.get(effectKeyId)
                 if buff:

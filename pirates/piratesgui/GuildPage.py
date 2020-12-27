@@ -287,7 +287,7 @@ class GuildPage(SocialPage.SocialPage):
             self.confirmBox = PiratesOffLineRequest.PiratesOffLineRequest(PLocalizer.GuildInvite, PLocalizer.GuildInviteResponse, displayToken, preExistPerm)
 
     def leaveGuild(self):
-        if localAvatar.getGuildRank() == GUILDRANK_GM and len(base.cr.guildManager.id2Name.keys()) > 1:
+        if localAvatar.getGuildRank() == GUILDRANK_GM and len(list(base.cr.guildManager.id2Name.keys())) > 1:
             self.confirmBox = PiratesInfo.PiratesInfo(PLocalizer.GuildPageLeaveGuild, [PLocalizer.GuildAskLeaveGM])
         else:
             self.confirmBox = PiratesConfirm.PiratesConfirm(PLocalizer.GuildPageLeaveGuild, PLocalizer.GuildAskLeave, base.cr.guildManager.removeMember, base.localAvatar.getDoId())
