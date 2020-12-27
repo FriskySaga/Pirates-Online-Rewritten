@@ -123,6 +123,10 @@ ENV/
 *.DS_Store
 Library/
 
+# Eclipse
+.project
+.pydevproject
+
 # Visual Studio
 .vs/
 
