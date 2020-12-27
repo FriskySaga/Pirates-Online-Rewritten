@@ -126,6 +126,10 @@ Library/
 # Visual Studio
 .vs/
 
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
 # Game logs
 *.log
 logs/
